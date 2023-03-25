@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.login-logo{
+  background: -webkit-linear-gradient(#00dfc4, #00fc97, #08bff1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+ .form-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    background-color: #1d2b3a;
+}
+.input-box{
+    position: relative;
+    width: 250px;
+    margin: 20px 0;
+}
+.input-box input{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background-color: #1d2b3a;
+    border-radius: 5px;
+    outline: none;
+    color: white;
+    font-size: 1em;
+    transition: 0.5s;
+}
+.input-box span{
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.25);
+    /* text-transform: uppercase; */ 
+    transition: 0.5s;
+}
+.input-box input:valid ~ span,
+.input-box input:focus ~ span{
+    color: #1d2b3a;
+    transform: translateX(10px) translateY(-7px);
+    font-size: 0.65em;
+    padding: 0 10px;
+    letter-spacing: 0.2em;
+    background-color: #00dfc4;
+    border-radius: 2px;
+}
+.input-box input:valid,
+.input-box input:focus{
+    border: 1px solid #00dfc4;
+    box-shadow: 3px 3px 3px #00dfc593;
+}
+
+.btn{
+    display: block;
+    width: 50%;
+    height: 50px;
+    border-radius: 25px;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    outline: none;
+    border: none;
+    background-image: linear-gradient(to right, #00dfc4, #00fc97, #08bff1);
+    cursor: pointer;
+    color: #fff;
+    /* text-transform: uppercase; */
+    font-family: 'Poppins', sans-serif;
+    background-size: 200%;
+    transition: .5s;
+}
+
+.btn:hover{
+	transition: .5s;
+    background-position: right;
+}

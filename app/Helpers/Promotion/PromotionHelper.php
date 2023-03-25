@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Helpers\Promotion;
+
+use Illuminate\Support\Str;
+
+class PromotionHelper
+{
+  public static function promotion($promotions)
+  {
+    $html = '';
+    foreach ($promotions as $key => $promotion) {
+      $html .= '
+        <tr>
+          <td>' . $promotion->id . '</td>
+          <td>' . $promotion->name . '</td>
+          <td>' . $promotion->sale . '</td>
+          <td>' . $promotion->updated_at . '</td>
+          <td>
+            <a href="/admin/promotions/edit/id=' . $promotion->id . '" class="btn btn-primary btn-sm">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </a>
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#Modal' . $promotion->id . '">
+              <i class="fa-regular fa-trash"></i>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="Modal' . $promotion->id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa khuyến mãi</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Bạn có chắc xóa khuyến mãi <b>' . $promotion->name . '</b> không ?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="removeRow(' . $promotion->id . ',\'/admin/promotions/destroy\')">Xóa</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        ';
+
+      unset($promotions[$key]);
+    }
+
+    return $html;
+  }
+}
