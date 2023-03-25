@@ -22,8 +22,6 @@ class UserController extends Controller
     $this->userService = $userService;
   }
 
-
-
   public function index()
   {
     return view('admin.user.list', [
@@ -75,6 +73,22 @@ class UserController extends Controller
     $user = Auth::user();
     return view('admin.main', ['user' => $user]);
   }
+
+  public function showInfo()
+  {
+    $user = Auth::user();
+    $userTypes = UserType::all();
+    return view('admin.info.detail',[
+      'title' => 'Thông tin người dùng đăng nhập',
+    ], compact('user', 'userTypes'));
+  }
+
+  // $usertypes = UserType::all();
+  //   $data = compact('user', 'usertypes');
+  //   $user = Auth::user();
+  //   $view1 = view('admin.main', ['user' => $user] +$data);
+  //   $view2 = view('admin.info.detail', ['user' => $user] + $data);
+  //   return array($view1,$view2);
 
   /**
    * Update the specified resource in storage.

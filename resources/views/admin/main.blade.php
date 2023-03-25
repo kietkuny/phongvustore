@@ -123,7 +123,7 @@
           <i class="fa-solid fa-chevron-down"></i>
         </div>
         <ul class="avatar-detail">
-          <li><a href="#"><i class="fa-solid fa-info"></i> Chi tiết</a></li>
+          <li><a href="/admin/info"><i class="fa-solid fa-info"></i> Chi tiết</a></li>
           <li>
             <a href="{{ route('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
           </li>

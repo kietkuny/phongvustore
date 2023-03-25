@@ -38,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('admin');
     Route::get('main', [MainController::class, 'index']);
 
+    Route::get('/info', [UserController::class, 'showInfo'])->name('admin.info');
+
     #Menu
     Route::prefix('menus')->group(function () {
       Route::get('add', [MenuController::class, 'create']);
