@@ -53,7 +53,7 @@ class UserTypeController extends Controller
   public function show(UserType $userType)
   {
     return view('admin.user_type.edit',[
-      'title' => 'Chỉnh Sửa loại người dùng: ' . $userType->name ,
+      'title' => 'Chỉnh Sửa loại nhân viên: ' . $userType->name ,
       'user_type' => $userType,
     ]);
   }

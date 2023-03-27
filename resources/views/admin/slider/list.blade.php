@@ -11,11 +11,10 @@
 <table class="table table-hover table-bordered">
   <thead>
     <th style="width: 50px">ID</th>
-    <th>Tên</th>
+    <th>Tiêu đề</th>
     <th>Đường dẫn</th>
     <th>Ảnh</th>
-    <th>Sắp xếp</th>
-    <th>Kích hoạt</th>
+    <th>Trạng thái</th>
     <th>Cập nhật</th>
     <th style="width: 100px;"></th>
   </thead>

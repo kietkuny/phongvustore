@@ -15,6 +15,17 @@
 
 </script>
 <script>
+  $(".inpw").on("click", function() {
+    $(this).toggleClass("active");
+    if ($(this).hasClass("active")) {
+      $(this).html("<i class='fa-regular fa-eye'></i>").prev("input").attr("type", "text");
+    } else {
+      $(this).html("<i class='fa-regular fa-eye-slash'></i>").prev("input").attr("type", "password");
+    }
+  });
+
+</script>
+<script>
   window.addEventListener('beforeunload', function(event) {
     // Gọi API đăng xuất trong Laravel
     axios.post('/logout').then(response => {

@@ -56,6 +56,7 @@
           </div>
           <div class="input-group mb-3">
             <input type="password" name="password" autocomplete="on" class="form-control" placeholder="Mật khẩu">
+            <div class="inpw"><i class="fa-regular fa-eye"></i></div>
             <div class="input-group-append">
               <div class="input-group-text bg-white">
                 <span class="fas fa-lock"></span>

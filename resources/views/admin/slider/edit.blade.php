@@ -7,11 +7,11 @@
     <div class="row">
       <div class="form-group col-md-6">
         <label>Tiêu đề</label>
-        <input type="text" class="form-control" name="name" placeholder="Nhập tiêu đề" {{ $slider->name }}>
+        <input type="text" class="form-control" name="name" placeholder="Nhập tiêu đề" value="{{ $slider->name }}" >
       </div>
       <div class="form-group col-md-6">
         <label>Đường đẫn</label>
-        <input type="text" class="form-control" name="url" placeholder="Nhập đường dẫn" {{ $slider->url }}>
+        <input type="text" class="form-control" name="url" placeholder="Nhập đường dẫn" value="{{ $slider->url }}">
       </div>
     </div>
     <div class="form-group">
@@ -35,7 +35,7 @@
         <label for="active" class="custom-control-label">Có</label>
       </div>
       <div class="custom-control custom-radio">
-        <input class="custom-control-input" value="0" type="radio" id="no_active" name="active" {{ $menu->active == 0 ? 'checked=""' : '' }}>
+        <input class="custom-control-input" value="0" type="radio" id="no_active" name="active" {{ $slider->active == 0 ? 'checked=""' : '' }}>
         <label for="no_active" class="custom-control-label">Không</label>
       </div>
     </div>
