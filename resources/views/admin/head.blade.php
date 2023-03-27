@@ -17,9 +17,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="icon" href="/template/admin/dist/img/logoPV.svg">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-{{-- <link rel="stylesheet" href="/template/admin/dist/css/login.css"> --}}
-
-{{-- @vite(['resources/js/app.js']) --}}
+{{-- <link rel="stylesheet" href="/template/admin/dist/css/loginadmin.css"> --}}
 
 {{-- <link rel="stylesheet" href="/template/admin/plugins/chart.js/chart.min.css"> --}}
 

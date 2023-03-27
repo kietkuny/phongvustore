@@ -41,7 +41,7 @@
       <label for="active" class="custom-control-label">Có</label>
     </div>
     <div class="custom-control custom-radio">
-      <input class="custom-control-input" value="0" type="radio" id="no_active" name="active">
+      <input class="custom-control-input" value="0" type="radio" id="no_active" name="active" {{ $menu->active == 0 ? 'checked=""' : '' }}>
       <label for="no_active" class="custom-control-label">Không</label>
     </div>
   </div>

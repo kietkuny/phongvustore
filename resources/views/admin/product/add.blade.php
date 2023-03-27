@@ -7,12 +7,11 @@
 @section('content')
 <form action="" method="post">
   <div class="card-body">
-
-    <div class="form-group">
-      <label for="name">Tên sản phẩm</label>
-      <input type="text" class="form-control" name="name" placeholder="Nhập tên loại sản phẩm">
-    </div>
     <div class="row">
+      <div class="form-group col-md-6">
+        <label for="name">Tên sản phẩm</label>
+        <input type="text" class="form-control" name="name" placeholder="Nhập tên sản phẩm">
+      </div>
       <div class="form-group col-md-6">
         <label for="producttype_id">Loại sản phẩm</label>
         <select name="producttype_id" class="form-control form-select">
@@ -26,6 +25,14 @@
         <select name="trademark_id" class="form-control form-select">
           @foreach ($trademarks as $trademark)
           <option value="{{ $trademark->id }}">{{ $trademark->name }}</option>
+          @endforeach
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="promotion_id">Loại khuyến mãi</label>
+        <select name="promotion_id" class="form-control form-select">
+          @foreach ($promotions as $promotion)
+          <option value="{{ $promotion->id }}">{{ $promotion->name }}</option>
           @endforeach
         </select>
       </div>

@@ -17,7 +17,6 @@ class ProductTypeService
     try {
       ProductType::create([
         'name' => (string) $request->input('name'),
-        'promotion_id' => (string) $request->input('promotion_id'),
       ]);
 
       Session::flash('success', 'Tạo loại sản phẩm thành công');
@@ -32,7 +31,6 @@ class ProductTypeService
 
   public function update($request, $productType) : bool{
     $productType->name = (string) $request->input('name');
-    $productType->promotion_id = (string) $request->input('promotion_id');
     $productType->save();
 
     Session::flash('success', 'Cập nhật loại sản phẩm thành công');

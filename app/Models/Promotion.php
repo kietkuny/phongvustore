@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Promotion extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-      'name',
-      'sale',
-    ];
+  use HasFactory;
+  protected $fillable = [
+    'name',
+    'sale',
+  ];
 
-    public function product_types()
-    {
-        return $this->hasMany(ProductType::class);
-    }
+  public function products()
+  {
+    return $this->hasMany(Product::class);
+  }
 }

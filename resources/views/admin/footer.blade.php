@@ -1,9 +1,10 @@
 <script>
-  $('.button').on('click', function () {
-    $('.login').addClass('loading').delay(2200).queue(function () {
-        $(this).addClass('active')
+  $('.button').on('click', function() {
+    $('.login').addClass('loading').delay(2200).queue(function() {
+      $(this).addClass('active')
     });
-});
+  });
+
 </script>
 <script>
   $(document).ready(function() {
@@ -11,6 +12,7 @@
       $(this).toggleClass("show")
     });
   });
+
 </script>
 <script>
   window.addEventListener('beforeunload', function(event) {
@@ -21,14 +23,38 @@
       console.log(error);
     });
   });
+
 </script>
-<script>
+{{-- <script>
   function hideBox() {
     let element = $(".dislay-success");
     element.addClass("d-none");
   }
   setTimeout(hideBox, 3000);
-</script>
+
+</script> --}}
+{{-- <script>
+  $(document).ready(function() {
+    $('.loading').hide();
+    $("#data").empty(); // Xóa dữ liệu hiện tại của phần từ #data
+
+    $.ajax({
+      type: 'POST'
+      , url: '/list-data'
+      , beforeSend: function() {
+        // Hiển thị thanh Loading khi dữ liệu đang được tải 
+        $('.loading').show();
+        $('.loading').css('display', 'flex');
+      }
+      , success: function(data) {
+        // Ẩn thanh Loading khi tải dữ liệu hoàn tất 
+        $('.loading').hide();
+        $("#data").html(data);
+      }
+    });
+  });
+
+</script> --}}
 
 <!-- jQuery -->
 <script src="/template/admin/plugins/jquery/jquery.min.js"></script>

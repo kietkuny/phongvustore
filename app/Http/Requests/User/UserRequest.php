@@ -27,6 +27,7 @@ class UserRequest extends FormRequest
           'cccd'=>'required',
           'phone'=>'required',
           'email'=>'required',
+          'thumb'=>'required',
           'password'=>'required',
         ];
     }
@@ -36,6 +37,7 @@ class UserRequest extends FormRequest
         'cccd.required' => 'Vui lòng nhập cccd nhân viên',
         'phone.required' => 'Vui lòng nhập sđt nhân viên',
         'email.required' => 'Vui lòng nhập email nhân viên',
+        'thumb.required' => 'Vui lòng nhập ảnh nhân viên',
         'password.required' => 'Vui lòng mật khẩu nhân viên',
       ];
     }

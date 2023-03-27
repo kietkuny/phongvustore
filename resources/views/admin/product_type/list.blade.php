@@ -12,7 +12,6 @@
   <thead>
     <th style="width: 50px">ID</th>
     <th>Tên loại sản phẩm</th>
-    <th>Khuyến mãi</th>
     <th>Cập nhật</th>
     <th style="width: 100px;"></th>
   </thead>

@@ -17,6 +17,7 @@ return new class extends Migration
       $table->longText('content');
       $table->foreignId('producttype_id')->references('id')->on('product_types');
       $table->foreignId('trademark_id')->references('id')->on('trademarks');
+      $table->foreignId('promotion_id')->references('id')->on('promotions');
       $table->string('thumb');
       $table->integer('quantity');
       $table->integer('price');

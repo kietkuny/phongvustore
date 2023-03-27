@@ -1,68 +1,47 @@
 @extends('admin.main')
 
-@section('head')
-<script src="/ckeditor/ckeditor.js"></script>
-@endsection
-
 @section('content')
 <form action="" method="post">
   <div class="card-body">
 
-    <div class="form-group">
-      <label for="name">Tên sản phẩm</label>
-      <input type="text" class="form-control" name="name" placeholder="Nhập tên loại sản phẩm">
-    </div>
     <div class="row">
       <div class="form-group col-md-6">
-        <label for="producttype_id">Loại sản phẩm</label>
-        <select name="producttype_id" class="form-control form-select">
-          @foreach ($producttypes as $producttype)
-          <option value="{{ $producttype->id }}">{{ $producttype->name }}</option>
-          @endforeach
-        </select>
+        <label>Tiêu đề</label>
+        <input type="text" class="form-control" name="name" placeholder="Nhập tiêu đề">
       </div>
       <div class="form-group col-md-6">
-        <label for="trademark_id">Thương hiệu</label>
-        <select name="trademark_id" class="form-control form-select">
-          @foreach ($trademarks as $trademark)
-          <option value="{{ $trademark->id }}">{{ $trademark->name }}</option>
-          @endforeach
-        </select>
-      </div>
-      <div class="form-group col-md-6">
-        <label>Giá tiền</label>
-        <input type="number" class="form-control" name="price" placeholder="Nhập giá tiền sản phẩm">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="quantity">Số lượng</label>
-        <input type="number" class="form-control" name="quantity" placeholder="Nhập số lượng sản phẩm">
+        <label>Đường đẫn</label>
+        <input type="text" class="form-control" name="url" placeholder="Nhập đường dẫn">
       </div>
     </div>
     <div class="form-group">
-      <label>Mô Tả Sản phẩm</label>
-      <textarea id="content" name="content" class="form-control"></textarea>
-    </div>
-    <div class="form-group">
-      <label>Ảnh sản phẩm</label>
+      <label>Ảnh slider</label>
       <input type="file" class="form-control" id="upload">
       <div id="image_show" class="mt-3"></div>
       <input type="hidden" name="thumb" id="thumb">
+    </div>
+    <div class="form-group">
+      <label>Sắp xếp</label>
+      <input type="number" value="1" class="form-control" name="sort_by" >
+    </div>
+    <div class="form-group">
+      <label>Kích hoạt</label>
+      <div class="custom-control custom-radio">
+        <input class="custom-control-input" value="1" type="radio" id="active" name="active" checked="">
+        <label for="active" class="custom-control-label">Có</label>
+      </div>
+      <div class="custom-control custom-radio">
+        <input class="custom-control-input" value="0" type="radio" id="no_active" name="active">
+        <label for="no_active" class="custom-control-label">Không</label>
+      </div>
     </div>
   </div>
   <!-- /.card-body -->
 
   <div class="card-footer">
-    <button type="submit" class="btn btn-success">Tạo sản phẩm</button>
-    <a href="/admin/products/list" class="btn btn-secondary">Quay lại</a>
+    <button type="submit" class="btn btn-success">Tạo Slider</button>
+    <a href="/admin/sliders/list" class="btn btn-secondary">Quay lại</a>
   </div>
   @csrf
 </form>
-@endsection
-
-
-@section('footer')
-<script>
-  CKEDITOR.replace('content')
-
-</script>
 @endsection

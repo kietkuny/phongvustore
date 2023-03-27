@@ -5,24 +5,34 @@
   @include('admin.head')
   <style>
     .active-sidebar {
-      border-radius: 50px 0 0 50px !important;
+      /* border-radius: 50px 0 0 50px !important; */
       background: #DFFFD8 !important;
-      min-width: 268px !important;
       color: black !important;
       position: relative !important;
-      display: flex !important;
-      align-items: center !important;
+      margin-right: -8px!important;
     }
 
     /* .active-sidebar::before{
       content: ''!important;
       position: absolute!important;
-      background: #DFFFD8!important;
-      width: 50px!important;
-      height: 50px!important;
-      right: 0!important;
-      transform: rotate(45deg)!important;
-      z-index: -1!important;
+      background: #06283D!important;
+      right: -8px!important;
+      width: 15px!important;
+      height: 15px!important;
+      top:-15px!important;
+      border-bottom-right-radius: 15px!important;
+      box-shadow: 15px 15px 0 15px #DFFFD8 !important;
+    }
+    .active-sidebar::after{
+      content: ''!important;
+      position: absolute!important;
+      background: #06283D!important;
+      right: -8px!important;
+      width: 15px!important;
+      height: 15px!important;
+      bottom:-15px!important;
+      border-top-right-radius: 15px!important;
+      box-shadow: 15px -15px 0 15px #DFFFD8 !important;
     } */
 
     .content-img {
@@ -98,7 +108,17 @@
     .avatar.show ul {
       display: block;
     }
-    
+
+    /* .table-hidden {
+      display: flex;
+    }
+
+    @media only screen and (max-width: 768px) {
+      .table-hidden {
+        display: none;
+      }
+    } */
+
   </style>
 </head>
 
@@ -117,7 +137,7 @@
       <div class="avatar ms-auto">
         <div class="avatar-link user-panel d-flex align-items-center" role="button">
           <div class="image mr-2 d-flex align-items-center">
-            <img src="/template/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <img src="{{ Auth::user()->thumb }}" class="img-circle elevation-2" alt="User Image">
             <b class="ml-2">{{ Auth::user()->name }}</b>
           </div>
           <i class="fa-solid fa-chevron-down"></i>

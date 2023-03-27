@@ -25,6 +25,7 @@ class UserHelper
           <td>' . $user->cccd . '</td>
           <td>' . $user->phone . '</td>
           <td>' . $user->email . '</td>
+          <td><img src="' . $user->thumb . '" width=80px></td>
           <td>' . $user->updated_at . '</td>
           <td>
             <a href="/admin/users/edit/id=' . $user->id . '" class="btn btn-primary btn-sm">

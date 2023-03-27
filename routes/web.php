@@ -110,7 +110,7 @@ Route::middleware(['auth'])->group(function () {
       Route::delete('destroy', [ProductController::class, 'destroy']);
     });
 
-    #Product
+    #Slider
     Route::prefix('sliders')->group(function () {
       Route::get('add', [SliderController::class, 'create']);
       Route::post('add', [SliderController::class, 'store']);

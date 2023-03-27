@@ -83,13 +83,6 @@ class UserController extends Controller
     ], compact('user', 'userTypes'));
   }
 
-  // $usertypes = UserType::all();
-  //   $data = compact('user', 'usertypes');
-  //   $user = Auth::user();
-  //   $view1 = view('admin.main', ['user' => $user] +$data);
-  //   $view2 = view('admin.info.detail', ['user' => $user] + $data);
-  //   return array($view1,$view2);
-
   /**
    * Update the specified resource in storage.
    */

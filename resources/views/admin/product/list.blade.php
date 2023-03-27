@@ -4,7 +4,7 @@
 <div class="text-right m-2">
   <a href="/admin/products/add" class="btn-sm btn btn-success text-decoration-none">
     <div class="p-1">
-      <i class="fa-solid fa-plus"></i> Thêm loại sản phẩm
+      <i class="fa-solid fa-plus"></i> Thêm sản phẩm
     </div>
   </a>
 </div>

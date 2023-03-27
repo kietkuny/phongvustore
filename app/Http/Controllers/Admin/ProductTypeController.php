@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductType\ProductTypeRequest;
 use App\HTTP\Services\ProductType\ProductTypeService;
 use App\Models\ProductType;
-use App\Models\Promotion;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -33,10 +32,8 @@ class ProductTypeController extends Controller
    */
   public function create()
   {
-    $promotions = Promotion::all();
     return view('admin.product_type.add',[
       'title' => 'Thêm loại sản phẩm mới',
-      'promotions'=>$promotions
     ]);
   }
 
@@ -55,11 +52,9 @@ class ProductTypeController extends Controller
    */
   public function show(ProductType $productType)
   {
-    $promotions = Promotion::all();
     return view('admin.product_type.edit',[
       'title' => 'Chỉnh sửa loại sản phẩm: ' . $productType->name ,
       'product_type' => $productType,
-      'promotions'=>$promotions,
     ]);
   }
 

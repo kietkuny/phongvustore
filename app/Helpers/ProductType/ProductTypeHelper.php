@@ -10,16 +10,12 @@ class ProductTypeHelper
 {
   public static function product_type($product_types)
   {
-    $product_types = ProductType::with('promotion')
-    ->select('id', 'name', 'promotion_id', 'updated_at')
-    ->get();
     $html = '';
     foreach ($product_types as $key => $product_type) {
       $html .= '
         <tr>
           <td>' . $product_type->id . '</td>
           <td>' . $product_type->name . '</td>
-          <td>' . ($product_type->promotion ? $product_type->promotion->name : '') . '</td>
           <td>' . $product_type->updated_at . '</td>
           <td>
             <a href="/admin/product_types/edit/id=' . $product_type->id . '" class="btn btn-primary btn-sm">

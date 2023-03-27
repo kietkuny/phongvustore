@@ -7,19 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-      'name',
-      'content',
-      'producttype_id',
-      'trademark_id',
-      'thumb',
-      'price',
-    ];
-    public function trademark(){
-      return $this->belongsTo(Trademark::class);
-    }
-    public function producttype(){
-      return $this->belongsTo(ProductType::class);
-    }
+  use HasFactory;
+  protected $fillable = [
+    'name',
+    'content',
+    'producttype_id',
+    'trademark_id',
+    'promotion_id',
+    'thumb',
+    'quantity',
+    'price',
+  ];
+  public function promotion()
+  {
+    return $this->belongsTo(Promotion::class);
+  }
+  public function trademark()
+  {
+    return $this->belongsTo(Trademark::class);
+  }
+  public function producttype()
+  {
+    return $this->belongsTo(ProductType::class);
+  }
 }

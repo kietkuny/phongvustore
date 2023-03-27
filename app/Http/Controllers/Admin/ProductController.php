@@ -7,6 +7,7 @@ use App\Http\Requests\Product\ProductRequest;
 use App\HTTP\Services\Product\ProductService;
 use App\Models\Product;
 use App\Models\ProductType;
+use App\Models\Promotion;
 use App\Models\Trademark;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -36,10 +37,12 @@ class ProductController extends Controller
   {
     $trademarks = Trademark::all();
     $producttypes = ProductType::all();
+    $promotions = Promotion::all();
     return view('admin.product.add', [
       'title' => 'Thêm sản phẩm mới',
       'trademarks' => $trademarks,
       'producttypes' => $producttypes,
+      'promotions' => $promotions,
     ]);
   }
 
@@ -60,11 +63,13 @@ class ProductController extends Controller
   {
     $trademarks = Trademark::all();
     $producttypes = ProductType::all();
+    $promotions = Promotion::all();
     return view('admin.product.edit', [
       'title' => 'Chỉnh Sửa sản phẩm: ' . $product->name,
       'product' => $product,
       'producttypes' => $producttypes,
       'trademarks' => $trademarks,
+      'promotions' => $promotions,
     ]);
   }
 

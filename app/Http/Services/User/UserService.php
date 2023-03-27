@@ -3,6 +3,7 @@
 namespace App\HTTP\Services\User;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -23,6 +24,7 @@ class UserService
         'cccd' => (string) $request->input('cccd'),
         'phone' => (string) $request->input('phone'),
         'email' => (string) $request->input('email'),
+        'thumb' => (string) $request->input('thumb'),
         'password' => Hash::make($request->input('password')),
       ]);
 
@@ -42,12 +44,14 @@ class UserService
     $user->cccd = (string) $request->input('cccd');
     $user->phone = (string) $request->input('phone');
     $user->email = (string) $request->input('email');
+    $user->thumb = (string) $request->input('thumb');
     $newPassword = $request->input('password');
     if (!empty($newPassword)) {
         $user->password = Hash::make($newPassword);
     }
+    
     $user->save();
-
+    Auth::guard('web')->login($user);
     Session::flash('success', 'Cập nhật nhân viên thành công');
     return true;
   }

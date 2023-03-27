@@ -4,7 +4,7 @@
 <div class="text-right m-2">
   <a href="/admin/promotions/add" class="btn-sm btn btn-success text-decoration-none">
     <div class="p-1">
-      <i class="fa-solid fa-plus"></i> Thêm thương hiệu
+      <i class="fa-solid fa-plus"></i> Thêm khuyến mãi
     </div>
   </a>
 </div>

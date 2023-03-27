@@ -11,13 +11,7 @@ class ProductType extends Model
 
   protected $fillable = [
     'name',
-    'promotion_id'
   ];
-
-  public function promotion()
-  {
-    return $this->belongsTo(Promotion::class);
-  }
 
   public function products()
   {

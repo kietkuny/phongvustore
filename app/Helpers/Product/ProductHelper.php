@@ -10,21 +10,22 @@ class ProductHelper
 
   public static function product($products)
   {
-    $products = Product::with('producttype','producttype.promotion')
-      ->select('products.*', 'product_types.name as producttype_name', 'trademarks.name as trademark_name')
+    $products = Product::with('producttype','promotion','trademark')
+      ->select('products.*', 'product_types.name as producttype_name', 'trademarks.name as trademark_name' ,'promotions.name as promotion_name')
       ->join('product_types', 'product_types.id', '=', 'products.producttype_id')
       ->join('trademarks', 'trademarks.id', '=', 'products.trademark_id')
+      ->join('promotions', 'promotions.id', '=', 'products.promotion_id')
       ->get();
     $html = '';
     foreach ($products as $key => $product) {
-      $product->price_sale = $product->price - $product->price * $product->producttype->promotion->sale;
+      $product->price_sale = $product->price - $product->price * $product->promotion->sale;
       $html .= '
         <tr>
           <td>' . $product->id . '</td>
           <td>' . $product->name . '</td>
           <td>' . $product->producttype_name . '</td>
           <td>' . $product->trademark_name . '</td>
-          <td></td>
+          <td>' . $product->quantity .'</td>
           <td><img src="' . $product->thumb . '" width=80px></td>
           <td>' . $product->price . '</td>
           <td>' . $product->price_sale . '</td>

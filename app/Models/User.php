@@ -23,6 +23,7 @@ class User extends Authenticatable
     'cccd',
     'phone',
     'email',
+    'thumb',
     'password',
   ];
 
