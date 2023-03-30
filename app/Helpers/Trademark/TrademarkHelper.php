@@ -8,11 +8,18 @@ class TrademarkHelper
 {
   public static function trademark($trademarks)
   {
+    // Định nghĩa số sản phẩm trên mỗi trang
+    $perPage = 5;
+    // Lấy trang hiện tại từ request (mặc định là trang 1)
+    $currentPage = request()->input('page', 1);
+    // Tính toán giá trị bắt đầu của số thứ tự (startStt)
+    $startStt = ($currentPage - 1) * $perPage + 1;
     $html = '';
     foreach ($trademarks as $key => $trademark) {
+      $stt = $startStt + $key;
       $html .= '
         <tr>
-          <td>' . $trademark->id . '</td>
+          <td>' . $stt . '</td>
           <td>' . $trademark->name . '</td>
           <td>' . $trademark->updated_at . '</td>
           <td>

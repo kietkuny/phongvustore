@@ -9,12 +9,18 @@ use Illuminate\Support\Str;
 class ProductTypeHelper
 {
   public static function product_type($product_types)
-  {
+  {// Định nghĩa số sản phẩm trên mỗi trang
+    $perPage = 5;
+    // Lấy trang hiện tại từ request (mặc định là trang 1)
+    $currentPage = request()->input('page', 1);
+    // Tính toán giá trị bắt đầu của số thứ tự (startStt)
+    $startStt = ($currentPage - 1) * $perPage + 1;
     $html = '';
     foreach ($product_types as $key => $product_type) {
+      $stt = $key + $startStt;
       $html .= '
         <tr>
-          <td>' . $product_type->id . '</td>
+          <td>' . $stt . '</td>
           <td>' . $product_type->name . '</td>
           <td>' . $product_type->updated_at . '</td>
           <td>

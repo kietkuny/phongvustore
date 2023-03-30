@@ -8,9 +8,9 @@
     </div>
   </a>
 </div>
-<table class="table table-hover table-bordered">
+<table class="table table-hover table-bordered table-responsive-md">
   <thead>
-    <th style="width: 50px">ID</th>
+    <th style="width: 50px">STT</th>
     <th>Tên thương hiệu</th>
     <th>Cập nhật</th>
     <th style="width: 100px;"></th>

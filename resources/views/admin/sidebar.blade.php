@@ -29,6 +29,35 @@
             <p>Danh mục</p>
           </a>
         </li> --}}
+        {{-- <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Dashboard
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="./index.html" class="nav-link active">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Dashboard v1</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./index2.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Dashboard v2</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./index3.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Dashboard v3</p>
+              </a>
+            </li>
+          </ul>
+        </li> --}}
         <li class="nav-item pagination">
           <a href="/admin" class="nav-link {{ request()->is('admin') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-solid fa-house-chimney"></i>
@@ -84,9 +113,15 @@
           </a>
         </li>
         <li class="nav-item pagination">
-          <a href="/admin/menus/list" class="nav-link {{ request()->is('admin/promotions-types/*') ? 'active-sidebar' : '' }}">
+          <a href="/admin/orders/list" class="nav-link {{ request()->is('admin/orders/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-sharp fa-regular fa-cart-shopping"></i>
             <p>Đơn hàng</p>
+          </a>
+        </li>
+        <li class="nav-item pagination">
+          <a href="/admin/messages/list" class="nav-link {{ request()->is('admin/messages/*') ? 'active-sidebar' : '' }}">
+            <i class="nav-icon fa-regular fa-comments"></i>
+            <p>Tin nhắn</p>
           </a>
         </li>
       </ul>

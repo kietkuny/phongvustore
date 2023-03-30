@@ -8,7 +8,7 @@
     </div>
   </a>
 </div>
-<table class="table table-hover table-bordered">
+<table class="table table-hover table-bordered table-responsive-md">
   <thead>
     <th style="width: 50px">ID</th>
     <th>Tiêu đề</th>

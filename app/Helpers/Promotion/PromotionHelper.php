@@ -8,11 +8,18 @@ class PromotionHelper
 {
   public static function promotion($promotions)
   {
+    // Định nghĩa số sản phẩm trên mỗi trang
+    $perPage = 5;
+    // Lấy trang hiện tại từ request (mặc định là trang 1)
+    $currentPage = request()->input('page', 1);
+    // Tính toán giá trị bắt đầu của số thứ tự (startStt)
+    $startStt = ($currentPage - 1) * $perPage + 1;
     $html = '';
     foreach ($promotions as $key => $promotion) {
+      $stt = $startStt + $key;
       $html .= '
         <tr>
-          <td>' . $promotion->id . '</td>
+          <td>' . $stt . '</td>
           <td>' . $promotion->name . '</td>
           <td>' . $promotion->sale . '</td>
           <td>' . $promotion->updated_at . '</td>

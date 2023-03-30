@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="/template/admin/dist/css/adminlte.css">
 <link rel="stylesheet" href="/template/admin/dist/css/adminlte.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="icon" href="/template/admin/dist/img/logoPV.svg">
+<link rel="icon" href="/template/admin/dist/img/adminLG.png">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 {{-- <link rel="stylesheet" href="/template/admin/dist/css/loginadmin.css"> --}}
 

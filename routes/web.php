@@ -11,12 +11,9 @@ use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Users\LoginController;
 use App\Http\Controllers\Admin\UserTypeController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
-Route::get('/', function () {
-  return view('welcome');
-});
 
 Auth::routes();
 
@@ -124,3 +121,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('upload/services', [UploadController::class, 'store']);
   });
 });
+
+Route::get('/', [HomeController::class, 'index']);
+
