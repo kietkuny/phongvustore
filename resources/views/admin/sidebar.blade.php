@@ -65,6 +65,12 @@
           </a>
         </li>
         <li class="nav-item pagination">
+          <a href="/admin/menus/list" class="nav-link {{ request()->is('admin/menus/*') ? 'active-sidebar' : '' }}">
+            <i class="nav-icon fa-solid fa-list"></i>
+            <p>Danh mục</p>
+          </a>
+        </li>
+        <li class="nav-item pagination">
           <a href="/admin/sliders/list" class="nav-link {{ request()->is('admin/sliders/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fas fa-images"></i>
             <p>Trình chiếu</p>

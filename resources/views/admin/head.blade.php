@@ -3,7 +3,9 @@
 <title>{{ $title }}</title>
 
 <!-- Google Font: Source Sans Pro -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="/template/admin/plugins/fontawesome-free/css/all.min.css">
 <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css" />
@@ -17,7 +19,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="icon" href="/template/admin/dist/img/adminLG.png">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-{{-- <link rel="stylesheet" href="/template/admin/dist/css/loginadmin.css"> --}}
+<link rel="stylesheet" href="/template/admin/dist/css/loginadmin.css">
 
 {{-- <link rel="stylesheet" href="/template/admin/plugins/chart.js/chart.min.css"> --}}
 
