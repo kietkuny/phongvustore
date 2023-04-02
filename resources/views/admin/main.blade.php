@@ -198,7 +198,7 @@
   </div>
   <!-- ./wrapper -->
 
-
+  <div id="loading"><span class="loader"></span></div>
   @include('admin.footer')
 </body>
 

@@ -44,4 +44,5 @@ class LoginController extends Controller
       'password.required' => 'Vui lòng mật khẩu',
     ];
   }
+
 }

@@ -36,6 +36,8 @@
   });
 
 </script>
+
+
 {{-- <script>
   function hideBox() {
     let element = $(".dislay-success");

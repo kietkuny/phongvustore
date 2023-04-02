@@ -64,12 +64,13 @@ class Helper
 
   public static function menus($menus, $parent_id = 0)
   {
+    // $menu->id . '-' .
     $html = '';
     foreach ($menus as $key => $menu) {
       if ($menu->parent_id == $parent_id) {
         $html .= '
-          <li class="' . (request()->is('/') ? 'active-menu' : '') . '">
-            <a href="/danh-muc/' . $menu->id . '-' . Str::slug($menu->name, '-') . '.html">
+          <li class="' . (request()->is('/danh-muc/'. Str::slug($menu->name, '-') . '.html') ? 'active-menu' : '') . '">
+            <a href="/danh-muc/' . Str::slug($menu->name, '-') . '.html"> 
               ' . $menu->name . '
             </a>';
         if (self::isChild($menus, $menu->id)) {

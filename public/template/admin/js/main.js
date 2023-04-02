@@ -45,4 +45,3 @@ $('#upload').change(function () {
     }
   })
 });
-
