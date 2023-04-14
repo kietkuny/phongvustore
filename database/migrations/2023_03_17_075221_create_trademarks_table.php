@@ -14,6 +14,8 @@ return new class extends Migration
     Schema::create('trademarks', function (Blueprint $table) {
       $table->id();
       $table->string('name');
+      $table->string('thumb');
+      $table->string('url')->nullable();
       $table->timestamps();
     });
   }

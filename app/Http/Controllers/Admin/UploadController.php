@@ -21,12 +21,6 @@ class UploadController extends Controller
   {
     $this->upload = $upload;
   }
-
-  /**
-   * Summary of store
-   * @param Request $request
-   * @return void
-   */
   public function store(Request $request)
   {
     $url = $this->upload->store($request);

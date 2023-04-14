@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
-  public function logout(){  
+  public function logout()
+  {
     return redirect('admin/login')->with(Auth::logout());
- }
+  }
   public function index()
   {
     return view('admin.login', [
@@ -38,11 +39,11 @@ class LoginController extends Controller
     return redirect()->back();
   }
 
-  public function messages(){
+  public function messages()
+  {
     return [
       'email.required' => 'Vui lòng nhập email',
       'password.required' => 'Vui lòng mật khẩu',
     ];
   }
-
 }

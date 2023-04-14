@@ -58,4 +58,36 @@ class SliderHelper
   {
     return $active == 0 ? '<span class="btn btn-danger btn-sm"><i class="fa-solid fa-x"></i></span>' : '<span class="btn btn-success btn-sm"><i class="fa-regular fa-check"></i></span>';
   }
+
+  public static function sliders($sliders)
+  {
+    $html = '';
+    foreach ($sliders as $key => $slider) {
+      $html .= '
+      <div class="slide-item">
+        <div class="slide-item-img d-flex align-items-center justify-content-center">
+          <img src="' . $slider->thumb . '" alt="' . $slider->name . '">
+          <div class="opacity-img"></div>
+        </div>
+        <div class="slide-item-content" data-aos="fade-down">
+          <div class="container">
+            <div class="px-5">
+              <h1>' . $slider->name . '</h1>
+              <p>Máy tính Acer Nitro 5</p>
+              <div>
+                <a href="' . $slider->url . '">
+                  Xem thêm
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        ';
+
+      unset($sliders[$key]);
+    }
+
+    return $html;
+  }
 }

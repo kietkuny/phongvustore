@@ -55,6 +55,16 @@
       <div id="image_show" class="mt-3"></div>
       <input type="hidden" name="thumb" id="thumb">
     </div>
+    {{-- <div class="form-group">
+      <label>Ảnh sản phẩm</label>
+      <div class="row" id="image_preview"></div>
+      <div class="input-group mt-3">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="upload" accept="image/*" multiple>
+          <label class="custom-file-label" for="upload">Tải ảnh lên...</label>
+        </div>
+      </div>
+    </div> --}}
   </div>
   <!-- /.card-body -->
 

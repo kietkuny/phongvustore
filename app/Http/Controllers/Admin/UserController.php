@@ -68,13 +68,28 @@ class UserController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function showProfile()
+  public function showAdmin()
   {
     $user = Auth::user();
     return view('admin.main', ['user' => $user]);
   }
 
-  public function showInfo()
+  public function showUser()
+  {
+    $user = Auth::user();
+    return view('admin.mainuser', ['user' => $user]);
+  }
+
+  public function showInfoAdmin()
+  {
+    $user = Auth::user();
+    $userTypes = UserType::all();
+    return view('admin.info.detail',[
+      'title' => 'Thông tin người dùng đăng nhập',
+    ], compact('user', 'userTypes'));
+  }
+
+  public function showInfoUser()
   {
     $user = Auth::user();
     $userTypes = UserType::all();

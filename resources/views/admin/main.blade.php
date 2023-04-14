@@ -109,15 +109,21 @@
       display: block;
     }
 
-    /* .table-hidden {
-      display: flex;
-    }
-
-    @media only screen and (max-width: 768px) {
-      .table-hidden {
-        display: none;
+    @media only screen and (max-width: 1023.98px) {
+      body{
+        font-size: 12px;
       }
-    } */
+    }
+    @media only screen and (max-width: 767.98px) {
+      body{
+        font-size: 10px;
+      }
+    }
+    @media only screen and (max-width: 479.98px) {
+      body{
+        font-size: 8px;
+      }
+    }
 
   </style>
 </head>
@@ -198,7 +204,6 @@
   </div>
   <!-- ./wrapper -->
 
-  <div id="loading"><span class="loader"></span></div>
   @include('admin.footer')
 </body>
 
