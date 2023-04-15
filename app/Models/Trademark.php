@@ -10,6 +10,8 @@ class Trademark extends Model
   use HasFactory;
   protected $fillable = [
     'name',
+    'thumb',
+    'url'
   ];
   public function products()
   {

@@ -22,11 +22,30 @@ class ProductController extends Controller
   {
     $this->productService = $productService;
   }
-  public function index()
+  public function search()
   {
+    return view('admin.product.search', [
+      'title' => 'Tìm kiếm sản phẩm'
+    ]);
+  }
+  public function index(Request $request)
+  {
+    $search = $request->get('search');
+    $products = Product::with(['producttype', 'trademark', 'promotion'])
+      -> when($search, function ($query, $search) {
+        $query->where('name', 'like', '%' . $search . '%')
+          ->orWhereHas('producttype', function ($query) use ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+          })
+          ->orWhereHas('trademark', function ($query) use ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+          });
+      })
+      ->orderBy('id', 'desc')
+      ->paginate(5);
     return view('admin.product.list', [
       'title' => 'Danh sách sản phẩm',
-      'products' => $this->productService->get()
+      'products' => $products
     ]);
   }
 
@@ -84,19 +103,19 @@ class ProductController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Product $product,ProductRequest $request)
+  public function update(Product $product, ProductRequest $request)
   {
-    $this->productService->update($request,$product);
+    $this->productService->update($request, $product);
     return redirect('/admin/products/list');
   }
 
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Request $request):JsonResponse
+  public function destroy(Request $request): JsonResponse
   {
     $result = $this->productService->destroy($request);
-    if($result){
+    if ($result) {
       return response()->json([
         'error' => false,
         'message' => 'Xóa thành công sản phẩm'

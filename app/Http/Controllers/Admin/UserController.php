@@ -24,9 +24,14 @@ class UserController extends Controller
 
   public function index()
   {
+    $users = User::with('usertype')
+      ->select('users.*')
+      ->join('user_types', 'user_types.id', '=', 'users.usertype_id')
+      ->get();
     return view('admin.user.list', [
       'title' => 'Danh Sách nhân viên',
-      'users' => $this->userService->get()
+      'users' => $this->userService->get(),
+      compact('users'),
     ]);
   }
 
@@ -84,7 +89,7 @@ class UserController extends Controller
   {
     $user = Auth::user();
     $userTypes = UserType::all();
-    return view('admin.info.detail',[
+    return view('admin.info.detail', [
       'title' => 'Thông tin người dùng đăng nhập',
     ], compact('user', 'userTypes'));
   }
@@ -93,7 +98,7 @@ class UserController extends Controller
   {
     $user = Auth::user();
     $userTypes = UserType::all();
-    return view('admin.info.detail',[
+    return view('admin.info.detail', [
       'title' => 'Thông tin người dùng đăng nhập',
     ], compact('user', 'userTypes'));
   }

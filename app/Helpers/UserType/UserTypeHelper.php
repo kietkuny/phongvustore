@@ -14,7 +14,7 @@ class UserTypeHelper
         <tr>
           <td>' . $user_type->id . '</td>
           <td>' . $user_type->name . '</td>
-          <td>' . $user_type->updated_at . '</td>
+          <td>' . date('d-m-Y H:i:s', strtotime($user_type->updated_at)) . '</td>
           <td>
             <a href="/admin/user_types/edit/id=' . $user_type->id . '" class="btn btn-primary btn-sm">
               <i class="fa-regular fa-pen-to-square"></i>

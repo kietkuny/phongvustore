@@ -60,12 +60,13 @@
         <p class="mb-0">2000000đ</p>
       </div>
     </div>
-  </li>
-  <li class="sticky-bottom bg-white menu-header-shop-product menu-header-shop-bill border-top border-1">
+  </li> --> 
+  
+  <li class="sticky-bottom bg-white menu-header-shop-bill border-top border-1 d-none">
     <div class=" d-flex justify-content-between mb-3">
       <h6 class="mb-0 mt-1">Tổng tiền: </h6>
       <p class="mb-0 mt-1">6000000đ</p>
     </div>
     <a href="#">Xem giỏ hàng</a>
-  </li> -->
+  </li>
 </ul>

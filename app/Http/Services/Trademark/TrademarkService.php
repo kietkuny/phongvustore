@@ -17,6 +17,8 @@ class TrademarkService
     try {
       Trademark::create([
         'name' => (string) $request->input('name'),
+        'thumb' => (string) $request->input('thumb'),
+        'url' => (string) $request->input('url'),
       ]);
 
       Session::flash('success', 'Tạo thương hiệu thành công');
@@ -31,6 +33,8 @@ class TrademarkService
 
   public function update($request, $trademark) : bool{
     $trademark->name = (string) $request->input('name');
+    $trademark->thumb = (string) $request->input('thumb');
+    $trademark->url = (string) $request->input('url');
     $trademark->save();
 
     Session::flash('success', 'Cập nhật thương hiệu thành công');

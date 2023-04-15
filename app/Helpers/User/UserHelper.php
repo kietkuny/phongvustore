@@ -11,22 +11,18 @@ class UserHelper
 
   public static function user($users)
   {
-    $users = User::with('usertype')
-      ->select('users.*', 'user_types.name as usertype_name')
-      ->join('user_types', 'user_types.id', '=', 'users.usertype_id')
-      ->get();
     $html = '';
     foreach ($users as $key => $user) {
       $html .= '
         <tr>
           <td>' . $user->id . '</td>
           <td>' . $user->name . '</td>
-          <td>' . $user->usertype_name . '</td>
+          <td>' . $user->usertype->name . '</td>
           <td>' . $user->cccd . '</td>
           <td>' . $user->phone . '</td>
           <td>' . $user->email . '</td>
           <td><img src="' . $user->thumb . '" width=80px></td>
-          <td>' . $user->updated_at . '</td>
+          <td>' . date('d-m-Y H:i:s', strtotime($user->updated_at)) . '</td>
           <td>
             <a href="/admin/users/edit/id=' . $user->id . '" class="btn btn-primary btn-sm">
               <i class="fa-regular fa-pen-to-square"></i>

@@ -16,7 +16,7 @@ class Helper
           <td>' . $menu->id . '</td>
           <td>' . $char . $menu->name . '</td>
           <td>' . self::active($menu->active) . '</td>
-          <td>' . $menu->updated_at . '</td>
+          <td>' . date('d-m-Y H:i:s', strtotime($menu->updated_at)) . '</td>
           <td>
             <a href="/admin/menus/edit/id=' . $menu->id . '" class="btn btn-primary btn-sm">
               <i class="fa-regular fa-pen-to-square"></i>

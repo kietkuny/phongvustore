@@ -20,11 +20,17 @@ class TrademarkController extends Controller
     $this->trademarkService = $trademarkService;
   }
 
-  public function index()
+  public function index(Request $request)
   {
-    return view('admin.trademark.list',[
+    $search = $request->get('search');
+    $trademarks = Trademark::when($search, function ($query, $search) {
+        $query->where('name', 'like', '%' . $search . '%');
+      })
+      ->orderBy('id', 'desc')
+      ->paginate(5);;
+    return view('admin.trademark.list', [
       'title' => 'Danh Sách thương hiệu',
-      'trademarks' => $this->trademarkService->get()
+      'trademarks' => $trademarks
     ]);
   }
 
@@ -33,7 +39,7 @@ class TrademarkController extends Controller
    */
   public function create()
   {
-    return view('admin.trademark.add',[
+    return view('admin.trademark.add', [
       'title' => 'Thêm thương hiệu mới',
     ]);
   }
@@ -53,8 +59,8 @@ class TrademarkController extends Controller
    */
   public function show(Trademark $trademark)
   {
-    return view('admin.trademark.edit',[
-      'title' => 'Chỉnh Sửa thương hiệu: ' . $trademark->name ,
+    return view('admin.trademark.edit', [
+      'title' => 'Chỉnh Sửa thương hiệu: ' . $trademark->name,
       'trademark' => $trademark,
     ]);
   }
@@ -83,7 +89,7 @@ class TrademarkController extends Controller
   public function destroy(Request $request): JsonResponse
   {
     $result = $this->trademarkService->destroy($request);
-    if($result){
+    if ($result) {
       return response()->json([
         'error' => false,
         'message' => 'Xóa thành công thuơng hiệu'

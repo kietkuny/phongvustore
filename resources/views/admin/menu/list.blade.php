@@ -1,7 +1,7 @@
 @extends('admin.main')
 
 @section('content')
-<div class="text-right m-2">
+<div class="text-right mb-3">
   <a href="/admin/menus/add" class="btn-sm btn btn-success text-decoration-none">
     <div class="p-1">
       <i class="fa-solid fa-plus"></i> Thêm Danh Mục

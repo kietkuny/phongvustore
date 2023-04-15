@@ -8,9 +8,10 @@ use Illuminate\Support\Str;
 
 class ProductService
 {
-  public function get(){
-    return Product::orderbyDesc('id')->paginate(5);
-  }
+  // public function get()
+  // {
+  //   return Product::orderbyDesc('id')->paginate(5);
+  // }
 
   public function create($request)
   {
@@ -27,7 +28,6 @@ class ProductService
       ]);
 
       Session::flash('success', 'Tạo sản phẩm thành công');
-
     } catch (\Exception $err) {
       Session::flash('error', $err->getMessage());
       return false;
@@ -36,7 +36,8 @@ class ProductService
     return true;
   }
 
-  public function update($request, $product) : bool{
+  public function update($request, $product): bool
+  {
     $product->name = (string) $request->input('name');
     $product->content = (string) $request->input('content');
     $product->producttype_id = (string) $request->input('producttype_id');
@@ -51,10 +52,11 @@ class ProductService
     return true;
   }
 
-  public function destroy($request){
+  public function destroy($request)
+  {
     $id = (int) $request->input('id');
     $product = Product::where('id', $id)->first();
-    if($product){
+    if ($product) {
       return Product::where('id', $id)->delete();
     }
 

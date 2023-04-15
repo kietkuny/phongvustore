@@ -22,7 +22,7 @@ class PromotionHelper
           <td>' . $stt . '</td>
           <td>' . $promotion->name . '</td>
           <td>' . $promotion->sale . '</td>
-          <td>' . $promotion->updated_at . '</td>
+          <td>' . date('d-m-Y H:i:s', strtotime($promotion->updated_at)) . '</td>
           <td>
             <a href="/admin/promotions/edit/id=' . $promotion->id . '" class="btn btn-primary btn-sm">
               <i class="fa-regular fa-pen-to-square"></i>

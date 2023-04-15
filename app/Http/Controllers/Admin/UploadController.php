@@ -30,6 +30,6 @@ class UploadController extends Controller
         'url'   => $url
       ]);
     }
-    return response()->json(['error' => true]);
+    return response()->json(['error' => 'File nhập vào không phải là file ảnh'], 422);
   }
 }

@@ -15,9 +15,9 @@ class SliderHelper
           <td>' . $slider->id . '</td>
           <td>' . $slider->name . '</td>
           <td>' . $slider->url . '</td>
-          <td><img src="' . $slider->thumb . '" width=80px></td>
+          <td><img src="' . $slider->thumb . '" width=80px alt="' . $slider->name . '"></td>
           <td>' . self::active($slider->active) . '</td>
-          <td>' . $slider->updated_at . '</td>
+          <td>' . date('d-m-Y H:i:s', strtotime($slider->updated_at)) . '</td>
           <td>
             <a href="/admin/sliders/edit/id=' . $slider->id . '" class="btn btn-primary btn-sm">
               <i class="fa-regular fa-pen-to-square"></i>

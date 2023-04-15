@@ -11,12 +11,9 @@ class ProductHelper
 
   public static function product($products)
   {
-    $products = Product::with('producttype', 'promotion', 'trademark')
-      ->select('products.*', 'product_types.name as producttype_name', 'trademarks.name as trademark_name', 'promotions.name as promotion_name')
-      ->join('product_types', 'product_types.id', '=', 'products.producttype_id')
-      ->join('trademarks', 'trademarks.id', '=', 'products.trademark_id')
-      ->join('promotions', 'promotions.id', '=', 'products.promotion_id')
-      ->get();
+    $perPage = 5;
+    $currentPage = request()->input('page', 1);
+    $startStt = ($currentPage - 1) * $perPage + 1;
     $html = '';
     foreach ($products as $key => $product) {
       $product->price_sale = $product->price - $product->price * $product->promotion->sale;
@@ -29,15 +26,16 @@ class ProductHelper
       // $firstImage = !empty($images) ? $images[0] : '';
       $html .= '
         <tr>
-          <td>' . $product->id . '</td>
+          <td>' . $startStt + $key . '</td>
           <td>' . $product->name . '</td>
-          <td>' . $product->producttype_name . '</td>
-          <td>' . $product->trademark_name . '</td>
+          <td>' . $product->producttype->name . '</td>
+          <td>' . $product->trademark->name . '</td>
           <td>' . $product->quantity . '</td>
-          <td><img src="' . $product->thumb . '" width=80px></td>
-          <td>' . $product->price . '</td>
-          <td>' . $product->price_sale . '</td>
-          <td>' . $product->updated_at . '</td>
+          <td><img src="' . $product->thumb . '" width=80px alt="' . $product->name . '"></td>
+          <td>' . $product->price_formatted . '</td>
+          <td>' . $product->price_sale_formatted . '</td>
+          <td>' .
+        date('d/m/Y H:i:s', strtotime($product->updated_at)) . '</td>
           <td>
             <a href="/admin/products/edit/id=' . $product->id . '" class="btn btn-primary btn-sm">
               <i class="fa-regular fa-pen-to-square"></i>
@@ -76,12 +74,6 @@ class ProductHelper
 
   public static function products($products): string
   {
-    $products = Product::with('producttype', 'promotion', 'trademark')
-      ->select('products.*', 'product_types.name as producttype_name', 'trademarks.name as trademark_name', 'promotions.name as promotion_name')
-      ->join('product_types', 'product_types.id', '=', 'products.producttype_id')
-      ->join('trademarks', 'trademarks.id', '=', 'products.trademark_id')
-      ->join('promotions', 'promotions.id', '=', 'products.promotion_id')
-      ->get();
     $html = '';
     foreach ($products as $key => $product) {
       $created_at = Carbon::parse($product->created_at);
@@ -106,7 +98,7 @@ class ProductHelper
                 </div>
                 <div class="product-card-content mt-2">
                     <div>
-                        <div class="trademark"><b>' . $product->trademark_name . '</b></div>
+                        <div class="trademark"><b>' . $product->trademark->name . '</b></div>
                         <div class="name">' . $product->name . '</div>
                     </div>
                     <div class="price mt-2">

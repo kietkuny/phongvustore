@@ -21,7 +21,8 @@ class TrademarkHelper
         <tr>
           <td>' . $stt . '</td>
           <td>' . $trademark->name . '</td>
-          <td>' . $trademark->updated_at . '</td>
+          <td><img src="' . $trademark->thumb . '" width=80px alt="' . $trademark->name . '"></td>
+          <td>' . date('d-m-Y H:i:s', strtotime($trademark->updated_at)) . '</td>
           <td>
             <a href="/admin/trademarks/edit/id=' . $trademark->id . '" class="btn btn-primary btn-sm">
               <i class="fa-regular fa-pen-to-square"></i>

@@ -22,7 +22,7 @@ class ProductTypeHelper
         <tr>
           <td>' . $stt . '</td>
           <td>' . $product_type->name . '</td>
-          <td>' . $product_type->updated_at . '</td>
+          <td>' . date('d-m-Y H:i:s', strtotime($product_type->updated_at)) . '</td>
           <td>
             <a href="/admin/product_types/edit/id=' . $product_type->id . '" class="btn btn-primary btn-sm">
               <i class="fa-regular fa-pen-to-square"></i>
