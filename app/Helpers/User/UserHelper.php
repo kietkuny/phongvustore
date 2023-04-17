@@ -13,11 +13,13 @@ class UserHelper
   {
     $html = '';
     foreach ($users as $key => $user) {
+      $gender = ($user->gender == 1) ? 'Nam' : 'Nữ';
       $html .= '
         <tr>
           <td>' . $user->id . '</td>
           <td>' . $user->name . '</td>
           <td>' . $user->usertype->name . '</td>
+          <td>' . $gender . '</td>
           <td>' . $user->cccd . '</td>
           <td>' . $user->phone . '</td>
           <td>' . $user->email . '</td>

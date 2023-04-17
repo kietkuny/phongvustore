@@ -12,7 +12,8 @@
   <thead>
     <th style="width: 50px">ID</th>
     <th>Name</th>
-    <th style="">Active</th>
+    <th>URL</th>
+    <th>Active</th>
     <th>Update</th>
     <th style="width: 100px;"></th>
   </thead>

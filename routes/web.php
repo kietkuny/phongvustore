@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Users\LoginController;
 use App\Http\Controllers\Admin\Users\LoginUserController;
 use App\Http\Controllers\Admin\UserTypeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -184,3 +185,5 @@ Route::middleware(['auth'])->group(function () {
 // });
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/product', [ProductsController::class, 'index']);
+Route::get('/product/id={product}', [ProductsController::class, 'show']);

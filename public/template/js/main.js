@@ -89,6 +89,10 @@
     }
   }
 
+  // $(window).on('beforeunload', function() {
+  //   $(window).scrollTop(0);
+  // });
+
   $(`.scroll-top`).on("click", function () {
     $('html, body').animate({ scrollTop: (0) }, '5000')
   })
@@ -123,6 +127,19 @@
   }
 
 
+  // $('#search-menu').on('keyup', function() {
+  //   var keyword = $(this).val().toLowerCase();
+  //   $('a.product-card').each(function() {
+  //     var text = $(this).find('.name').text().toLowerCase();
+  //     if(text.indexOf(keyword) > -1) {
+  //       $(this).parent('.product').show();
+  //     } else {
+  //       $(this).parent('.product').hide();
+  //     }
+  //   });
+  // });
+
+
   const btnSearch = ".btn-search";
   const inputSearch = ".input-search";
   $(btnSearch).on("click", function () {
@@ -143,4 +160,8 @@
     }
   });
 
+
+  setTimeout(function(){
+    $("#loading").hide();
+  }, 1500);
 })(jQuery);

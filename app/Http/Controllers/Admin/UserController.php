@@ -10,6 +10,7 @@ use App\Models\UserType;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -22,16 +23,26 @@ class UserController extends Controller
     $this->userService = $userService;
   }
 
-  public function index()
+  public function index(Request $request)
   {
+    $search = $request->get('search');
+    if (!empty($search)) {
+      $request->session()->put('search', $search);
+    }
+    $search = $request->session()->get('search');
     $users = User::with('usertype')
-      ->select('users.*')
-      ->join('user_types', 'user_types.id', '=', 'users.usertype_id')
-      ->get();
+      // ->when(function ($query) use ($search) {
+      //   $query->where('name', 'like', '%' . $search . '%')
+      //     ->orWhereHas('usertype', function ($query) use ($search) {
+      //       $query->where('name', 'like', '%' . $search . '%');
+      //     });
+      // })
+      ->orderBy('id', 'desc')
+      ->paginate(5);
+
     return view('admin.user.list', [
       'title' => 'Danh Sách nhân viên',
-      'users' => $this->userService->get(),
-      compact('users'),
+      'users' => $users
     ]);
   }
 

@@ -3,7 +3,7 @@
     <!-- Sản phẩm chưa thêm -->
     <img src="/template/img/empty_cart.png" alt="empty_cart">
     <p>Giỏ hàng chưa có sản phẩm nào</p>
-    <a href="#" class="empty-product-link">Mua hàng ngay</a>
+    <a href="/product" class="empty-product-link">Mua hàng ngay</a>
   </li>
   <!-- <li class="menu-header-shop-product d-flex justify-content-between mb-4">
     <div class="product-img">

@@ -15,6 +15,7 @@ return new class extends Migration
       $table->id();
       $table->string('name');
       $table->foreignId('usertype_id')->references('id')->on('user_types');
+      $table->boolean('gender');
       $table->string('cccd', 12);
       $table->string('phone', 10);
       $table->string('email')->unique();

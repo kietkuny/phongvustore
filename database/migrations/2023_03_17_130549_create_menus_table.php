@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->integer('parent_id')->nullable();
-            $table->longText('content');
+            $table->string('url');
             $table->integer('active');
             $table->timestamps();
         });

@@ -9,6 +9,10 @@
         <input type="text" class="form-control" name="name" disabled value="{{ $user->name }}">
       </div>
       <div class="form-group col-md-6">
+        <label for="usertype_id">Giới tính</label>
+        <input type="text" class="form-control" disabled value="{{ ($user->gender == 1) ? 'Nam' : 'Nữ' }}">
+      </div>
+      <div class="form-group col-md-6">
         <label for="usertype_id">Loại nhân viên</label>
         <input type="text" class="form-control" disabled value="{{ $user->userType->name }}">
       </div>

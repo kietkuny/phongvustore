@@ -9,6 +9,21 @@
         <input type="text" class="form-control" name="name" value="{{ $user->name }}" placeholder="Nhập tên nhân viên">
       </div>
       <div class="form-group col-md-6">
+        <label>Giới tính</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="gender_male" value="1" {{ ($user->gender == 1) ? 'checked' : '' }}>
+          <label class="form-check-label" for="gender_male">
+            Nam
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="gender_female" value="0" {{ ($user->gender == 0) ? 'checked' : '' }}>
+          <label class="form-check-label" for="gender_female">
+            Nữ
+          </label>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
         <label for="usertype_id">Loại nhân viên</label>
         <select name="usertype_id" class="form-control form-select">
           @foreach ($usertypes as $usertype)

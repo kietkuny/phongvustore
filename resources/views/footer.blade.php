@@ -1,4 +1,4 @@
-<footer class="text-center text-lg-start bg-black text-light">
+<footer class="text-center text-lg-start text-light" style="background-color: #009FBD;">
   <section class="border-bottom">
     <div class="container">
       <div class="d-flex justify-content-center justify-content-lg-between p-4">

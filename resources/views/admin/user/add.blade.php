@@ -9,6 +9,23 @@
         <input type="text" class="form-control" name="name" placeholder="Nhập tên loại nhân viên">
       </div>
       <div class="form-group col-md-6">
+        <label for="usertype_id">Giới tính</label>
+        <div class="d-flex w-25 justify-content-between">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="gender_male" value="1">
+            <label class="form-check-label" for="gender_male">
+              Nam
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="gender_female" value="0">
+            <label class="form-check-label" for="gender_female">
+              Nữ
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
         <label for="usertype_id">Loại nhân viên</label>
         <select name="usertype_id" class="form-control form-select">
           @foreach ($usertypes as $usertype)

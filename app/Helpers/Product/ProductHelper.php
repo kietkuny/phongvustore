@@ -88,7 +88,7 @@ class ProductHelper
       $product->price_sale_formatted = number_format($product->price_sale, 0, '.', '.');
       $product->price_formatted = number_format($product->price, 0, '.', '.');
       $html .= '
-            <a href="#" class="product-card" data-aos="fade-up">
+            <a href="/product/id='. $product->id .'" class="product-card" data-aos="fade-up">
                 <div class="product-card-sale">
                     ' . $new_label . '
                     ' . ($product->promotion->sale != 0 ? '<div class="sale">' . $product->promotion->name . '</div>' : '') . '

@@ -1,36 +1,29 @@
 @extends('admin.main')
 
-@section('head')
-<script src="/ckeditor/ckeditor.js"></script>
-@endsection
-
 @section('content')
 <form action="" method="post">
   <div class="card-body">
 
-    <div class="form-group">
-      <label for="menu">Tên Danh Mục</label>
-      <input type="text" class="form-control" name="name" placeholder="Nhập tên danh mục">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="menu">Tên Danh Mục</label>
+        <input type="text" class="form-control" name="name" placeholder="Nhập tên danh mục">
+      </div>
+  
+      <div class="form-group col-md-6">
+        <label>Danh Mục</label>
+        <select name="parent_id" class="form-select col-4">
+          <option value="0">Chọn menu gốc(hoặc không)</option>
+          @foreach ($menus as $menu)
+          <option value="{{ $menu->id }}">{{ $menu->name }}</option>
+          @endforeach
+        </select>
+      </div>
     </div>
 
     <div class="form-group">
-      <label>Danh Mục</label>
-      <select name="parent_id" class="form-select col-4">
-        <option value="0">option</option>
-        @foreach ($menus as $menu)
-        <option value="{{ $menu->id }}">{{ $menu->name }}</option>
-        @endforeach
-      </select>
-    </div>
-
-    {{-- <div class="form-group">
-                <label>Mô Tả</label>
-                <textarea name="description" class="form-control"></textarea>
-            </div> --}}
-
-    <div class="form-group">
-      <label>Mô Tả Chi Tiết</label>
-      <textarea id="content" name="content" class="form-control"></textarea>
+      <label>Đường dẫn</label>
+      <input type="text" class="form-control" name="url" placeholder="Nhập tên danh mục">
     </div>
 
     <div class="form-group">
@@ -56,9 +49,3 @@
 </form>
 @endsection
 
-
-@section('footer')
-<script>
-  CKEDITOR.replace('content')
-</script>
-@endsection

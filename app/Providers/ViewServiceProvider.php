@@ -26,5 +26,6 @@ class ViewServiceProvider extends ServiceProvider
     View::composer('header',MenuComposer::class);
     View::composer('home',SliderComposer::class);
     View::composer('home',ProductComposer::class);
+    View::composer('product',ProductComposer::class);
   }
 }

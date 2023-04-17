@@ -6,6 +6,7 @@
 </head>
 
 <body>
+  <div id="loading"><span class="loader"></span></div>
   @include('header')
   <main>
     <section class="slide overflow-hidden">

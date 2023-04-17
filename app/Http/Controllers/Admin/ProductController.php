@@ -11,6 +11,7 @@ use App\Models\Promotion;
 use App\Models\Trademark;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -22,17 +23,16 @@ class ProductController extends Controller
   {
     $this->productService = $productService;
   }
-  public function search()
-  {
-    return view('admin.product.search', [
-      'title' => 'Tìm kiếm sản phẩm'
-    ]);
-  }
+
   public function index(Request $request)
   {
     $search = $request->get('search');
+    if (!empty($search)) {
+      $request->session()->put('search', $search);
+    }
+    $search = $request->session()->get('search');
     $products = Product::with(['producttype', 'trademark', 'promotion'])
-      -> when($search, function ($query, $search) {
+      ->when($search, function ($query, $search) {
         $query->where('name', 'like', '%' . $search . '%')
           ->orWhereHas('producttype', function ($query) use ($search) {
             $query->where('name', 'like', '%' . $search . '%');
