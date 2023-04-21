@@ -13,20 +13,6 @@
       </div>
       <div class="menu-header d-md-flex  menu-header-close align-items-center">
         <ul class="menu-header-item d-md-flex align-items-center d-block me-auto mb-2 mb-md-0">
-          <li class="nav-item menu-header-item-menu active-header">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item menu-header-item-menu">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          {{-- <li class="nav-item menu-header-item-menu">
-            <a class="nav-link" href="#">Drop &nbsp;&nbsp;<i class="fa-solid fa-chevron-down"></i></a>
-            <ul class="menu-drop">
-              <li><a class="nav-link" href="#" class="menu-drop-link">Kiệt</a></li>
-              <li><a class="nav-link" href="#" class="menu-drop-link">Kiệt</a></li>
-              <li><a class="nav-link" href="#" class="menu-drop-link">Kiệt</a></li>
-            </ul>
-          </li> --}}
           {!! App\Helpers\Helper::menus($menus) !!}
         </ul>
         <div class="d-md-flex d-block align-items-center">
@@ -40,7 +26,7 @@
                 hàng</span>
               <div class="menu-header-shop-num">3</div>
             </a>
-            @include('cart')
+            @include('layout.cart')
           </div>
           <a href="#" class="menu-header-login ms-md-4 ms-2 d-flex align-items-center mt-md-0 mt-3">
             <i class="fa-solid fa-user"></i> <span class="ms-3"> Đăng nhập</span>

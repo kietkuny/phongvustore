@@ -15,6 +15,7 @@ class Helper
         <tr>
           <td>' . $menu->id . '</td>
           <td>' . $char . $menu->name . '</td>
+          <td>' . $menu->url . '</td>
           <td>' . self::active($menu->active) . '</td>
           <td>' . date('d-m-Y H:i:s', strtotime($menu->updated_at)) . '</td>
           <td>
@@ -66,12 +67,15 @@ class Helper
   {
     // $menu->id . '-' .
     // ' . (request()->is('/danh-muc/' . $menu->id . '-' . Str::slug($menu->name, '-') . '.html') ? 'active-header' : '') . '
+
+    //' . Str::slug($menu->name, '+') . '
+
     $html = '';
     foreach ($menus as $key => $menu) {
       if ($menu->parent_id == $parent_id) {
         $html .= '
-          <li class="nav-item menu-header-item-menu ">
-            <a class="nav-link" href="/danh-muc/' . $menu->id . '-' . Str::slug($menu->name, '-') . '.html">
+          <li class="nav-item menu-header-item-menu ' . (request()->is($menu->url) ? 'active-header' : '') . '">
+            <a class="nav-link" href="' . $menu->url . '">
             ' . $menu->name . '
             </a>';
         unset($menus[$key]);

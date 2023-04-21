@@ -10,6 +10,7 @@ use App\Models\UserType;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -26,24 +27,43 @@ class UserController extends Controller
   public function index(Request $request)
   {
     $search = $request->get('search');
-    if (!empty($search)) {
-      $request->session()->put('search', $search);
-    }
-    $search = $request->session()->get('search');
     $users = User::with('usertype')
-      // ->when(function ($query) use ($search) {
-      //   $query->where('name', 'like', '%' . $search . '%')
-      //     ->orWhereHas('usertype', function ($query) use ($search) {
-      //       $query->where('name', 'like', '%' . $search . '%');
-      //     });
-      // })
+      ->when($search, function ($query, $search) {
+        $query->where('name', 'like', '%' . $search . '%')
+          ->orWhere('gender', $search == 'Nam' ? 1 : ($search == 'Nữ' ? 0 : null))
+          ->orWhere('cccd', 'like', '%' . $search . '%')
+          ->orWhere('phone', 'like', '%' . $search . '%')
+          ->orWhere('email', 'like', '%' . $search . '%')
+          ->orWhereHas('usertype', function ($query) use ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+          });
+      })
       ->orderBy('id', 'desc')
       ->paginate(5);
-
+    $users->appends(['search' => $search]);
     return view('admin.user.list', [
       'title' => 'Danh Sách nhân viên',
       'users' => $users
     ]);
+  }
+
+  public function search(Request $request)
+  {
+    $search = $request->get('query');
+    $users = User::with('usertype')
+      ->where('name', 'like', '%' . $search . '%')
+      ->orWhere('gender', $search == 'Nam' ? 1 : ($search == 'Nữ' ? 0 : null))
+      ->orWhere('cccd', 'like', '%' . $search . '%')
+      ->orWhere('phone', 'like', '%' . $search . '%')
+      ->orWhere('email', 'like', '%' . $search . '%')
+      ->orWhereHas('usertype', function ($query) use ($search) {
+        $query->where('name', 'like', '%' . $search . '%');
+      })
+      ->orderBy('id', 'desc')
+      ->get()
+      ->pluck('name');
+
+    return response()->json($users);
   }
 
   /**
@@ -81,37 +101,14 @@ class UserController extends Controller
     ]);
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   */
-  public function showAdmin()
-  {
-    $user = Auth::user();
-    return view('admin.main', ['user' => $user]);
-  }
-
-  public function showUser()
-  {
-    $user = Auth::user();
-    return view('admin.mainuser', ['user' => $user]);
-  }
-
   public function showInfoAdmin()
   {
     $user = Auth::user();
     $userTypes = UserType::all();
+    $isAdmin = ($user->usertype_id === 1);
     return view('admin.info.detail', [
       'title' => 'Thông tin người dùng đăng nhập',
-    ], compact('user', 'userTypes'));
-  }
-
-  public function showInfoUser()
-  {
-    $user = Auth::user();
-    $userTypes = UserType::all();
-    return view('admin.info.detail', [
-      'title' => 'Thông tin người dùng đăng nhập',
-    ], compact('user', 'userTypes'));
+    ], compact('user', 'userTypes', 'isAdmin'));
   }
 
   /**
@@ -119,7 +116,12 @@ class UserController extends Controller
    */
   public function update(User $user, UserRequest $request)
   {
+    if (Auth::user()->usertype_id !== 1) {
+      return redirect()->route('admin');
+    }
+
     $this->userService->update($request, $user);
+
     return redirect('/admin/users/list');
   }
 

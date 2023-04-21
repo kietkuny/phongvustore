@@ -15,14 +15,14 @@
       </div>
     </div>
     <div class="form-group">
+      <label>Mô Tả</label>
+      <textarea name="description" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
       <label>Ảnh slider</label>
       <input type="file" class="form-control" id="upload">
       <div id="image_show" class="mt-3"></div>
       <input type="hidden" name="thumb" id="thumb">
-    </div>
-    <div class="form-group">
-      <label>Sắp xếp</label>
-      <input type="number" value="1" class="form-control" name="sort_by" >
     </div>
     <div class="form-group">
       <label>Kích hoạt</label>

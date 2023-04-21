@@ -12,7 +12,7 @@
         <label for="usertype_id">Giới tính</label>
         <div class="d-flex w-25 justify-content-between">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="gender" id="gender_male" value="1">
+            <input class="form-check-input" type="radio" name="gender" id="gender_male" value="1" checked>
             <label class="form-check-label" for="gender_male">
               Nam
             </label>

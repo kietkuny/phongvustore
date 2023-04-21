@@ -15,6 +15,10 @@
       </div>
     </div>
     <div class="form-group">
+      <label>Mô Tả</label>
+      <textarea name="description" class="form-control">{{ $slider->description }}</textarea>
+    </div>
+    <div class="form-group">
       <label>Ảnh slider</label>
       <input type="file" class="form-control" id="upload">
       <div id="image_show" class="mt-3">
@@ -23,10 +27,6 @@
         </a>
       </div>
       <input type="hidden" name="thumb" value="{{ $slider->thumb }}" id="thumb">
-    </div>
-    <div class="form-group">
-      <label>Sắp xếp</label>
-      <input type="number" value="{{ $slider->sort_by }}" class="form-control" name="sort_by" >
     </div>
     <div class="form-group">
       <label>Kích hoạt</label>

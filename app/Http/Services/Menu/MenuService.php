@@ -12,7 +12,7 @@ class MenuService
     return Menu::where('parent_id',0)->get();
   }
   public function getAll(){
-    return Menu::orderbyDesc('id')->paginate(5);
+    return Menu::orderBy('id')->paginate(5);
   }
 
   public function create($request)
@@ -21,7 +21,7 @@ class MenuService
       Menu::create([
         'name' => (string) $request->input('name'),
         'parent_id' => (string) $request->input('parent_id'),
-        'content' => (string) $request->input('content'),
+        'url' => (string) $request->input('url'),
         'active' => (string) $request->input('active'),
       ]);
 
@@ -40,7 +40,7 @@ class MenuService
       $menu->parent_id = (string) $request->input('parent_id');
     }
     $menu->name = (string) $request->input('name');
-    $menu->content = (string) $request->input('content');
+    $menu->url = (string) $request->input('url');
     $menu->active = (string) $request->input('active');
     $menu->save();
 

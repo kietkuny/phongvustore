@@ -27,10 +27,6 @@ class ProductController extends Controller
   public function index(Request $request)
   {
     $search = $request->get('search');
-    if (!empty($search)) {
-      $request->session()->put('search', $search);
-    }
-    $search = $request->session()->get('search');
     $products = Product::with(['producttype', 'trademark', 'promotion'])
       ->when($search, function ($query, $search) {
         $query->where('name', 'like', '%' . $search . '%')
@@ -43,10 +39,29 @@ class ProductController extends Controller
       })
       ->orderBy('id', 'desc')
       ->paginate(5);
+    $products->appends(['search' => $search]);
     return view('admin.product.list', [
       'title' => 'Danh sách sản phẩm',
-      'products' => $products
+      'products' => $products,
     ]);
+  }
+
+  public function search(Request $request)
+  {
+    $search = $request->get('query');
+    $products = Product::with(['producttype', 'trademark', 'promotion'])
+      ->where('name', 'like', '%' . $search . '%')
+      ->orWhereHas('producttype', function ($query) use ($search) {
+        $query->where('name', 'like', '%' . $search . '%');
+      })
+      ->orWhereHas('trademark', function ($query) use ($search) {
+        $query->where('name', 'like', '%' . $search . '%');
+      })
+      ->orderBy('id', 'desc')
+      ->get()
+      ->pluck('name');
+
+    return response()->json($products);
   }
 
   /**

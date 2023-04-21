@@ -21,6 +21,7 @@ class User extends Authenticatable
     'name',
     'usertype_id',
     'cccd',
+    'gender',
     'phone',
     'email',
     'thumb',

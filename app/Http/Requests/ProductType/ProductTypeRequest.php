@@ -23,12 +23,14 @@ class ProductTypeRequest extends FormRequest
   {
     return [
       'name' => 'required',
+      'thumb' => 'required',
     ];
   }
   public function messages()
   {
     return [
       'name.required' => 'Vui lòng nhập tên loại sản phẩm',
+      'thumb.required' => 'Vui lòng nhập ảnh loại sản phẩm',
     ];
   }
 }

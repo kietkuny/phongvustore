@@ -64,30 +64,38 @@
             <p>Trang chủ</p>
           </a>
         </li>
+        @if ( Auth::user()->usertype_id === 1)
         <li class="nav-item pagination">
           <a href="/admin/menus/list" class="nav-link {{ request()->is('admin/menus/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-solid fa-list"></i>
             <p>Danh mục</p>
           </a>
         </li>
+        @endif
+        @if ( Auth::user()->usertype_id === 1)
         <li class="nav-item pagination">
           <a href="/admin/sliders/list" class="nav-link {{ request()->is('admin/sliders/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fas fa-images"></i>
             <p>Trình chiếu</p>
           </a>
         </li>
+        @endif
+        @if ( Auth::user()->usertype_id === 1)
         <li class="nav-item pagination">
           <a href="/admin/users/list" class="nav-link {{ request()->is('admin/users/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-regular fa-user"></i>
             <p>Nhân viên</p>
           </a>
         </li>
+        @endif
+        @if ( Auth::user()->usertype_id === 1)
         <li class="nav-item pagination">
           <a href="/admin/user_types/list" class="nav-link {{ request()->is('admin/user_types/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-regular fa-users"></i>
             <p>Loại nhân viên</p>
           </a>
         </li>
+        @endif
         <li class="nav-item pagination">
           <a href="/admin/trademarks/list" class="nav-link {{ request()->is('admin/trademarks/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-solid fa-trademark"></i>

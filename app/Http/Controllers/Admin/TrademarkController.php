@@ -23,19 +23,26 @@ class TrademarkController extends Controller
   public function index(Request $request)
   {
     $search = $request->get('search');
-    if (!empty($search)) {
-      $request->session()->put('search', $search);
-    }
-    $search = $request->session()->get('search');
     $trademarks = Trademark::when($search, function ($query, $search) {
-        $query->where('name', 'like', '%' . $search . '%');
-      })
+      $query->where('name', 'like', '%' . $search . '%');
+    })
       ->orderBy('id', 'desc')
-      ->paginate(5);;
+      ->paginate(5);
+    $trademarks->appends(['search' => $search]);
     return view('admin.trademark.list', [
       'title' => 'Danh Sách thương hiệu',
       'trademarks' => $trademarks
     ]);
+  }
+  public function search(Request $request)
+  {
+    $search = $request->get('query');
+    $trademarks = Trademark::where('name', 'like', '%' . $search . '%')
+      ->orderBy('id', 'desc')
+      ->get()
+      ->pluck('name');
+
+    return response()->json($trademarks);
   }
 
   /**

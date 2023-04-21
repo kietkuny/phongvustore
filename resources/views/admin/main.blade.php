@@ -4,6 +4,9 @@
 <head>
   @include('admin.head')
   <style>
+    .btn{
+      transition: 0.3s;
+    }
     .active-sidebar {
       /* border-radius: 50px 0 0 50px !important; */
       background: #DFFFD8 !important;

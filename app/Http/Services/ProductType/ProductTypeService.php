@@ -17,6 +17,8 @@ class ProductTypeService
     try {
       ProductType::create([
         'name' => (string) $request->input('name'),
+        'thumb' => (string) $request->input('thumb'),
+        'active' => (string) $request->input('active'),
       ]);
 
       Session::flash('success', 'Tạo loại sản phẩm thành công');
@@ -31,6 +33,8 @@ class ProductTypeService
 
   public function update($request, $productType) : bool{
     $productType->name = (string) $request->input('name');
+    $productType->thumb = (string) $request->input('thumb');
+    $productType->active = (string) $request->input('active');
     $productType->save();
 
     Session::flash('success', 'Cập nhật loại sản phẩm thành công');

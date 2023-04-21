@@ -18,7 +18,7 @@ class SliderService{
         'name' => (string) $request->input('name'),
         'url' => (string) $request->input('url'),
         'thumb' => (string) $request->input('thumb'),
-        'sort_by' => (string) $request->input('sort_by'),
+        'description' => (string) $request->input('description'),
         'active' => (string) $request->input('active'),
       ]);
 
@@ -36,7 +36,7 @@ class SliderService{
     $slider->name = (string) $request->input('name');
     $slider->url = (string) $request->input('url');
     $slider->thumb = (string) $request->input('thumb');
-    $slider->sort_by = (string) $request->input('sort_by');
+    $slider->description = (string) $request->input('description');
     $slider->active = (string) $request->input('active');
     $slider->save();
 

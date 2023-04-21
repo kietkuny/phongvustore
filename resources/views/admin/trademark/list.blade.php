@@ -4,7 +4,8 @@
 <div class="row d-flex justify-content-md-between mb-3">
   <form method="GET" action="/admin/trademarks/list" class="input-group rounded col-md-8 w-auto align-items-center">
     <div class="form-outline">
-      <input type="search" class="form-control rounded" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="search-addon" name="search" />
+      <input type="search" class="form-control rounded" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="search-addon" name="search" 
+      id="search-trademark"/>
     </div>
     <button type="submit" type="button" class="btn btn-dark">
         <i class="fas fa-search"></i>

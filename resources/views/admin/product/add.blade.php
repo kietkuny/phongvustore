@@ -46,6 +46,10 @@
       </div>
     </div>
     <div class="form-group">
+      <label>Mô Tả</label>
+      <textarea name="description" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
       <label>Mô Tả Sản phẩm</label>
       <textarea id="content" name="content" class="form-control"></textarea>
     </div>

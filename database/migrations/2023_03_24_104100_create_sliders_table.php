@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->string('thumb');
             $table->string('description');
-            $table->integer('sort_by');
             $table->integer('active');
             $table->timestamps();
         });

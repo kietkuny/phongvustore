@@ -23,13 +23,13 @@ class CreateFormRequest extends FormRequest
   {
     return [
       'name'=>'required',
-      'content'=>'required'
+      // 'url'=>'required'
     ];
   }
   public function messages(){
     return [
       'name.required' => 'Vui lòng nhập tên vào danh mục',
-      'content.required' => 'Vui lòng nhập nội dung danh mục',
+      // 'url.required' => 'Vui lòng nhập nội dung danh mục',
     ];
   }
 }

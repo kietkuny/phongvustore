@@ -2,19 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\UserType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class AbminUtypeSeeder extends Seeder
+class UserTypeSeeder extends Seeder
 {
   /**
    * Run the database seeds.
    */
   public function run(): void
   {
-    UserType::created([
-      'name' => 'Admin'
+    DB::table('user_types')->insert([
+      [
+        'name' => 'Admin',
+      ]
     ]);
   }
 }

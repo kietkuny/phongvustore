@@ -24,12 +24,14 @@ class SliderRequest extends FormRequest
     return [
       'name'=>'required',
       'thumb'=>'required',
+      'description' =>'required',
     ];
   }
   public function messages(){
     return [
       'name.required' => 'Vui lòng nhập tên slider',
-      'thumb.required' => 'Vui lòng nhập ảnh slider'
+      'thumb.required' => 'Vui lòng nhập ảnh slider',
+      'description.required' => 'Vui lòng nhập mô tả slider',
     ];
   }
 }

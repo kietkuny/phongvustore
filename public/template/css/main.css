@@ -16,6 +16,10 @@ a {
   text-decoration: none !important;
 }
 
+.btn{
+  transition: 0.3s;
+}
+
 header {
   position: fixed;
   top: 0;
@@ -371,6 +375,8 @@ main{
 }
 .slide-item-img img {
   width: 100%;
+  object-fit: cover;
+  height: 100vh;
 }
 .slide-item-content {
   top: 35%;
@@ -405,13 +411,15 @@ main{
 }
 @media screen and (max-width: 1439.98px) {
   .slide-item-img,
-  .slide-item .opacity-img {
+  .slide-item .opacity-img,
+  .slider-item-img img {
     height: 90vh;
   }
 }
 @media screen and (max-width: 1023.98px) {
   .slide-item-img,
-  .slide-item .opacity-img {
+  .slide-item .opacity-img,
+  .slider-item-img img {
     height: 70vh;
   }
   .slide-item h1 {
@@ -428,19 +436,22 @@ main{
 }
 @media screen and (max-width: 767.98px) {
   .slide-item-img,
-  .slide-item .opacity-img {
+  .slide-item .opacity-img,
+  .slider-item-img img {
     height: 50vh;
   }
 }
 @media screen and (max-width: 579.98px) {
   .slide-item-img,
-  .slide-item .opacity-img {
+  .slide-item .opacity-img,
+  .slider-item-img img {
     height: 40vh;
   }
 }
 @media screen and (max-width: 479.98px) {
   .slide-item-img,
-  .slide-item .opacity-img {
+  .slide-item .opacity-img,
+  .slider-item-img img {
     height: 30vh;
   }
   .slide-item-content {
@@ -796,8 +807,8 @@ main{
 .main-detail-head-img img {
   width: 100%;
   height: 200px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 @media screen and (max-width: 1023.98px) {
   .main-detail-head-img img {
@@ -836,8 +847,16 @@ main{
 .main-detail-head-name .btn-add {
   border: #278db5 solid 1px;
   color: #278db5;
+  background: none;
   transition: 0.3s;
 }
+
+.main-detail-head-name .input-quantity[type="number"]::-webkit-inner-spin-button,
+.main-detail-head-name .input-quantity[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .main-detail-head-name .btn-add:hover {
   border: #1a5f7a solid 1px;
   color: #1a5f7a;
@@ -910,6 +929,33 @@ main{
   padding: 15px;
   background: white;
   border-radius: 10px;
+}
+.main-detail-description img {
+  width: 70%;
+  display:flex;
+  margin:auto;
+  padding: 40px 0;
+}
+.main-detail-description iframe {
+  width: 70%;
+  display: flex;
+  margin: auto;
+  height: 500px;
+}
+@media screen and (max-width: 1023.98px) {
+  .main-detail-description iframe {
+    height: 300px;
+  }
+}
+@media screen and (max-width: 767.98px) {
+  .main-detail-description iframe {
+    height: 200px;
+  }
+}
+@media screen and (max-width: 479.98px) {
+  .main-detail-description iframe {
+    height: 100px;
+  }
 }
 
 .bar1,

@@ -25,6 +25,11 @@
   });
 
 </script>
+
+<script>
+  $('input[type="search"]').attr('autocomplete', 'off');
+</script>
+
 <script>
   window.addEventListener('beforeunload', function(event) {
     // Gọi API đăng xuất trong Laravel
@@ -37,43 +42,45 @@
 
 </script>
 
+<script>
+  //  type="text/javascipt"
 
-{{-- <script>
-  function hideBox() {
-    let element = $(".dislay-success");
-    element.addClass("d-none");
-  }
-  setTimeout(hideBox, 3000);
-
-</script> --}}
-{{-- <script>
-  $(document).ready(function() {
-    $('.loading').hide();
-    $("#data").empty(); // Xóa dữ liệu hiện tại của phần từ #data
-
-    $.ajax({
-      type: 'POST'
-      , url: '/list-data'
-      , beforeSend: function() {
-        // Hiển thị thanh Loading khi dữ liệu đang được tải 
-        $('.loading').show();
-        $('.loading').css('display', 'flex');
-      }
-      , success: function(data) {
-        // Ẩn thanh Loading khi tải dữ liệu hoàn tất 
-        $('.loading').hide();
-        $("#data").html(data);
-      }
-    });
+  $('#search-user').typeahead({
+    source: function(query, process) {
+      return $.get('{{ route("admin.users.search") }}', {
+        query: query
+      }, function(data) {
+        return process(data);
+      });
+    }
   });
 
-</script> --}}
+  $('#search-trademark').typeahead({
+    source: function(query, process) {
+      return $.get('{{ route("admin.trademarks.search") }}', {
+        query: query
+      }, function(data) {
+        return process(data);
+      });
+    }
+  });
+
+  $('#search-product').typeahead({
+    source: function(query, process) {
+      return $.get('{{ route("admin.products.search") }}', {
+        query: query
+      }, function(data) {
+        return process(data);
+      });
+    }
+  });
+
+  
+
+</script>
 
 <!-- jQuery -->
 <script src="/template/admin/plugins/jquery/jquery.min.js"></script>
-
-<!-- Bootstrap 4 -->
-{{-- <script src="/template/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
 
 <!-- AdminLTE App -->
 <script src="/template/admin/dist/js/adminlte.min.js"></script>

@@ -19,11 +19,18 @@ class ProductTypeController extends Controller
   {
     $this->productTypeService = $productTypeService;
   }
-  public function index()
+  public function index(Request $request)
   {
+    $search = $request->get('search');
+    $producttypes = ProductType::when($search, function ($query, $search) {
+      $query->where('name', 'like', '%' . $search . '%');
+    })
+      ->orderBy('id', 'desc')
+      ->paginate(5);
+    $producttypes->appends(['search' => $search]);
     return view('admin.product_type.list',[
       'title' => 'Danh sách loại sản phẩm',
-      'product_types' => $this->productTypeService->get()
+      'product_types' => $producttypes
     ]);
   }
 

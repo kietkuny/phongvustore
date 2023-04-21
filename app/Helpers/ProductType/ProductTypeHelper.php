@@ -22,6 +22,8 @@ class ProductTypeHelper
         <tr>
           <td>' . $stt . '</td>
           <td>' . $product_type->name . '</td>
+          <td><img src="' . $product_type->thumb . '" width=80px alt="' . $product_type->name . '"></td>
+          <td>' . self::active($product_type->active) . '</td>
           <td>' . date('d-m-Y H:i:s', strtotime($product_type->updated_at)) . '</td>
           <td>
             <a href="/admin/product_types/edit/id=' . $product_type->id . '" class="btn btn-primary btn-sm">
@@ -57,5 +59,9 @@ class ProductTypeHelper
     }
 
     return $html;
+  }
+  public static function active($active = 0)
+  {
+    return $active == 0 ? '<span class="btn btn-danger btn-sm"><i class="fa-solid fa-x"></i></span>' : '<span class="btn btn-success btn-sm"><i class="fa-regular fa-check"></i></span>';
   }
 }

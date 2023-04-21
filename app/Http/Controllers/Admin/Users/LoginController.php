@@ -29,10 +29,15 @@ class LoginController extends Controller
     if (Auth::attempt([
       'email' => $request->input('email'),
       'password' => $request->input('password'),
-      'usertype_id' => 1,
     ], $request->input('remember'))) {
-
-      return redirect()->route('admin');
+      {
+        if (Auth::user()->usertype_id != 1 && Auth::user()->usertype_id != 2) {
+          Auth::logout();
+          Session::flash('error', 'Tài khoản không có quyền đăng nhập');
+          return redirect()->back();
+        }
+        return redirect()->route('admin');
+      }
     }
 
     Session::flash('error', 'Email hoặc Mật khẩu không đúng');

@@ -18,6 +18,7 @@ class ProductService
     try {
       Product::create([
         'name' => (string) $request->input('name'),
+        'description' => (string) $request->input('description'),
         'content' => (string) $request->input('content'),
         'producttype_id' => (string) $request->input('producttype_id'),
         'trademark_id' => (string) $request->input('trademark_id'),
@@ -39,6 +40,7 @@ class ProductService
   public function update($request, $product): bool
   {
     $product->name = (string) $request->input('name');
+    $product->description = (string) $request->input('description');
     $product->content = (string) $request->input('content');
     $product->producttype_id = (string) $request->input('producttype_id');
     $product->trademark_id = (string) $request->input('trademark_id');

@@ -12,7 +12,7 @@ class Slider extends Model
       'name',
       'url',
       'thumb',
-      'sort_by',
+      'description',
       'active',
     ];
 }

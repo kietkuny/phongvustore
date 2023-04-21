@@ -161,6 +161,33 @@
   });
 
 
+  $(".btn-qtt-minus").click(function () {
+    let input = $(this).siblings('input[type="number"]');
+    let val = parseInt(input.val());
+    if (val > 1) {
+      input.val(val - 1);
+    }
+  });
+
+  $(".btn-qtt-plus").click(function () {
+    let input = $(this).siblings('input[type="number"]');
+    let val = parseInt(input.val());
+    let max = parseInt(input.attr("max"));
+    if (val < max) {
+      input.val(val + 1);
+    }
+  });
+
+  $("#add-to-cart-button").click(function () {
+    let quantity = $("input[name='quantity']").val();
+    if (quantity == 0) {
+      alert("Sản phẩm đã hết hàng");
+      return false;
+    }
+  });
+
+
+
   setTimeout(function(){
     $("#loading").hide();
   }, 1500);

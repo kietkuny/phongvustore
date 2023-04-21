@@ -21,6 +21,7 @@ class UserService
       User::create([
         'name' => (string) $request->input('name'),
         'usertype_id' => (string) $request->input('usertype_id'),
+        'gender' => (string) $request->input('gender'),
         'cccd' => (string) $request->input('cccd'),
         'phone' => (string) $request->input('phone'),
         'email' => (string) $request->input('email'),
@@ -41,6 +42,7 @@ class UserService
   {
     $user->name = (string) $request->input('name');
     $user->usertype_id = (string) $request->input('usertype_id');
+    $user->gender = (string) $request->input('gender');
     $user->cccd = (string) $request->input('cccd');
     $user->phone = (string) $request->input('phone');
     $user->email = (string) $request->input('email');
@@ -50,8 +52,7 @@ class UserService
         $user->password = Hash::make($newPassword);
     }
     
-    $user->save();
-    Auth::guard('web')->login($user);
+    $user->update();
     Session::flash('success', 'Cập nhật nhân viên thành công');
     return true;
   }
