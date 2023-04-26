@@ -40,7 +40,7 @@
         </div>
         <hr class="w-100 px-3">
         <div class="main-detail-head-configuration">
-          {!! $product->description !!}
+          {!! str_replace('-', '<br> - ', $product->description) !!}
         </div>
         <div class="main-detail-head-promotion">
           <div class="mb-3"><b>Khuyến mãi liên quan</b></div>

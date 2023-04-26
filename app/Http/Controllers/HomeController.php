@@ -17,8 +17,8 @@ class HomeController extends Controller
   }
 
   public function ajaxSearch()
-{
+  {
     $data = Product::search()->get();
     return view('ajaxSearch', compact('data'));
-}
+  }
 }

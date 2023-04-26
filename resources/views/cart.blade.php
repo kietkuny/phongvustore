@@ -22,7 +22,7 @@
             @foreach ($products as $key => $product)
             <li class="d-flex align-items-center">
               <div class="cart-shop-input">
-                <input type="checkbox" name="" id="" class="p-2">
+                <input type="checkbox" name="product_checkbox" class="p-2">
               </div>
               <div class="p-2 cart-shop-product d-flex align-items-center">
                 <img class="img-fluid" src="{{ $product->thumb }}" alt="{{ $product->name }}" width="100px">
