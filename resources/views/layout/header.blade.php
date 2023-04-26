@@ -17,16 +17,20 @@
         </ul>
         <div class="d-md-flex d-block align-items-center">
           <form class="menu-header-form d-flex mb-4 mb-md-0" role="search" action="/product">
-            <div class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></div>
-            <input type="search" class="input-search" id="search-menu" placeholder="Tìm kiếm" name="search">
+            <div class="w-100">
+              <div class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></div>
+              <input type="search" class="input-search input-search-ajax" id="search-menu" placeholder="Tìm kiếm" name="search" autocomplete="off">
+            </div>
+            <div class="list-search"></div>
+            {{-- {{ csrf_field() }} --}}
           </form>
           <div class="menu-header-shop ms-md-4 mt-md-0 mt-3">
-            <a href="/product" style="position: relative; z-index: 10;" class="d-flex align-items-center">
+            <a href="/carts" style="position: relative; z-index: 10;" class="d-flex align-items-center">
               <i class="fa-sharp fa-regular fa-cart-shopping"></i> <span class="ms-3">Giỏ
                 hàng</span>
               <div class="menu-header-shop-num">3</div>
             </a>
-            @include('layout.cart')
+            {{-- @include('layout.cart') --}}
           </div>
           <a href="#" class="menu-header-login ms-md-4 ms-2 d-flex align-items-center mt-md-0 mt-3">
             <i class="fa-solid fa-user"></i> <span class="ms-3"> Đăng nhập</span>

@@ -19,6 +19,14 @@ class Product extends Model
     'quantity',
     'price',
   ];
+
+  public function scopeSearch($query){
+    if(request('key')){
+      $key= request('key');
+      $query = $query->where('name','like','%'.$key.'%');
+    }
+    return $query;
+  }
   public function promotion()
   {
     return $this->belongsTo(Promotion::class);

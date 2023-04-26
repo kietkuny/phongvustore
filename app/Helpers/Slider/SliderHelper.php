@@ -14,6 +14,7 @@ class SliderHelper
         <tr>
           <td>' . $slider->id . '</td>
           <td>' . $slider->name . '</td>
+          <td>'. $slider->description. '</td>
           <td>' . $slider->url . '</td>
           <td><img src="' . $slider->thumb . '" width=80px alt="' . $slider->name . '"></td>
           <td>' . self::active($slider->active) . '</td>
@@ -59,17 +60,4 @@ class SliderHelper
     return $active == 0 ? '<span class="btn btn-danger btn-sm"><i class="fa-solid fa-x"></i></span>' : '<span class="btn btn-success btn-sm"><i class="fa-regular fa-check"></i></span>';
   }
 
-  public static function sliders($sliders)
-  {
-    $html = '';
-    foreach ($sliders as $key => $slider) {
-      $html .= '
-      
-        ';
-
-      unset($sliders[$key]);
-    }
-
-    return $html;
-  }
 }

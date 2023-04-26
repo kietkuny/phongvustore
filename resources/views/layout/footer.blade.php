@@ -6,20 +6,15 @@
           <span>Get connected with us on social networks:</span>
         </div>
         <div>
-          <a href="#" class="btn text-white btn-floating m-1" style="background-color: #3b5998;" href="#!"
-            role="button"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="btn text-white btn-floating m-1" style="background-color: #3b5998;" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
 
-          <a class="btn text-white btn-floating m-1" style="background-color: #dd4b39;" href="#!" role="button"><i
-              class="fab fa-google"></i></a>
+          <a class="btn text-white btn-floating m-1" style="background-color: #dd4b39;" href="#!" role="button"><i class="fab fa-google"></i></a>
 
-          <a class="btn text-white btn-floating m-1" style="background-color: #ac2bac;" href="#!" role="button"><i
-              class="fab fa-instagram"></i></a>
+          <a class="btn text-white btn-floating m-1" style="background-color: #ac2bac;" href="#!" role="button"><i class="fab fa-instagram"></i></a>
 
-          <a class="btn text-white btn-floating m-1" style="background-color: #0082ca;" href="#!" role="button"><i
-              class="fab fa-linkedin-in"></i></a>
+          <a class="btn text-white btn-floating m-1" style="background-color: #0082ca;" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
 
-          <a class="btn text-white btn-floating m-1" style="background-color: #333333;" href="#!" role="button"><i
-              class="fab fa-github"></i></a>
+          <a class="btn text-white btn-floating m-1" style="background-color: #333333;" href="#!" role="button"><i class="fab fa-github"></i></a>
         </div>
       </div>
     </div>
@@ -95,19 +90,18 @@
   <i class="fa-sharp fa-solid fa-angle-up"></i>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
-  integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" integrity="sha512-HWlJyU4ut5HkEj0QsK/IxBCY55n5ZpskyjVlAoV9Z7XQwwkqXoYdCIC93/htL3Gu5H3R4an/S0h2NXfbZk3g7w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init({
-    delay: 200,
-    duration: 800,
-    once: true,
-  });
+    delay: 200
+    , duration: 800
+    , once: true
+  , });
+
 </script>
 <script src="/template/js/main.js"></script>

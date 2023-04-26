@@ -47,7 +47,7 @@
     prevArrow: '<button type="button" class="slick-left"><i class="fa-solid fa-caret-left"></i></button>',
     nextArrow: '<button type="button" class="slick-right"><i class="fa-solid fa-caret-right"></i></button>',
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 1500,
     slidesToShow: 4,
     slidesToScroll: 1,
     responsive: [
@@ -126,26 +126,72 @@
     });
   }
 
-
-  // $('#search-menu').on('keyup', function() {
-  //   var keyword = $(this).val().toLowerCase();
-  //   $('a.product-card').each(function() {
-  //     var text = $(this).find('.name').text().toLowerCase();
-  //     if(text.indexOf(keyword) > -1) {
-  //       $(this).parent('.product').show();
-  //     } else {
-  //       $(this).parent('.product').hide();
-  //     }
-  //   });
-  // });
-
-
   const btnSearch = ".btn-search";
   const inputSearch = ".input-search";
   $(btnSearch).on("click", function () {
     $(inputSearch).toggleClass('search-active')
   })
 
+  
+  $('.input-search-ajax').keyup(function () {
+    let _text = $(this).val();
+    if (_text != '') {
+      $.ajax({
+        url: window.location.origin + "/api/ajax-search-product?key=" + _text,
+        type: "GET",
+        success: function (res) {  
+          let _html = '';
+          let count = 0;
+          for (let pro of res) {
+            if (count === 3) { break; }
+            _html += '<a href="/product/id=' + pro.id + '">'
+            _html += '<div class="card mx-2 my-2">';
+            _html += '<div class="row g-0">';
+            _html += '<div class="col-3 list-search-img">';
+            _html += '<img src="' + pro.thumb + '" class="img-fluid rounded-start" alt="' + pro.name + '">';
+            _html += '</div>';
+            _html += '<div class="col-9">';
+            _html += '<div class="card-body">';
+            _html += '<p class="card-text"><small>' + pro.name + '</small></p>';
+            _html += '</div>';
+            _html += '</div>';
+            _html += '</div>';
+            _html += '</div>';
+            _html += '</a>';
+            count++;
+          }
+          $('.list-search').show(200);
+          $('.list-search').html(_html);
+        }
+      });
+    } else {
+      $('.list-search').html('');
+      $('.list-search').hide();
+    }
+    
+  })
+
+
+  // let _html = '';
+          // let count = 0;
+          // for (let pro of res) {
+          //   if (count === 3) { break; }
+          //   _html += '<a href="/product/id=' + pro.id + '">'
+          //   _html += '<div class="card mx-2 my-2">';
+          //   _html += '<div class="row g-0">';
+          //   _html += '<div class="col-3 list-search-img">';
+          //   _html += '<img src="' + pro.thumb + '" class="img-fluid rounded-start" alt="' + pro.name + '">';
+          //   _html += '</div>';
+          //   _html += '<div class="col-9">';
+          //   _html += '<div class="card-body">';
+          //   _html += '<p class="card-text"><small>' + pro.name + '</small></p>';
+          //   _html += '</div>';
+          //   _html += '</div>';
+          //   _html += '</div>';
+          //   _html += '</div>';
+          //   _html += '</a>';
+          //   count++;
+          // }
 
   if ($('li.menu-header-shop-product').length > 0) {
     $('li.empty-product').addClass('d-none');
@@ -187,8 +233,97 @@
   });
 
 
+  $('.cart-shop li').each(function () {
 
-  setTimeout(function(){
+    // Tìm giá trị giá mặc định và định dạng nó thành giá tiền hiển thị
+    var price = parseInt($(this).find('.cart-shop-price p').text().replace(/\D+/g, ''));
+    var formattedPrice = new Intl.NumberFormat().format(price) + '₫';
+    $(this).find('.cart-shop-price p').text(formattedPrice);
+
+    // Tìm giá trị số lượng sản phẩm và tính tổng cộng giá trị
+    var quantity = parseInt($(this).find('.cart-shop-quantity input').val());
+    var formattedQuantity = new Intl.NumberFormat().format(quantity);
+    var sum = quantity * price;
+    var formattedSum = new Intl.NumberFormat().format(sum) + '₫';
+    // Cập nhật giá trị cho các phần tử liên quan đến sản phẩm đó
+    $(this).find('.cart-shop-quantity input').val(formattedQuantity);
+    $(this).find('.cart-shop-sum p').text(formattedSum);
+
+    // Bắt sự kiện cho input số lượng và cập nhật lại giá trị tổng
+    $(this).find('.cart-shop-quantity input').on('input', function () {
+      var quantity = parseInt($(this).val().replace(/\D+/g, ''));
+      var sum = quantity * price;
+      var formattedSum = new Intl.NumberFormat().format(sum) + '₫';
+      $(this).siblings('.btn-quantity-minus').prop('disabled', quantity <= 1);
+      $(this).siblings('.btn-quantity-plus').prop('disabled', quantity >= $(this).attr('max'));
+      $(this).closest('.cart-shop li').find('.cart-shop-sum p').text(formattedSum);
+    });
+
+  });
+
+
+  $('.cart-shop li .cart-shop-input input[type="checkbox"]').change(function () {
+    var quantity = 0;
+    var sum = 0;
+    $('.cart-shop li').each(function () {
+      if ($(this).find('.cart-shop-input input[type="checkbox"]').prop('checked')) {
+        var itemQuantity = parseInt($(this).find('.cart-shop-quantity input').val().replace(/\D+/g, ''));
+        quantity += itemQuantity;
+        var itemSum = parseInt($(this).find('.cart-shop-sum p').text().replace(/\D+/g, ''));
+        sum += itemSum;
+      }
+    });
+    var formattedQuantity = new Intl.NumberFormat().format(quantity);
+    $('.main-cart-quantity').text('x' + formattedQuantity);
+    var formattedSum = new Intl.NumberFormat().format(sum) + '₫';
+    $('.main-cart-sum').text(formattedSum);
+  });
+
+  $('.cart-shop li .cart-shop-quantity-input').on('input', function () {
+    var quantity = 0;
+    var sum = 0;
+    $('.cart-shop li').each(function () {
+      var itemQuantity = parseInt($(this).find('.cart-shop-quantity input').val().replace(/\D+/g, ''));
+      quantity += itemQuantity;
+      var itemPrice = parseInt($(this).find('.cart-shop-price p').text().replace(/\D+/g, ''));
+      var itemSum = itemQuantity * itemPrice;
+      sum += itemSum;
+    });
+    var formattedQuantity = new Intl.NumberFormat().format(quantity);
+    $('.main-cart-quantity').text('x' + formattedQuantity);
+    var formattedSum = new Intl.NumberFormat().format(sum) + '₫';
+    $('.main-cart-sum').text(formattedSum);
+  });
+
+
+  $('.btn-quantity-minus').click(function () {
+    var input = $(this).siblings('input[type="number"]');
+    var val = parseInt(input.val().replace(/\D+/g, ''));
+    if (val > 1) {
+      var price = parseInt(input.closest('.cart-shop li').find('.cart-shop-price p').text().replace(/\D+/g, ''));
+      var quantity = val - 1;
+      var sum = quantity * price;
+      var formattedSum = new Intl.NumberFormat().format(sum) + '₫';
+      input.val(quantity);
+      input.closest('.cart-shop li').find('.cart-shop-sum p').text(formattedSum);
+    }
+  });
+
+  $('.btn-quantity-plus').click(function () {
+    var input = $(this).siblings('input[type="number"]');
+    var val = parseInt(input.val().replace(/\D+/g, ''));
+    var max = parseInt(input.attr('max'));
+    if (val < max) {
+      var price = parseInt(input.closest('.cart-shop li').find('.cart-shop-price p').text().replace(/\D+/g, ''));
+      var quantity = val + 1;
+      var sum = quantity * price;
+      var formattedSum = new Intl.NumberFormat().format(sum) + '₫';
+      input.val(quantity);
+      input.closest('.cart-shop li').find('.cart-shop-sum p').text(formattedSum);
+    }
+  });
+
+  setTimeout(function () {
     $("#loading").hide();
   }, 1500);
 })(jQuery);

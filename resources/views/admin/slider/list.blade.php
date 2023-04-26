@@ -12,6 +12,7 @@
   <thead>
     <th style="width: 50px">ID</th>
     <th>Tiêu đề</th>
+    <th>Mô tả</th>
     <th>Đường dẫn</th>
     <th>Ảnh</th>
     <th>Trạng thái</th>

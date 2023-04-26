@@ -8,10 +8,10 @@ use Illuminate\Support\Str;
 
 class ProductService
 {
-  // public function get()
-  // {
-  //   return Product::orderbyDesc('id')->paginate(5);
-  // }
+  public function get()
+  {
+    return Product::orderbyDesc('id')->paginate(5);
+  }
 
   public function create($request)
   {

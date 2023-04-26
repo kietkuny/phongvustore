@@ -28,6 +28,7 @@
 
 <script>
   $('input[type="search"]').attr('autocomplete', 'off');
+
 </script>
 
 <script>
@@ -55,6 +56,16 @@
     }
   });
 
+  $('#search-producttype').typeahead({
+    source: function(query, process) {
+      return $.get('{{ route("admin.producttypes.search") }}', {
+        query: query
+      }, function(data) {
+        return process(data);
+      });
+    }
+  });
+
   $('#search-trademark').typeahead({
     source: function(query, process) {
       return $.get('{{ route("admin.trademarks.search") }}', {
@@ -74,8 +85,6 @@
       });
     }
   });
-
-  
 
 </script>
 

@@ -14,10 +14,11 @@ class ProductsController extends Controller
   {
     return view('product', [
       'title' => 'Sản phẩm',
-      // 'sliders' => $this->slider->show()
     ]);
   }
-  public function show(Product $product){
+
+  public function show(Product $product)
+  {
     $trademarks = Trademark::all();
     $producttypes = ProductType::all();
     $promotions = Promotion::all();

@@ -20,26 +20,25 @@
           </div>
           <div class="mt-4 mb-3">
             <form method="POST" action="/addcart" class="">
-              @csrf
               <div class="col-4 mb-3 d-flex">
                 <button type="button" class="btn-add w-25 btn-qtt-minus"><i class="fa-solid fa-minus"></i></button>
-                <input class="input-quantity text-center" type="number" name="num_product" value="0" min="0" max="{{ $product->quantity }}" style="
+                <input class="input-quantity text-center" type="number" name="num_product" value="0" min="1" max="{{ $product->quantity }}" style="
               border: 1px solid gray;">
                 <button type="button" class="btn-add w-25 btn-qtt-plus"><i class="fa-solid fa-plus"></i></button>
               </div>
               <input type="hidden" name="product_id" value="{{ $product->id }}">
               <div class="col-12">
-                <button class="btn btn-buy w-100" id="add-to-cart-button">THÊM VÀO GIỎ HÀNG</button>
-              </div>
-
-            </form>
-            {{-- <div class="col-sm-6">
+                <button type="submit" class="btn btn-buy w-100" id="add-to-cart-button" {{ ($product->quantity == 0) ? "disabled" : "" }}>THÊM VÀO GIỎ HÀNG</button>
+                {{-- <div class="col-sm-6">
               <button class="btn btn-add w-100">THÊM VÀO GIỎ HÀNG</button>
             </div> --}}
+              </div>
+              @csrf
+            </form>
+            
           </div>
         </div>
         <hr class="w-100 px-3">
-        {{-- Đoạn code chưa thêm --}}
         <div class="main-detail-head-configuration">
           {!! $product->description !!}
         </div>

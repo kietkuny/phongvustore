@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\UserTypeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -95,6 +96,7 @@ Route::middleware(['auth'])->group(function () {
       Route::get('add', [ProductTypeController::class, 'create']);
       Route::post('add', [ProductTypeController::class, 'store']);
       Route::get('list', [ProductTypeController::class, 'index']);
+      Route::get('search', [ProductTypeController::class, 'search'])->name('admin.producttypes.search');
       Route::get('edit/id={product_type}', [ProductTypeController::class, 'show']);
       Route::post('edit/id={product_type}', [ProductTypeController::class, 'update']);
       Route::delete('destroy', [ProductTypeController::class, 'destroy']);
@@ -129,6 +131,8 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', [HomeController::class, 'index']);
 Route::get('product', [ProductsController::class, 'index']);
 Route::get('product/id={product}', [ProductsController::class, 'show']);
+Route::get('/ajax-search-product',[HomeController::class,'ajaxSearch'])->name('ajax-search-product');
 Route::post('addcart', [CartController::class, 'index']);
-Route::get('cart', [CartController::class, 'index']);
+Route::get('carts', [CartController::class, 'show']);
+
 

@@ -50,12 +50,14 @@ class ProductController extends Controller
   {
     $search = $request->get('query');
     $products = Product::with(['producttype', 'trademark', 'promotion'])
-      ->where('name', 'like', '%' . $search . '%')
-      ->orWhereHas('producttype', function ($query) use ($search) {
-        $query->where('name', 'like', '%' . $search . '%');
-      })
-      ->orWhereHas('trademark', function ($query) use ($search) {
-        $query->where('name', 'like', '%' . $search . '%');
+      ->when($search, function ($query, $search) {
+        $query->where('name', 'like', '%' . $search . '%')
+          ->orWhereHas('producttype', function ($query) use ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+          })
+          ->orWhereHas('trademark', function ($query) use ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+          });
       })
       ->orderBy('id', 'desc')
       ->get()

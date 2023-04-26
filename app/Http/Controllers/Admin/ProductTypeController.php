@@ -25,10 +25,10 @@ class ProductTypeController extends Controller
     $producttypes = ProductType::when($search, function ($query, $search) {
       $query->where('name', 'like', '%' . $search . '%');
     })
-      ->orderBy('id', 'desc')
+      ->orderBy('id')
       ->paginate(5);
     $producttypes->appends(['search' => $search]);
-    return view('admin.product_type.list',[
+    return view('admin.product_type.list', [
       'title' => 'Danh sách loại sản phẩm',
       'product_types' => $producttypes
     ]);
@@ -37,9 +37,20 @@ class ProductTypeController extends Controller
   /**
    * Show the form for creating a new resource.
    */
+
+  public function search(Request $request)
+  {
+    $search = $request->get('query');
+    $producttypes = ProductType::where('name', 'like', '%' . $search . '%')
+      ->orderBy('id')
+      ->get()
+      ->pluck('name');
+
+    return response()->json($producttypes);
+  }
   public function create()
   {
-    return view('admin.product_type.add',[
+    return view('admin.product_type.add', [
       'title' => 'Thêm loại sản phẩm mới',
     ]);
   }
@@ -59,8 +70,8 @@ class ProductTypeController extends Controller
    */
   public function show(ProductType $productType)
   {
-    return view('admin.product_type.edit',[
-      'title' => 'Chỉnh sửa loại sản phẩm: ' . $productType->name ,
+    return view('admin.product_type.edit', [
+      'title' => 'Chỉnh sửa loại sản phẩm: ' . $productType->name,
       'product_type' => $productType,
     ]);
   }
@@ -78,7 +89,7 @@ class ProductTypeController extends Controller
    */
   public function update(ProductType $productType, ProductTypeRequest $request)
   {
-    $this->productTypeService->update($request,$productType);
+    $this->productTypeService->update($request, $productType);
 
     return redirect('/admin/product_types/list');
   }
@@ -86,10 +97,10 @@ class ProductTypeController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Request $request):JsonResponse
+  public function destroy(Request $request): JsonResponse
   {
     $result = $this->productTypeService->destroy($request);
-    if($result){
+    if ($result) {
       return response()->json([
         'error' => false,
         'message' => 'Xóa thành công loại sản phẩm'

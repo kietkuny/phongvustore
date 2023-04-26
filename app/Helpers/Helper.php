@@ -65,17 +65,12 @@ class Helper
 
   public static function menus($menus, $parent_id = 0): string
   {
-    // $menu->id . '-' .
-    // ' . (request()->is('/danh-muc/' . $menu->id . '-' . Str::slug($menu->name, '-') . '.html') ? 'active-header' : '') . '
-
-    //' . Str::slug($menu->name, '+') . '
-
     $html = '';
     foreach ($menus as $key => $menu) {
       if ($menu->parent_id == $parent_id) {
         $html .= '
           <li class="nav-item menu-header-item-menu ' . (request()->is($menu->url) ? 'active-header' : '') . '">
-            <a class="nav-link" href="' . $menu->url . '">
+            <a class="nav-link" href="' .((!empty($menu->url) && preg_match('/[a-zA-Z]/', $menu->url)) ? '/' : ''). $menu->url .'">
             ' . $menu->name . '
             </a>';
         unset($menus[$key]);
