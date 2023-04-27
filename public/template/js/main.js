@@ -26,6 +26,13 @@
 
 // })(jQuery);
 (function ($) {
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
   $(`.hamburger-menu`).on("click", function () {
     $(`.hamburger-menu`).toggleClass('change');
     $(`.menu-header`).toggleClass('menu-header-close');
@@ -89,9 +96,9 @@
     }
   }
 
-  // $(window).on('beforeunload', function() {
-  //   $(window).scrollTop(0);
-  // });
+  $(window).on('beforeunload', function () {
+    $(window).scrollTop(0);
+  });
 
   $(`.scroll-top`).on("click", function () {
     $('html, body').animate({ scrollTop: (0) }, '5000')
@@ -132,14 +139,14 @@
     $(inputSearch).toggleClass('search-active')
   })
 
-  
+
   $('.input-search-ajax').keyup(function () {
     let _text = $(this).val();
     if (_text != '') {
       $.ajax({
         url: window.location.origin + "/api/ajax-search-product?key=" + _text,
         type: "GET",
-        success: function (res) {  
+        success: function (res) {
           let _html = '';
           let count = 0;
           for (let pro of res) {
@@ -168,30 +175,70 @@
       $('.list-search').html('');
       $('.list-search').hide();
     }
-    
+
   })
 
+  $('.add-to-cart-button').click(function (e) {
+    e.preventDefault(); // Ngăn chặn chuyển trang khi submit form
+    let form = $(this).closest('form'); // Tìm form gần nhất
+    let data = form.serialize(); // Lấy dữ liệu của form
+    let quantityInput = form.find('input[name=num_product]');
+    if (quantityInput.val() <= 0) {
+      return;
+    }
+    $.ajax({
+      type: "POST",
+      url: form.attr('action'),
+      data: data,
+      success: function (response) {
+        $('#addToCartModal').modal('show');
+      },
+      error: function (xhr) {
+        console.log(xhr.responseText); // Log lỗi nếu có
+      }
+    });
+  });
 
-  // let _html = '';
-          // let count = 0;
-          // for (let pro of res) {
-          //   if (count === 3) { break; }
-          //   _html += '<a href="/product/id=' + pro.id + '">'
-          //   _html += '<div class="card mx-2 my-2">';
-          //   _html += '<div class="row g-0">';
-          //   _html += '<div class="col-3 list-search-img">';
-          //   _html += '<img src="' + pro.thumb + '" class="img-fluid rounded-start" alt="' + pro.name + '">';
-          //   _html += '</div>';
-          //   _html += '<div class="col-9">';
-          //   _html += '<div class="card-body">';
-          //   _html += '<p class="card-text"><small>' + pro.name + '</small></p>';
-          //   _html += '</div>';
-          //   _html += '</div>';
-          //   _html += '</div>';
-          //   _html += '</div>';
-          //   _html += '</a>';
-          //   count++;
-          // }
+  $('.add-to-cart-form input[type=number]').on('change', function() {
+    if ($(this).val() <= 0) {
+      $('#addToCartModal').modal('hide');
+    }
+  });
+
+  $('.btn-delete-all').on('click', function () {
+    $.ajax({
+      url: "/carts/delete/all",
+      type: 'DELETE',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function (response) {
+        location.reload(); // Reload trang web
+      },
+      error: function (xhr) {
+        console.log(xhr.responseText);
+      }
+    });
+  });
+
+
+  $('.btn-delete').on('click', function () {
+    let productId = $(this).data('id');
+
+    $.ajax({
+      url: "/carts/" + productId,
+      type: 'DELETE',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function (response) {
+        location.reload(); // Reload trang web
+      },
+      error: function (xhr) {
+        console.log(xhr.responseText);
+      }
+    });
+  });
 
   if ($('li.menu-header-shop-product').length > 0) {
     $('li.empty-product').addClass('d-none');
@@ -221,14 +268,6 @@
     let max = parseInt(input.attr("max"));
     if (val < max) {
       input.val(val + 1);
-    }
-  });
-
-  $("#add-to-cart-button").click(function () {
-    let quantity = $("input[name='quantity']").val();
-    if (quantity == 0) {
-      alert("Sản phẩm đã hết hàng");
-      return false;
     }
   });
 

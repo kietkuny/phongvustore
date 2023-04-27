@@ -58,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
       Route::get('edit/id={user}', [UserController::class, 'show']);
       Route::post('edit/id={user}', [UserController::class, 'update']);
       Route::delete('destroy', [UserController::class, 'destroy']);
-    }); 
+    });
 
     #UserType
     Route::prefix('user_types')->middleware('checkUserType')->group(function () {
@@ -131,8 +131,11 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', [HomeController::class, 'index']);
 Route::get('product', [ProductsController::class, 'index']);
 Route::get('product/id={product}', [ProductsController::class, 'show']);
-Route::get('/ajax-search-product',[HomeController::class,'ajaxSearch'])->name('ajax-search-product');
+Route::get('/ajax-search-product', [HomeController::class, 'ajaxSearch'])->name('ajax-search-product');
 Route::post('addcart', [CartController::class, 'index']);
 Route::get('carts', [CartController::class, 'show']);
-
-
+Route::delete('/carts/{product_id}', [CartController::class, 'delete']);
+// Route::delete('/carts/all', [CartController::class, 'deleteAll']);
+Route::group(['middleware' => 'web'], function () {
+  Route::delete('/carts/delete/all', [CartController::class, 'deleteALL']);
+});

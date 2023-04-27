@@ -10,8 +10,8 @@
         <div class="main-detail-head-name">
           <h4>{{ $product->name }}</h4>
           <p class="mb-2">Loại: {{ $product->producttype->name }}</p>
-          <p class="mb-2">Thương hiệu: <a href="#" style="color: #62cdff;"><b>{{ $product->trademark->name }}</b></a></p>
-          <p class="mb-2">Số lượng: {{ $product->quantity }}</p>
+          <p class="mb-2">Thương hiệu: <a href="{{ $product->trademark->url }}" style="color: #62cdff;"><b>{{ $product->trademark->name }}</b></a></p>
+          <p class="mb-2">Số lượng: {{ $product->quantity }} <b class="text-danger {{ ($product->quantity == 0) ? '' : 'd-none' }}">( Sản phẩm đã hết hàng )</b></p>
           <div class="price mt-4">
             @if($product->promotion->sale != 0)
             <h6><del>{{ number_format($product->price, 0, '.', '.') }}₫</del> <small>{{ $product->promotion->name }}</small> </h6>
@@ -19,7 +19,7 @@
             <h5>{{ number_format($product->price - $product->price * $product->promotion->sale, 0, '.', '.') }} ₫</h5>
           </div>
           <div class="mt-4 mb-3">
-            <form method="POST" action="/addcart" class="">
+            <form method="POST" action="/addcart" class="add-to-cart-form">
               <div class="col-4 mb-3 d-flex">
                 <button type="button" class="btn-add w-25 btn-qtt-minus"><i class="fa-solid fa-minus"></i></button>
                 <input class="input-quantity text-center" type="number" name="num_product" value="0" min="1" max="{{ $product->quantity }}" style="
@@ -28,7 +28,7 @@
               </div>
               <input type="hidden" name="product_id" value="{{ $product->id }}">
               <div class="col-12">
-                <button type="submit" class="btn btn-buy w-100" id="add-to-cart-button" {{ ($product->quantity == 0) ? "disabled" : "" }}>THÊM VÀO GIỎ HÀNG</button>
+                <button type="submit" class="btn btn-buy w-100 add-to-cart-button" {{ ($product->quantity == 0) ? "disabled" : "" }}>THÊM VÀO GIỎ HÀNG</button>
                 {{-- <div class="col-sm-6">
               <button class="btn btn-add w-100">THÊM VÀO GIỎ HÀNG</button>
             </div> --}}
@@ -85,6 +85,23 @@
       <h4>Mô tả sản phẩm</h4>
       <div>
         {!! $product->content !!}
+      </div>
+    </div>
+    <div class="modal fade" id="addToCartModal" tabindex="-1" aria-labelledby="addToCartModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addToCartModalLabel">Thông báo</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="location.reload();"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img src="/template/img/tich.jpg" alt="tich" width="30%">
+            <p>Sản phẩm đã được thêm vào giỏ hàng!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="location.reload();">Đóng</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

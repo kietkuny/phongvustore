@@ -8,7 +8,7 @@
       <form method="post" action="">
         <div class="left">
           <div class="text-end">
-            <a href="#" class=" btn btn-outline-danger" type="button">Xóa tất cả</a>
+            <button type="button" class="btn-delete-all btn btn-outline-danger" style="transition: 0.3s">Xóa tất cả</button>
           </div>
           <ul class="cart-head">
             <li></li>
@@ -43,7 +43,7 @@
                 <p class="mb-0"></p>
               </div>
               <div class="cart-shop-delete text-center">
-                <a href="#" class="text-danger">Xóa</a>
+                <button type="button" class="btn btn-outline-danger btn-delete delete-product border-0" data-id="{{ $product->id }}" style="transition: 0.3s">Xóa</button>
               </div>
             </li>
             @endforeach

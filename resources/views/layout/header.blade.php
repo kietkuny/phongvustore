@@ -28,7 +28,7 @@
             <a href="/carts" style="position: relative; z-index: 10;" class="d-flex align-items-center">
               <i class="fa-sharp fa-regular fa-cart-shopping"></i> <span class="ms-3">Giỏ
                 hàng</span>
-              <div class="menu-header-shop-num">3</div>
+              <div class="menu-header-shop-num">{{ count(Session::get('carts', [])) }}</div>
             </a>
             {{-- @include('layout.cart') --}}
           </div>
