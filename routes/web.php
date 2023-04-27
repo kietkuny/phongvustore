@@ -49,6 +49,16 @@ Route::middleware(['auth'])->group(function () {
       Route::delete('destroy', [MenuController::class, 'destroy']);
     });
 
+    #Slider
+    Route::prefix('sliders')->middleware('checkUserType')->group(function () {
+      Route::get('add', [SliderController::class, 'create']);
+      Route::post('add', [SliderController::class, 'store']);
+      Route::get('list', [SliderController::class, 'index']);
+      Route::get('edit/id={slider}', [SliderController::class, 'show']);
+      Route::post('edit/id={slider}', [SliderController::class, 'update']);
+      Route::delete('destroy', [SliderController::class, 'destroy']);
+    });
+
     #User
     Route::prefix('users')->middleware('checkUserType')->group(function () {
       Route::get('add', [UserController::class, 'create']);
@@ -112,17 +122,7 @@ Route::middleware(['auth'])->group(function () {
       Route::post('edit/id={product}', [ProductController::class, 'update']);
       Route::delete('destroy', [ProductController::class, 'destroy']);
     });
-
-    #Slider
-    Route::prefix('sliders')->middleware('checkUserType')->group(function () {
-      Route::get('add', [SliderController::class, 'create']);
-      Route::post('add', [SliderController::class, 'store']);
-      Route::get('list', [SliderController::class, 'index']);
-      Route::get('edit/id={slider}', [SliderController::class, 'show']);
-      Route::post('edit/id={slider}', [SliderController::class, 'update']);
-      Route::delete('destroy', [SliderController::class, 'destroy']);
-    });
-
+    
     #Upload
     Route::post('upload/services', [UploadController::class, 'store']);
   });
@@ -135,7 +135,4 @@ Route::get('/ajax-search-product', [HomeController::class, 'ajaxSearch'])->name(
 Route::post('addcart', [CartController::class, 'index']);
 Route::get('carts', [CartController::class, 'show']);
 Route::delete('/carts/{product_id}', [CartController::class, 'delete']);
-// Route::delete('/carts/all', [CartController::class, 'deleteAll']);
-Route::group(['middleware' => 'web'], function () {
-  Route::delete('/carts/delete/all', [CartController::class, 'deleteALL']);
-});
+Route::delete('/carts/delete/all', [CartController::class, 'deleteALL']);
