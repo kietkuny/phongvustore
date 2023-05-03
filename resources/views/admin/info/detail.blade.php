@@ -45,7 +45,7 @@
   <!-- /.card-body -->
 
   <div class="card-footer">
-    <a href="/admin" class="btn btn-secondary">Quay lại</a>
+    <a onclick="history.back(-1)" class="btn btn-secondary">Quay lại</a>
   </div>
   @csrf
 </form>

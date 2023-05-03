@@ -27,16 +27,14 @@ class UserController extends Controller
   public function index(Request $request)
   {
     $search = $request->get('search');
-    $users = User::with('usertype')
-      ->when($search, function ($query, $search) {
-        $query->where('name', 'like', '%' . $search . '%')
-          ->orWhere('gender', $search == 'Nam' ? 1 : ($search == 'Nữ' ? 0 : null))
-          ->orWhere('cccd', 'like', '%' . $search . '%')
-          ->orWhere('phone', 'like', '%' . $search . '%')
-          ->orWhere('email', 'like', '%' . $search . '%')
-          ->orWhereHas('usertype', function ($query) use ($search) {
-            $query->where('name', 'like', '%' . $search . '%');
-          });
+    $users = User::select('users.*')->with('usertype')
+      ->where('name', 'like', '%' . $search . '%')
+      ->orWhere('gender', $search == 'Nam' ? 1 : ($search == 'Nữ' ? 0 : null))
+      ->orWhere('cccd', 'like', '%' . $search . '%')
+      ->orWhere('phone', 'like', '%' . $search . '%')
+      ->orWhere('email', 'like', '%' . $search . '%')
+      ->orWhereHas('usertype', function ($query) use ($search) {
+        $query->where('name', 'like', '%' . $search . '%');
       })
       ->orderBy('id', 'desc')
       ->paginate(5);
@@ -60,8 +58,8 @@ class UserController extends Controller
         $query->where('name', 'like', '%' . $search . '%');
       })
       ->orderBy('id', 'desc')
-      ->get()
-      ->pluck('name');
+      ->get();
+      // ->pluck();
 
     return response()->json($users);
   }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiController;
+use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/ajax-search-product',[ApiController::class,'ajaxSearch'])->name('api-ajax-search-product');
+
+Route::get('/provinces/{id}/cities', function($id) {
+  $cities = City::where('province_id', $id)->get();
+  return $cities;
+});

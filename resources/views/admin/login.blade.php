@@ -30,7 +30,7 @@
           </div>
           <div class="forget">
             <label>Remember Me
-              <input type="checkbox">
+              <input type="checkbox" name="remember_token">
               <span class="checkmark"></span>
             </label>
             <a href="#">Forget Password</a>

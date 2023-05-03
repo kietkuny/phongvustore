@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
@@ -10,12 +11,13 @@ use App\Http\Controllers\Admin\TrademarkController;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Users\LoginController;
-use App\Http\Controllers\Admin\Users\LoginUserController;
 use App\Http\Controllers\Admin\UserTypeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\SearchController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,9 +27,11 @@ Route::fallback(function () {
   return view('errors.404');
 });
 
-Route::get('admin/login', [LoginController::class, 'index'])->name('login');
+Route::get('admin/login', [LoginController::class, 'index'])->name('admin.login');
 
 Route::post('admin/login/store', [LoginController::class, 'store']);
+
+Route::get('admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 Route::middleware(['auth'])->group(function () {
   Route::prefix('admin')->group(function () {
@@ -35,7 +39,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('admin');
     Route::get('main', [MainController::class, 'index']);
 
-    Route::get('/info', [UserController::class, 'showInfoAdmin'])->name('admin.info');
+    
+    Route::get('info', [UserController::class, 'showInfoAdmin'])->name('admin.info');
 
     #Menu
     Route::prefix('menus')->middleware('checkUserType')->group(function () {
@@ -120,17 +125,47 @@ Route::middleware(['auth'])->group(function () {
       Route::post('edit/id={product}', [ProductController::class, 'update']);
       Route::delete('destroy', [ProductController::class, 'destroy']);
     });
-    
+
+    #Customer
+    Route::prefix('customers')->group(function () {
+      Route::get('add', [CustomerController::class, 'create']);
+      Route::post('add', [CustomerController::class, 'store']);
+      Route::get('list', [CustomerController::class, 'index']);
+      Route::get('search', [CustomerController::class, 'search'])->name('admin.customers.search');
+      Route::get('edit/id={customer}', [CustomerController::class, 'show']);
+      Route::post('edit/id={customer}', [CustomerController::class, 'update']);
+      Route::delete('destroy', [CustomerController::class, 'destroy']);
+    });
+
     #Upload
     Route::post('upload/services', [UploadController::class, 'store']);
   });
 });
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// //Register
+Route::get('/register', [CustomersController::class,'showRegistrationForm'])->name('register');
+Route::post('/register', [CustomersController::class,'register']);
+
+// Login
+Route::get('/login', [HomeController::class,'login'])->name('home.login');
+Route::post('/login', [HomeController::class,'post_login'])->name('home.login');
+
+//logout
+Route::get('/logout',[HomeController::class,'logout'])->name('home.logout');
+// Route::get('/verify-email/{token}', [CustomersController::class,'verify'])->name('verify-email');
+
+// Route::post('/send-email-verification-code', [CustomersController::class,'sendEmailVerificationCode'])->name('send-email-verification-code');
+
+Route::get('test-email', [HomeController::class, 'testEmail']);
+
 Route::get('product', [ProductsController::class, 'index']);
 Route::get('product/id={product}', [ProductsController::class, 'show']);
-Route::get('/ajax-search-product', [HomeController::class, 'ajaxSearch'])->name('ajax-search-product');
+Route::get('ajax-search-product', [HomeController::class, 'ajaxSearch'])->name('ajax-search-product');
 Route::post('addcart', [CartController::class, 'index']);
 Route::get('carts', [CartController::class, 'show']);
-Route::delete('/carts/{product_id}', [CartController::class, 'delete']);
-Route::delete('/carts/delete/all', [CartController::class, 'deleteALL']);
+Route::delete('carts/{product_id}', [CartController::class, 'delete']);
+Route::delete('carts/delete/all', [CartController::class, 'deleteALL']);
+
+

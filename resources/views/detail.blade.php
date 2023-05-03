@@ -29,9 +29,6 @@
               <input type="hidden" name="product_id" value="{{ $product->id }}">
               <div class="col-12">
                 <button type="submit" class="btn btn-buy w-100 add-to-cart-button" {{ ($product->quantity == 0) ? "disabled" : "" }}>THÊM VÀO GIỎ HÀNG</button>
-                {{-- <div class="col-sm-6">
-              <button class="btn btn-add w-100">THÊM VÀO GIỎ HÀNG</button>
-            </div> --}}
               </div>
               @csrf
             </form>

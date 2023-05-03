@@ -9,7 +9,8 @@
     }
     .active-sidebar {
       /* border-radius: 50px 0 0 50px !important; */
-      background: #DFFFD8 !important;
+      /* background: #DFFFD8 !important; */
+      background: #F1F6F9!important;
       color: black !important;
       position: relative !important;
       margin-right: -8px!important;
@@ -39,7 +40,8 @@
     } */
 
     .content-img {
-      background: linear-gradient(to right, #DFFFD8, #B4E4FF)
+      /* background: linear-gradient(to right, #DFFFD8, #B4E4FF); */
+      background: #F1F6F9;
     }
 
     .main-sidebar {
@@ -154,7 +156,7 @@
         <ul class="avatar-detail">
           <li><a href="/admin/info"><i class="fa-solid fa-info"></i> Chi tiết</a></li>
           <li>
-            <a href="{{ route('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+            <a href="{{ route('admin.logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
           </li>
         </ul>
       </div>

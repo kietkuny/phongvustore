@@ -32,9 +32,19 @@
             </a>
             {{-- @include('layout.cart') --}}
           </div>
-          <a href="#" class="menu-header-login ms-md-4 ms-2 d-flex align-items-center mt-md-0 mt-3">
-            <i class="fa-solid fa-user"></i> <span class="ms-3"> Đăng nhập</span>
-          </a>
+          <div class="menu-header-login ms-md-4 ms-2 d-flex align-items-center mt-md-0 mt-3">
+            <i class="fa-solid fa-user"></i> 
+            <span class="ms-3">
+              @if(Auth::guard('cus')->check())
+              <div class="d-flex align-items-center">
+                <a href="/" class="text-dark">{{ Auth::guard('cus')->user()->name }}</a>
+                <a href="{{ route('home.logout') }}" class="ms-3 text-dark"><i class="fa-regular fa-right-from-bracket" style="font-size: 20px"></i></a>
+              </div>
+              @else
+              <a href="{{ route('home.login') }}" class="text-dark">Đăng nhập</a>
+              @endif
+            </span>
+          </div>
         </div>
       </div>
     </nav>

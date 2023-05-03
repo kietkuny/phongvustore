@@ -18,6 +18,7 @@ class CartController extends Controller
   public function __construct(CartService $cartService)
   {
     $this->cartService = $cartService;
+    $this->middleware('cus');
   }
 
   public function index(Request $request)
@@ -26,7 +27,7 @@ class CartController extends Controller
     if ($result === false) {
       return redirect()->back();
     }
-    return redirect('/carts');
+    return view('cart');
   }
 
   public function show()

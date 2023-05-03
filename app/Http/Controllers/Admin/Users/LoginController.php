@@ -11,7 +11,7 @@ class LoginController extends Controller
 {
   public function logout()
   {
-    return redirect('admin/login')->with(Auth::logout());
+    return redirect()->route('admin.login')->with(Auth::logout());
   }
   public function index()
   {
