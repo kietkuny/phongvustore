@@ -29,8 +29,6 @@ Route::get('admin/login', [LoginController::class, 'index'])->name('login');
 
 Route::post('admin/login/store', [LoginController::class, 'store']);
 
-Route::get('logout', [LoginController::class, 'logout'])->name('logout');
-
 Route::middleware(['auth'])->group(function () {
   Route::prefix('admin')->group(function () {
 
