@@ -24,7 +24,6 @@ Lấy database từ thư mục SQL để đẩy database lên phpmyadmin (xampp 
 
 Chỉ cần chạy Xampp hoặc Laragon là có thể vào được
 
-Link : https://www.facebook.com/kietkuny/
 
 
 
