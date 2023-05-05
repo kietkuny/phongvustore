@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\View\Composers\CartComposer;
 use App\Http\View\Composers\MenuComposer;
 use App\Http\View\Composers\ProductComposer;
 use App\Http\View\Composers\ProductTypeComposer;
@@ -31,5 +32,6 @@ class ViewServiceProvider extends ServiceProvider
     View::composer('home',TrademarkComposer::class);
     View::composer('home',ProductComposer::class);
     View::composer('product',ProductComposer::class);
+    View::composer('layout.cart',CartComposer::class);
   }
 }

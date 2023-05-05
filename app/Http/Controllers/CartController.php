@@ -17,8 +17,8 @@ class CartController extends Controller
    */
   public function __construct(CartService $cartService)
   {
-    $this->cartService = $cartService;
     $this->middleware('cus');
+    $this->cartService = $cartService; 
   }
 
   public function index(Request $request)
@@ -43,17 +43,9 @@ class CartController extends Controller
     ]);
   }
 
-  public function showCart()
-  {
-    $promotions = Promotion::all();
-    $products = $this->cartService->getProduct();
-
-    return view('layout.header', [
-      'title' => 'Giỏ hàng',
-      'products' => $products,
-      'promotions' => $promotions,
-      'carts' => Session::get('carts'),
-    ]);
+  public function update(Request $request){
+    $this->cartService->update($request);
+    return redirect('/carts');
   }
 
   public function delete($productId): JsonResponse

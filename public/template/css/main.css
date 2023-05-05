@@ -226,7 +226,7 @@ header .menu-header-shop ul {
   top: 50px;
   left: -50%;
   border-radius: 5px;
-  padding: 20px 20px 0;
+  padding: 10px 10px 0;
   display: none;
   transition: 0.2s;
 }
@@ -309,6 +309,12 @@ header .menu-header-login {
 }
 header .menu-header-login i {
   font-size: 30px;
+}
+header .menu-header-login .logout a i{
+  transition: 0.3s;
+}
+header .menu-header-login .logout a:hover i{
+  color: #1a5f7a;
 }
 @media screen and (max-width: 767.98px) {
   header {
@@ -1127,10 +1133,6 @@ main{
 .main-cart .left ul {
   list-style: none;
   padding-left: 0;
-}
-.main-cart .left ul li {
-  display: flex;
-  align-items: center;
 }
 @media screen and (max-width: 767.98px) {
   .main-cart .left {

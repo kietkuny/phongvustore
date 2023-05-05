@@ -22,7 +22,6 @@
               <input type="search" class="input-search input-search-ajax" id="search-menu" placeholder="Tìm kiếm" name="search" autocomplete="off">
             </div>
             <div class="list-search"></div>
-            {{-- {{ csrf_field() }} --}}
           </form>
           <div class="menu-header-shop ms-md-4 mt-md-0 mt-3">
             <a href="/carts" style="position: relative; z-index: 10;" class="d-flex align-items-center">
@@ -30,20 +29,23 @@
                 hàng</span>
               <div class="menu-header-shop-num">{{ count(Session::get('carts', [])) }}</div>
             </a>
-            {{-- @include('layout.cart') --}}
+            @include('layout.cart')
           </div>
           <div class="menu-header-login ms-md-4 ms-2 d-flex align-items-center mt-md-0 mt-3">
-            <i class="fa-solid fa-user"></i> 
-            <span class="ms-3">
-              @if(Auth::guard('cus')->check())
+            @if(Auth::guard('cus')->check())
+            <i class="fa-duotone fa-user" style="color:deepskyblue"></i>
+            <span class="ms-2 logout">
               <div class="d-flex align-items-center">
                 <a href="/" class="text-dark">{{ Auth::guard('cus')->user()->name }}</a>
-                <a href="{{ route('home.logout') }}" class="ms-3 text-dark"><i class="fa-regular fa-right-from-bracket" style="font-size: 20px"></i></a>
+                <a href="{{ route('home.logout') }}" class="ms-3 text-dark"><i class="fa-regular fa-right-from-bracket d-flex" style="font-size: 20px"></i></a>
               </div>
-              @else
-              <a href="{{ route('home.login') }}" class="text-dark">Đăng nhập</a>
-              @endif
             </span>
+            @else
+            <i class="fa-solid fa-user" style="color:deepskyblue"></i>
+            <span class="ms-2">
+              <a href="{{ route('home.login') }}" class="text-dark">Đăng nhập</a>
+            </span>
+            @endif
           </div>
         </div>
       </div>

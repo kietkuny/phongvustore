@@ -165,6 +165,7 @@ Route::get('product/id={product}', [ProductsController::class, 'show']);
 Route::get('ajax-search-product', [HomeController::class, 'ajaxSearch'])->name('ajax-search-product');
 Route::post('addcart', [CartController::class, 'index']);
 Route::get('carts', [CartController::class, 'show']);
+Route::post('update-cart',[CartController::class, 'update']);
 Route::delete('carts/{product_id}', [CartController::class, 'delete']);
 Route::delete('carts/delete/all', [CartController::class, 'deleteALL']);
 

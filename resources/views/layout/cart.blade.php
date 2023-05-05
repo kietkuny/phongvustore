@@ -1,24 +1,37 @@
 <ul>
+  @if(isset($products) && count($products) > 0)
+  @foreach ($products as $key => $product)
+  @php
+  $price = $product->price - $product->price * $product->promotion->sale;
+  @endphp
+  <li class="menu-header-shop-product alert alert-info mb-2 p-1" >
+    <a href="/product/id={{ $product->id }}" class="d-flex justify-content-between">
+      <div class="product-img">
+        <img src="{{ $product->thumb }}" alt="{{ $product->name }}">
+      </div>
+      <div class="product-info ms-2" style="width:200px">
+        <h6 class="mb-0" style="font-size: 12px">{{ $product->name }}</h6>
+        <div class="d-flex justify-content-between">
+          <p class="mb-0"></p>
+          <p class="mb-0"><small>{{ number_format($price, 0, '.', '.') }}đ</small></p>
+        </div>
+      </div>
+    </a>
+  </li>
+  @endforeach
+  {{-- <li class="sticky-bottom bg-white menu-header-shop-bill border-top border-1 d-none">
+    <div class=" d-flex justify-content-between mb-3">
+      <h6 class="mb-0 mt-1">Tổng tiền: </h6>
+      <p class="mb-0 mt-1">{{ number_format($sumCart, 0, '.', '.') }}đ</p>
+    </div>
+    <a href="/carts">Xem giỏ hàng</a>
+  </li> --}}
+  @endif
   <li class="empty-product">
-    <!-- Sản phẩm chưa thêm -->
     <img src="/template/img/empty_cart.png" alt="empty_cart">
     <p>Giỏ hàng chưa có sản phẩm nào</p>
     <a href="product" class="empty-product-link">Mua hàng ngay</a>
   </li>
-  @foreach ($products as $key => $productcart)
-  <li class="menu-header-shop-product d-flex justify-content-between mb-4">
-    <div class="product-img">
-      <img src="{{ $product->thumb }}" alt="{{ $product->name }}">
-    </div>
-    <div class="product-info ms-2" style="width:200px">
-      <h6 class="mb-0">{{ $product->name }}</h6>
-      <div class="d-flex justify-content-between">
-        <p class="mb-0">x{{ $carts[$product->id] }}</p>
-        <p class="mb-0">{{ number_format($product->price - $product->price * $product->promotion->sale, 0, '.', '.') }}đ</p>
-      </div>
-    </div>
-  </li>
-  @endforeach
   {{-- <!-- <li class="menu-header-shop-product d-flex justify-content-between mb-4">
     <div class="product-img">
       <img
@@ -75,12 +88,4 @@
       </div>
     </div>
   </li> --> --}}
-
-  <li class="sticky-bottom bg-white menu-header-shop-bill border-top border-1 d-none">
-    <div class=" d-flex justify-content-between mb-3">
-      <h6 class="mb-0 mt-1">Tổng tiền: </h6>
-      <p class="mb-0 mt-1">6000000đ</p>
-    </div>
-    <a href="cart">Xem giỏ hàng</a>
-  </li>
 </ul>

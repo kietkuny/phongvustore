@@ -30,7 +30,7 @@ class CartService
     }
 
     $exists = Arr::exists($carts, $product_id);
-    if (isset($carts[$product_id])) {
+    if ($exists) {
       $carts[$product_id] += $quantity;
       Session::put('carts', $carts);
       return true;
@@ -53,6 +53,11 @@ class CartService
       ->select('id', 'name', 'quantity', 'thumb', 'price', 'promotion_id')
       ->whereIn('id', $productId)
       ->get();
+  }
+
+  public function update($request){
+    Session::put('carts', $request->input('num_product'));
+    return true;
   }
 
   public function delete($productId)

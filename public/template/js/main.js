@@ -286,6 +286,22 @@
     }
   });
 
+  $(".btn-quantity-minus").click(function () {
+    let input = $(this).siblings('input[type="number"]');
+    let val = parseInt(input.val());
+    if (val > 1) {
+      input.val(val - 1);
+    }
+  });
+
+  $(".btn-quantity-plus").click(function () {
+    let input = $(this).siblings('input[type="number"]');
+    let val = parseInt(input.val());
+    let max = parseInt(input.attr("max"));
+    if (val < max) {
+      input.val(val + 1);
+    }
+  });
 
   //  
 

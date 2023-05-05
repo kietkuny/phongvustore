@@ -6,9 +6,10 @@
       <h2 class="mb-3">{{ $title }}</h2>
       @if (count($products) != 0)
       <form method="post" action="">
+        @csrf
         <div class="left">
           <div class="text-end">
-            <button type="button" class="btn btn-outline-success" onClick="window.location.reload();" style="transition: 0.3s">
+            <button type="submit" class="btn btn-outline-success" formaction="/update-cart" style="transition: 0.3s">
               Cập nhật
             </button>
             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" style="transition: 0.3s">
@@ -39,8 +40,15 @@
             <li>Thành tiền</li>
             <li></li>
           </ul>
+          @php  $total = 0; $qtt = 0; @endphp
           <ul class="cart-shop">
             @foreach ($products as $key => $product)
+            @php
+              $price = $product->price - $product->price * $product->promotion->sale;
+              $priceSum = $price * $carts[$product->id];
+              $qtt += $carts[$product->id];
+              $total += $priceSum;
+            @endphp
             <li class="d-flex align-items-center">
               <div class="p-2 cart-shop-product d-flex align-items-center">
                 <img class="img-fluid" src="{{ $product->thumb }}" alt="{{ $product->name }}" width="100px">
@@ -50,15 +58,15 @@
                 @if($product->promotion->sale != 0)
                 <small><del>{{ number_format($product->price, 0, '.', '.') }}đ</del></small>
                 @endif
-                <p class="mb-0">{{ number_format($product->price - $product->price * $product->promotion->sale, 0, '.', '.') }}đ</p>
+                <p class="mb-0">{{ number_format($price, 0, '.', '.') }}đ</p>
               </div>
               <div class="cart-shop-quantity d-flex">
                 <button type="button" class="btn-quantity-minus"><i class="fa-solid fa-minus"></i></button>
-                <input type="number" disabled name="num_product" class="text-center cart-shop-quantity-input btn-quantity" value="{{ $carts[$product->id] }}" min="1" max="{{ $product->quantity }}">
+                <input type="number" name="num_product[{{ $product->id }}]" class="text-center cart-shop-quantity-input btn-quantity" value="{{ $carts[$product->id] }}" min="1" max="{{ $product->quantity }}">
                 <button type="button" class="btn-quantity-plus"><i class="fa-solid fa-plus"></i></button>
               </div>
               <div class="cart-shop-sum text-center">
-                <p class="mb-0">{{ number_format(($product->price - $product->price * $product->promotion->sale)*$carts[$product->id], 0, '.', '.') }}đ</p>
+                <p class="mb-0">{{ number_format($priceSum, 0, '.', '.') }}đ</p>
               </div>
               <div class="cart-shop-delete text-center">
                 <button type="button" class="btn btn-outline-danger btn-delete delete-product border-0" data-id="{{ $product->id }}" style="transition: 0.3s">Xóa</button>
@@ -71,13 +79,13 @@
           <h6 class="mb-3"><b>Thanh toán</b></h6>
           <div class="d-flex justify-content-between mb-3">
             <p>Tổng sản phẩm</p>
-            <p class="main-cart-quantity">x0</p>
+            <p class="main-cart-quantity">x{{ $qtt }}</p>
           </div>
           <div class="d-flex justify-content-between mb-3">
             <p>Tổng tiền</p>
-            <p class="main-cart-sum">0đ</p>
+            <p class="main-cart-sum">{{ number_format($total, 0, '.', '.') }}đ</p>
           </div>
-          <button type="submit" class="btn w-100 mb-4">Thanh toán</button>
+          <button type="button" class="btn w-100 mb-4">Thanh toán</button>
         </div>
       </form>
       @else
