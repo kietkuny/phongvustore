@@ -1210,7 +1210,7 @@ main{
   height: -moz-fit-content;
   height: fit-content;
 }
-.main-cart .right button {
+.main-cart .right a {
   padding: 10px 20px;
   border: none;
   background-image: linear-gradient(to right, #62cdff, #62cdff, #1a5f7a, #1a5f7a);
@@ -1219,7 +1219,7 @@ main{
   color: black;
   transition: 0.4s;
 }
-.main-cart .right button:hover {
+.main-cart .right a:hover {
   background-position: right;
   color: white;
 }
@@ -1246,6 +1246,96 @@ main{
   transition: 0.4s;
 }
 .main-cart-empty a:hover {
+  background-position: right;
+  color: white;
+}
+
+.main-pay {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-color: #f8f8fc;
+}
+.main-pay form {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.main-pay .left {
+  background: white;
+  border-radius: 10px;
+  width: 70%;
+  padding: 0 15px 15px;
+  margin-bottom: 15px;
+}
+@media screen and (max-width: 767.98px) {
+  .main-pay .left {
+    width: 100%;
+  }
+}
+.main-pay .left .makecolor {
+  top: 0;
+  height: 3px;
+  width: 100%;
+  background-position-x: -30px;
+  background-size: 116px 3px;
+  background-image: repeating-linear-gradient(45deg, #6fa6d6, #6fa6d6 33px, transparent 0, transparent 41px, #f18d9b 0, #f18d9b 74px, transparent 0, transparent 82px);
+}
+.main-pay .left .pay-customer {
+  padding-top: 15px;
+}
+.main-pay .left .pay-customer h6 {
+  color: #278db5;
+}
+.main-pay .left .pay-customer-change p {
+  border: 1px solid #1a5f7a;
+  padding: 3px 7px;
+  border-radius: 5px;
+  color: #1a5f7a;
+}
+.main-pay .left .pay-customer-change a {
+  color: #1cb3f9;
+  transition: all 0.3s;
+}
+.main-pay .left .pay-customer-change a:hover {
+  color: #278db5;
+}
+.main-pay .left .pay-hr {
+  margin: 20px -15px;
+  height: 10px;
+  background: #f8f8fc;
+}
+.main-pay .left .pay-product img {
+  width: 100px;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.main-pay .left .pay-product small {
+  color: #1cb3f9;
+}
+.main-pay .right {
+  width: 29%;
+  padding: 15px;
+  background: white;
+  border-radius: 10px;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+@media screen and (max-width: 767.98px) {
+  .main-pay .right {
+    width: 100%;
+  }
+}
+.main-pay .right button {
+  padding: 10px 20px;
+  border: none;
+  background-image: linear-gradient(to right, #62cdff, #62cdff, #1a5f7a, #1a5f7a);
+  background-size: 300%;
+  border-radius: 10px;
+  color: black;
+  transition: 0.4s;
+}
+.main-pay .right button:hover {
   background-position: right;
   color: white;
 }

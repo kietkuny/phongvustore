@@ -4,6 +4,7 @@ namespace App\HTTP\Services\Customer;
 
 use App\Mail\CustomerRegistered;
 use App\Models\Customer;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -31,7 +32,7 @@ class CustomerService
   //     ]);
 
   //     Mail::to($customer->email)->send(new CustomerRegistered($customer));
-      
+
   //     Session::flash('success', 'Đăng kí khách hàng thành công');
   //   } catch (\Exception $err) {
   //     Session::flash('error', $err->getMessage());
@@ -48,13 +49,26 @@ class CustomerService
     $customer->housenumber = (string) $request->input('housenumber');
     $customer->city_id = (string) $request->input('city_id');
     $customer->province_id = (string) $request->input('province_id');
-    // $customer->email = (string) $request->input('email');
+    $customer->email = (string) $request->input('email');
     $customer->password = (string) $request->input('password');
     $newPassword = $request->input('password');
-    if (!empty($newPassword)) {
-        $customer->password = Hash::make($newPassword);
+    if (!empty($newPassword) && $newPassword !== $customer->password) {
+      $customer->password = Hash::make($newPassword);
     }
-    $customer->update();
+    $customer->save();
+
+    // if (Auth::guard('cus')->check()) {
+    //   $updatedCustomer = Customer::find($customer->id);
+    //   Auth::guard('cus')->once([
+    //     'name' => $updatedCustomer->name, 
+    //     'phone' => $updatedCustomer->phone, 
+    //     'housenumber' => $updatedCustomer->housenumber, 
+    //     'city_id' => $updatedCustomer->city_id, 
+    //     'province_id' => $updatedCustomer->province_id, 
+    //     'email' => $updatedCustomer->email, 
+    //     'password' => $updatedCustomer->password
+    //   ]);
+    // }
 
     Session::flash('success', 'Cập nhật khách hàng thành công');
     return true;

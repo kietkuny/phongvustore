@@ -6,6 +6,7 @@ use App\HTTP\Services\Cart\CartService;
 use App\Models\Promotion;
 use Illuminate\Http\JsonResponse as HttpJsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -18,7 +19,7 @@ class CartController extends Controller
   public function __construct(CartService $cartService)
   {
     $this->middleware('cus');
-    $this->cartService = $cartService; 
+    $this->cartService = $cartService;
   }
 
   public function index(Request $request)
@@ -43,7 +44,22 @@ class CartController extends Controller
     ]);
   }
 
-  public function update(Request $request){
+  public function showPay()
+  {
+    // $customer = Auth::customer();
+    $promotions = Promotion::all();
+    $products = $this->cartService->getProduct();
+
+    return view('pay', [
+      'title' => 'Thanh toán',
+      'products' => $products,
+      'promotions' => $promotions,
+      'carts' => Session::get('carts'),
+    ]);
+  }
+
+  public function update(Request $request)
+  {
     $this->cartService->update($request);
     return redirect('/carts');
   }
@@ -76,5 +92,11 @@ class CartController extends Controller
     return response()->json([
       'error' => true
     ]);
+  }
+
+  public function addOrder(Request $request)
+  {
+    $this->cartService->addOrder($request);
+    return redirect('/carts');
   }
 }

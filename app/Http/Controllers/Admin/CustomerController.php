@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\CustomerRequest;
 use App\HTTP\Services\Customer\CustomerService;
+use App\Models\City;
 use App\Models\Customer;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -26,8 +28,6 @@ class CustomerController extends Controller
     $customers = Customer::where('name', 'like', '%' . $search . '%')
       ->orWhere('phone', 'like', '%' . $search . '%')
       ->orWhere('housenumber', 'like', '%' . $search . '%')
-      // ->orWhere('city', 'like', '%' . $search . '%')
-      // ->orWhere('province', 'like', '%' . $search . '%')
       ->orWhere('email', 'like', '%' . $search . '%')
       ->orderBy('id', 'desc')
       ->paginate(5);
@@ -43,8 +43,6 @@ class CustomerController extends Controller
     $customers = Customer::where('name', 'like', '%' . $search . '%')
       ->orWhere('phone', 'like', '%' . $search . '%')
       ->orWhere('housenumber', 'like', '%' . $search . '%')
-      // ->orWhere('city', 'like', '%' . $search . '%')
-      // ->orWhere('province', 'like', '%' . $search . '%')
       ->orWhere('email', 'like', '%' . $search . '%')
       ->orderBy('id', 'desc')
       ->get()
@@ -72,9 +70,13 @@ class CustomerController extends Controller
 
   public function show(Customer $customer)
   {
+    $provinces = Province::all();
+    $cities = City::all();
     return view('admin.customer.edit',[
       'title' => 'Chỉnh sửa khách hàng ' . $customer->name,
       'customer' => $customer,
+      'cities' => $cities,
+      'provinces' => $provinces
     ]);
   }
 

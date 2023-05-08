@@ -40,14 +40,14 @@
             <li>Thành tiền</li>
             <li></li>
           </ul>
-          @php  $total = 0; $qtt = 0; @endphp
+          @php $total = 0; $qtt = 0; @endphp
           <ul class="cart-shop">
             @foreach ($products as $key => $product)
             @php
-              $price = $product->price - $product->price * $product->promotion->sale;
-              $priceSum = $price * $carts[$product->id];
-              $qtt += $carts[$product->id];
-              $total += $priceSum;
+            $price = $product->price - $product->price * $product->promotion->sale;
+            $priceSum = $price * $carts[$product->id];
+            $qtt += $carts[$product->id];
+            $total += $priceSum;
             @endphp
             <li class="d-flex align-items-center">
               <div class="p-2 cart-shop-product d-flex align-items-center">
@@ -85,11 +85,12 @@
             <p>Tổng tiền</p>
             <p class="main-cart-sum">{{ number_format($total, 0, '.', '.') }}đ</p>
           </div>
-          <button type="button" class="btn w-100 mb-4">Thanh toán</button>
+          <a href="/pay" type="button" class="btn w-100 mb-4">Thanh toán</a>
         </div>
       </form>
       @else
       <div class="main-cart-empty">
+        @include('alert')
         <h3 class="text-center pt-4">Chưa có sản phẩm nào</h3>
         <a class="mt-5" href="product">Mua sắm ngay</a>
       </div>

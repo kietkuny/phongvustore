@@ -2,7 +2,10 @@
 
 namespace App\HTTP\Services\Cart;
 
+use App\Models\Order;
+use App\Models\Orderdetail;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -55,7 +58,8 @@ class CartService
       ->get();
   }
 
-  public function update($request){
+  public function update($request)
+  {
     Session::put('carts', $request->input('num_product'));
     return true;
   }
@@ -80,5 +84,45 @@ class CartService
   {
     Session::forget('carts');
     return true;
+  }
+
+  public function addOrder(Request $request)
+  {
+    // Lấy thông tin khách hàng từ input
+    $customer_id = $request->input('customer_id');
+
+    // Tạo một đối tượng Order mới
+    $order = new Order();
+    $order->customer_id = $customer_id;
+    $order->save();
+
+    // Lấy giỏ hàng hiện tại
+    $carts = Session::get('carts');
+    $productIds = array_keys($carts);
+
+    foreach ($productIds as $productId) {
+      $product = Product::with(['promotion'])
+        ->select('id', 'name', 'quantity', 'thumb', 'price', 'promotion_id')
+        ->where('id', $productId)
+        ->firstOrFail();
+      $product_id = $product->id;
+      $quantity = $carts[$productId];
+      $price = $product->price - $product->price * $product->promotion->sale;
+
+      // Tạo một đối tượng OrderDetail mới
+      $orderDetail = new Orderdetail();
+      $orderDetail->order_id = $order->id;
+      $orderDetail->product_id = $product_id;
+      $orderDetail->quantity = $quantity;
+      $orderDetail->price = $price;
+      $orderDetail->status_id = 1;
+      $orderDetail->save();
+
+      // Trừ số lượng sản phẩm trong kho
+      $product->quantity -= $quantity;
+      $product->save();
+    }
+    Session::forget('carts');
+    return redirect('/addpay')->with('success', 'Thanh toán thành công');
   }
 }

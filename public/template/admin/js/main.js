@@ -45,3 +45,24 @@ $('#upload').change(function () {
     }
   })
 });
+
+$('#province-select').change(function () {
+  let provinceId = $(this).val();
+  if (provinceId) {
+    // Gửi request AJAX để lấy danh sách thành phố
+    $.get('/api/provinces/' + provinceId + '/cities', function (cities) {
+      // Xóa danh sách thành phố cũ
+      $('#city-select').find('option').remove();
+
+      // Thêm các option mới vào danh sách thành phố
+      $.each(cities, function (i, city) {
+        let option = $('<option>');
+        option.attr('value', city.id).text(city.name);
+        $('#city-select').append(option);
+      });
+    });
+  } else {
+    // Nếu không chọn tỉnh, xóa danh sách thành phố
+    $('#city-select').find('option').remove();
+  }
+});

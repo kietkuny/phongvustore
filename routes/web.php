@@ -168,5 +168,7 @@ Route::get('carts', [CartController::class, 'show']);
 Route::post('update-cart',[CartController::class, 'update']);
 Route::delete('carts/{product_id}', [CartController::class, 'delete']);
 Route::delete('carts/delete/all', [CartController::class, 'deleteALL']);
+Route::get('pay', [CartController::class, 'showPay']);
+Route::post('addpay', [CartController::class, 'addOrder']);
 
 

@@ -48,11 +48,11 @@ class UserService
     $user->email = (string) $request->input('email');
     $user->thumb = (string) $request->input('thumb');
     $newPassword = $request->input('password');
-    if (!empty($newPassword)) {
-        $user->password = Hash::make($newPassword);
+    if (!empty($newPassword) && $newPassword !== $user->password) {
+      $user->password = Hash::make($newPassword);
     }
-    
-    $user->update();
+
+    $user->save();
     Session::flash('success', 'Cập nhật nhân viên thành công');
     return true;
   }
