@@ -10,13 +10,6 @@
         <i class="fas fa-search"></i>
     </button>
   </form>
-  {{-- <div class="text-md-right col-md-4">
-    <a href="/admin/customers/add" class="btn-sm btn btn-success text-decoration-none">
-      <div class="p-1">
-        <i class="fa-solid fa-plus"></i> Thêm khách hàng
-      </div>
-    </a>
-  </div> --}}
 </div>
 <table class="table table-hover table-bordered table-responsive-md">
   <thead>
