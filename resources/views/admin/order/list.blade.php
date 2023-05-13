@@ -5,7 +5,7 @@
   <form method="GET" action="/admin/orders/list" class="input-group rounded col-md-8 w-auto align-items-center">
     <div class="form-outline">
       <select name="search" class="form-select rounded">
-        <option selected>Chọn trạng thái</option>
+        <option value="">Chọn trạng thái</option>
         @foreach ($statuses as $status)
           <option value="{{ $status->id }}">
             {{ $status->name }}
