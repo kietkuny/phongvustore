@@ -476,6 +476,31 @@ main{
   color: white;
 }
 
+.main-info {
+  background-color: #f8f8fc;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.main-info form {
+  padding: 40px;
+  background-color: white;
+}
+.main-info form table {
+  min-width: 100%;
+}
+.main-info form .input-box {
+  margin: 10px 0 10px 25px;
+}
+.main-info form input,
+.main-info form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  border: 1px solid #62cdff;
+  box-shadow: 0px 3px 3px rgba(98, 205, 255, 0.5529411765);
+}
+
 .slide-banner {
   display: flex !important;
   align-items: center;
@@ -1111,6 +1136,71 @@ main{
   .main-detail-description iframe {
     height: 100px;
   }
+}
+
+.main-order {
+  background-color: #f8f8fc;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.main-order-wait, .main-order-confirm, .main-order-shipping, .main-order-delivered, .main-order-cancel {
+  border-radius: 5px;
+  padding: 10px 20px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.main-order-wait {
+  background-color: gray;
+  color: white;
+}
+.main-order-confirm {
+  background-color: lightgreen;
+}
+.main-order-shipping {
+  background-color: lightgoldenrodyellow;
+}
+.main-order-delivered {
+  background-color: khaki;
+}
+.main-order-cancel {
+  background-color: lightcoral;
+}
+.main-order .order {
+  padding: 20px;
+  background-color: white;
+}
+.main-order .order-detail {
+  padding: 20px;
+  background: rgba(98, 205, 255, 0.4392156863);
+  border-radius: 5px;
+}
+.main-order .order-detail ul {
+  padding-left: 0;
+  list-style: none;
+}
+.main-order .order-detail ul li:nth-child(1) {
+  width: 45%;
+}
+.main-order .order-detail ul li:nth-child(2) {
+  width: 20%;
+}
+.main-order .order-detail ul li:nth-child(3) {
+  width: 15%;
+}
+.main-order .order-detail ul li:nth-child(4) {
+  width: 20%;
+}
+.main-order .order-head {
+  text-align: center;
+  font-weight: bold;
+  justify-content: center;
+}
+.main-order .order-main {
+  border: 1px solid lightgray;
+  background-color: white;
+}
+.main-order .order del {
+  color: #62cdff;
 }
 
 .main-cart {

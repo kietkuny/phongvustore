@@ -21,6 +21,7 @@ class CustomerHelper
           ' . $customer->province->name . '
           </td>
           <td>' . $customer->email . '</td>
+          <td>' . self::active($customer->status) . '</td>
           <td>' . date('d-m-Y H:i:s', strtotime($customer->updated_at)) . '</td>
           <td>
             <a href="/admin/customers/edit/id=' . $customer->id . '" class="btn btn-primary btn-sm">
@@ -56,5 +57,10 @@ class CustomerHelper
     }
 
     return $html;
+  }
+
+  public static function active($active = 0)
+  {
+    return $active == 0 ? '<span class="btn btn-danger btn-sm"><i class="fa-solid fa-x"></i></span>' : '<span class="btn btn-success btn-sm"><i class="fa-regular fa-check"></i></span>';
   }
 }

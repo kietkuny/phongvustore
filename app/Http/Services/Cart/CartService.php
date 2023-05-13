@@ -7,6 +7,8 @@ use App\Models\Orderdetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
@@ -94,6 +96,7 @@ class CartService
     // Tạo một đối tượng Order mới
     $order = new Order();
     $order->customer_id = $customer_id;
+    $order->status_id = 1;
     $order->save();
 
     // Lấy giỏ hàng hiện tại
@@ -115,7 +118,6 @@ class CartService
       $orderDetail->product_id = $product_id;
       $orderDetail->quantity = $quantity;
       $orderDetail->price = $price;
-      $orderDetail->status_id = 1;
       $orderDetail->save();
 
       // Trừ số lượng sản phẩm trong kho
@@ -123,6 +125,14 @@ class CartService
       $product->save();
     }
     Session::forget('carts');
+
+    $customer = Auth::guard('cus')->user();
+    $content = 'đã đặt thành công, chờ đơn hàng được xác nhận để được giao hàng';
+    Mail::send('emails.order',compact('customer', 'order','content'), function($email) use($customer){
+      $email->subject('Phong Vũ - Chờ duyệt đơn hàng');
+      $email->to($customer->email,$customer->name);
+    });
+    
     return redirect('/addpay')->with('success', 'Thanh toán thành công');
   }
 }

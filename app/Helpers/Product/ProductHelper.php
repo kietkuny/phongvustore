@@ -19,11 +19,6 @@ class ProductHelper
       $product->price_sale = $product->price - $product->price * $product->promotion->sale;
       $product->price_sale_formatted = number_format($product->price_sale, 0, '.', '.');
       $product->price_formatted = number_format($product->price, 0, '.', '.');
-      // // Chuyển đổi chuỗi JSON thành một mảng PHP
-      // $images = json_decode($product->thumb, true);
-
-      // // Lấy URL của ảnh đầu tiên trong mảng
-      // $firstImage = !empty($images) ? $images[0] : '';
       $html .= '
         <tr>
           <td>' . $startStt + $key . '</td>

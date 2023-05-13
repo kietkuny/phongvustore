@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\View\Composers\CartComposer;
 use App\Http\View\Composers\MenuComposer;
+use App\Http\View\Composers\OrderComposer;
 use App\Http\View\Composers\ProductComposer;
 use App\Http\View\Composers\ProductTypeComposer;
 use App\Http\View\Composers\SliderComposer;
@@ -32,6 +33,7 @@ class ViewServiceProvider extends ServiceProvider
     View::composer('home',TrademarkComposer::class);
     View::composer('home',ProductComposer::class);
     View::composer('product',ProductComposer::class);
+    View::composer('order',OrderComposer::class);
     View::composer('layout.cart',CartComposer::class);
   }
 }

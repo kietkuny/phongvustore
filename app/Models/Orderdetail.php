@@ -14,7 +14,6 @@ class Orderdetail extends Model
     'product_id',
     'quantity',
     'price',
-    'status_id',
   ];
 
   public function order()
@@ -27,8 +26,4 @@ class Orderdetail extends Model
     return $this->belongsTo(Product::class);
   }
 
-  public function status()
-  {
-    return $this->belongsTo(Status::class);
-  }
 }

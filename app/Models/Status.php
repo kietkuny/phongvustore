@@ -13,8 +13,8 @@ class Status extends Model
     'name',
   ];
 
-  public function orderdetails()
+  public function orders()
   {
-    return $this->hasMany(Orderdetail::class);
+    return $this->hasMany(Order::class);
   }
 }

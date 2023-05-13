@@ -27,7 +27,9 @@ class Customer extends Authenticatable implements MustVerifyEmail
     'province_id',
     'email',
     'password',
-    'gmail_verification_token'
+    'status',
+    'token',
+    'remember_token',
   ];
 
   /**

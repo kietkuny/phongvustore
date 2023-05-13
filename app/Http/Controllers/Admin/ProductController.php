@@ -60,7 +60,6 @@ class ProductController extends Controller
           });
       })
       ->orderBy('id', 'desc')
-      ->get()
       ->pluck('name');
 
     return response()->json($products);

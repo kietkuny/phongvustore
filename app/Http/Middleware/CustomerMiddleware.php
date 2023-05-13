@@ -19,14 +19,15 @@ class CustomerMiddleware
    *
    * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
    */
-  public function handle(Request $request, Closure $next, $quard = 'cus'): Response
+  public function handle(Request $request, Closure $next): Response
   {
-    if (!Auth::guard($quard)->check()) {
+    if (!Auth::guard('cus')->check()) {
       return redirect()->route('home.login')->with('error', 'Bạn cần phải đăng nhập');
     } 
-    // elseif (Auth::guard('cus')->user()->status == 0) {
-    //   return redirect()->route('login')->with('error');
-    // }
+    elseif (Auth::guard('cus')->user()->status == 0) {
+      Auth::guard('cus')->logout();
+      return redirect()->route('home.login')->with('error','Tài khoản chưa kích hoạt');
+    }
     return $next($request);
   }
 }

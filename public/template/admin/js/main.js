@@ -66,3 +66,17 @@ $('#province-select').change(function () {
     $('#city-select').find('option').remove();
   }
 });
+
+$('#status').hide();
+$('#token').hide();
+
+$('#checkCus').change(function () {
+  if (this.checked) {
+    $('#status').show();
+    $('#token').show();
+  }
+  else {
+    $('#status').hide();
+    $('#token').hide();
+  }
+});

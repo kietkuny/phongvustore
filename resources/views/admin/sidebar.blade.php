@@ -132,12 +132,12 @@
             <p>Đơn hàng</p>
           </a>
         </li>
-        <li class="nav-item pagination">
+        {{-- <li class="nav-item pagination">
           <a href="/admin/messages/list" class="nav-link {{ request()->is('admin/messages/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-regular fa-comments"></i>
             <p>Tin nhắn</p>
           </a>
-        </li>
+        </li> --}}
       </ul>
     </nav>
   </div>

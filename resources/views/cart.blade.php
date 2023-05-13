@@ -89,8 +89,8 @@
         </div>
       </form>
       @else
+      @include('alert')
       <div class="main-cart-empty">
-        @include('alert')
         <h3 class="text-center pt-4">Chưa có sản phẩm nào</h3>
         <a class="mt-5" href="product">Mua sắm ngay</a>
       </div>

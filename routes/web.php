@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductTypeController;
 use App\Http\Controllers\Admin\PromotionController;
@@ -13,11 +14,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Users\LoginController;
 use App\Http\Controllers\Admin\UserTypeController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductsController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -137,6 +136,13 @@ Route::middleware(['auth'])->group(function () {
       Route::delete('destroy', [CustomerController::class, 'destroy']);
     });
 
+    #Order
+    Route::prefix('orders')->group(function () {
+      Route::get('list', [OrderController::class, 'index']);
+      Route::get('edit/id={order}', [OrderController::class, 'show']);
+      Route::post('edit/id={order}', [OrderController::class, 'update']);
+    });
+
     #Upload
     Route::post('upload/services', [UploadController::class, 'store']);
   });
@@ -145,24 +151,35 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // //Register
-Route::get('/register', [CustomersController::class,'showRegistrationForm'])->name('register');
-Route::post('/register', [CustomersController::class,'register']);
+Route::get('register', [HomeController::class,'register'])->name('home.register');
+Route::post('register', [HomeController::class,'post_register']);
+
+//Active
+Route::get('actived/{customer}/{token}', [HomeController::class,'actived'])->name('home.actived');
 
 // Login
-Route::get('/login', [HomeController::class,'login'])->name('home.login');
-Route::post('/login', [HomeController::class,'post_login'])->name('home.login');
+Route::get('login', [HomeController::class,'login'])->name('home.login');
+Route::post('login', [HomeController::class,'post_login']);
 
 //logout
-Route::get('/logout',[HomeController::class,'logout'])->name('home.logout');
-// Route::get('/verify-email/{token}', [CustomersController::class,'verify'])->name('verify-email');
+Route::get('logout',[HomeController::class,'logout'])->name('home.logout');
 
-// Route::post('/send-email-verification-code', [CustomersController::class,'sendEmailVerificationCode'])->name('send-email-verification-code');
+//forget
+Route::get('forget-password',[HomeController::class,'forget'])->name('home.forget');
+Route::post('forget-password',[HomeController::class,'post_forget']);
+Route::get('get-password/{customer}/{token}',[HomeController::class,'getPass'])->name('home.getPass');
+Route::post('get-password/{customer}/{token}',[HomeController::class,'postGetPass']);
 
 Route::get('test-email', [HomeController::class, 'testEmail']);
+
+//info
+Route::get('info',[HomeController::class, 'showInfo']);
+Route::post('info',[HomeController::class,'updateInfo']);
 
 Route::get('product', [ProductsController::class, 'index']);
 Route::get('product/id={product}', [ProductsController::class, 'show']);
 Route::get('ajax-search-product', [HomeController::class, 'ajaxSearch'])->name('ajax-search-product');
+Route::get('order',[OrdersController::class,'index']);
 Route::post('addcart', [CartController::class, 'index']);
 Route::get('carts', [CartController::class, 'show']);
 Route::post('update-cart',[CartController::class, 'update']);

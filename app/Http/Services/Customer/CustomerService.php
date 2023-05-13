@@ -17,30 +17,28 @@ class CustomerService
     return Customer::orderbyDesc('id')->paginate(5);
   }
 
-  // public function create($request)
-  // {
-  //   try {
-  //     $customer = Customer::create([
-  //       'name' => (string) $request->input('name'),
-  //       'phone' => (string) $request->input('phone'),
-  //       'housenumber' => (string) $request->input('housenumber'),
-  //       'city_id' => (string) $request->input('city'),
-  //       'province' => (string) $request->input('province_id'),
-  //       'email' => (string) $request->input('email'),
-  //       'password' => Hash::make($request->input('password')),
-  //       'gmail_verification_token' => Str::random(60),
-  //     ]);
+  public function create($request)
+  {
+    try {
+      Customer::create([
+        'name' => (string) $request->input('name'),
+        'phone' => (string) $request->input('phone'),
+        'housenumber' => (string) $request->input('housenumber'),
+        'city_id' => (string) $request->input('city_id'),
+        'province_id' => (string) $request->input('province_id'),
+        'email' => (string) $request->input('email'),
+        'password' => Hash::make($request->input('password')),
+        'status' => (string) $request->input('status'),
+      ]);
 
-  //     Mail::to($customer->email)->send(new CustomerRegistered($customer));
+      Session::flash('success', 'Tạo khách hàng thành công');
+    } catch (\Exception $err) {
+      Session::flash('error', $err->getMessage());
+      return false;
+    }
 
-  //     Session::flash('success', 'Đăng kí khách hàng thành công');
-  //   } catch (\Exception $err) {
-  //     Session::flash('error', $err->getMessage());
-  //     return false;
-  //   }
-
-  //   return true;
-  // }
+    return true;
+  }
 
   public function update($request, $customer): bool
   {
@@ -55,22 +53,28 @@ class CustomerService
     if (!empty($newPassword) && $newPassword !== $customer->password) {
       $customer->password = Hash::make($newPassword);
     }
+    $customer->status = (string) $request->input('status');
+    $customer->token = (string) $request->input('token');
     $customer->save();
 
-    // if (Auth::guard('cus')->check()) {
-    //   $updatedCustomer = Customer::find($customer->id);
-    //   Auth::guard('cus')->once([
-    //     'name' => $updatedCustomer->name, 
-    //     'phone' => $updatedCustomer->phone, 
-    //     'housenumber' => $updatedCustomer->housenumber, 
-    //     'city_id' => $updatedCustomer->city_id, 
-    //     'province_id' => $updatedCustomer->province_id, 
-    //     'email' => $updatedCustomer->email, 
-    //     'password' => $updatedCustomer->password
-    //   ]);
-    // }
-
     Session::flash('success', 'Cập nhật khách hàng thành công');
+    return true;
+  }
+  public function updateInfo($request, $customer): bool
+  {
+    $customer->name = (string) $request->input('name');
+    $customer->phone = (string) $request->input('phone');
+    $customer->housenumber = (string) $request->input('housenumber');
+    $customer->city_id = (string) $request->input('city_id');
+    $customer->province_id = (string) $request->input('province_id');
+    $customer->password = (string) $request->input('password');
+    $newPassword = $request->input('password');
+    if (!empty($newPassword) && $newPassword !== $customer->password) {
+      $customer->password = Hash::make($newPassword);
+    }
+    $customer->save();
+
+    Session::flash('success', 'Cập nhật thông tin thành công');
     return true;
   }
 

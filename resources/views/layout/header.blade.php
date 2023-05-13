@@ -33,10 +33,10 @@
           </div>
           <div class="menu-header-login ms-md-4 ms-2 d-flex align-items-center mt-md-0 mt-3">
             @if(Auth::guard('cus')->check())
-            <i class="fa-duotone fa-user"=></i>
+            <i class="fa-duotone fa-user"></i>
             <span class="ms-2 logout">
               <div class="d-flex align-items-center">
-                <a href="/" class="text-dark">{{ Auth::guard('cus')->user()->name }}</a>
+                <a href="/info" class="text-dark">{{ Auth::guard('cus')->user()->name }}</a>
                 <a href="{{ route('home.logout') }}" class="ms-3 text-dark"><i class="fa-regular fa-right-from-bracket d-flex" style="font-size: 20px"></i></a>
               </div>
             </span>
@@ -46,13 +46,6 @@
               <a href="{{ route('home.login') }}" class="text-dark">Đăng nhập</a>
             </span>
             @endif
-
-            {{-- @if(Auth::guard('cus')->check())
-            @php
-            $updatedCustomer = App\Models\Customer::find(Auth::guard('cus')->user()->id);
-            Auth::guard('cus')->once(['email' => $updatedCustomer->email, 'password' => $updatedCustomer->password]);
-            @endphp
-            @endif --}}
           </div>
         </div>
       </div>

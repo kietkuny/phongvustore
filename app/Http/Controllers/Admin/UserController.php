@@ -50,13 +50,13 @@ class UserController extends Controller
     $search = $request->get('query');
     $users = User::with('usertype')
       ->where('name', 'like', '%' . $search . '%')
-      // ->orWhere('gender', $search == 'Nam' ? 1 : ($search == 'Nữ' ? 0 : null))
-      // ->orWhere('cccd', 'like', '%' . $search . '%')
-      // ->orWhere('phone', 'like', '%' . $search . '%')
-      // ->orWhere('email', 'like', '%' . $search . '%')
-      // ->orWhereHas('usertype', function ($query) use ($search) {
-      //   $query->where('name', 'like', '%' . $search . '%');
-      // })
+      ->orWhere('gender', $search == 'Nam' ? 1 : ($search == 'Nữ' ? 0 : null))
+      ->orWhere('cccd', 'like', '%' . $search . '%')
+      ->orWhere('phone', 'like', '%' . $search . '%')
+      ->orWhere('email', 'like', '%' . $search . '%')
+      ->orWhereHas('usertype', function ($query) use ($search) {
+        $query->where('name', 'like', '%' . $search . '%');
+      })
       ->orderBy('id', 'desc')
       ->get();
       // ->pluck();

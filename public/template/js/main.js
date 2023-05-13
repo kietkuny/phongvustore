@@ -12,41 +12,25 @@
       // Gửi request AJAX để lấy danh sách thành phố
       $.get('/api/provinces/' + provinceId + '/cities', function (cities) {
         // Xóa danh sách thành phố cũ
-        $('#city-select').find('option').remove();
+        $('#city-select').find('.option-city').remove();
+
+        // Thêm option ẩn mới với giá trị city_id của khách hàng
+        let hiddenOption = $('<option class="option-city" style="display:none">');
+        hiddenOption.attr('value', '{{ $customer->city_id }}').attr('selected', 'selected');
+        $('#city-select').append(hiddenOption);
 
         // Thêm các option mới vào danh sách thành phố
         $.each(cities, function (i, city) {
-          let option = $('<option>');
+          let option = $('<option class="option-city">');
           option.attr('value', city.id).text(city.name);
           $('#city-select').append(option);
         });
       });
     } else {
       // Nếu không chọn tỉnh, xóa danh sách thành phố
-      $('#city-select').find('option').remove();
+      $('#city-select').find('.option-city').remove();
     }
   });
-
-
-//   $('#send-verification-code').click(function(e) {
-//     e.preventDefault();
-//     var email = $('input[name=email]').val();
-//     $.ajax({
-//         url: "{{ route('send-email-verification-code') }}",
-//         type: "POST",
-//         dataType: "json",
-//         data: {
-//             email: email,
-//             _token: "{{ csrf_token() }}"
-//         },
-//         success: function(data) {
-//             alert(data.message);
-//         },
-//         error: function(xhr, status, error) {
-//             console.log(xhr.responseText);
-//         }
-//     });
-// });
 
   $(`.hamburger-menu`).on("click", function () {
     $(`.hamburger-menu`).toggleClass('change');
@@ -111,9 +95,9 @@
     }
   }
 
-  $(window).on('beforeunload', function () {
-    $(window).scrollTop(0);
-  });
+  // $(window).on('beforeunload', function () {
+  //   $(window).scrollTop(0);
+  // });
 
   $(`.scroll-top`).on("click", function () {
     $('html, body').animate({ scrollTop: (0) }, '5000')
@@ -154,7 +138,7 @@
     $(inputSearch).toggleClass('search-active')
   })
 
-
+  $('.list-search').hide();
   $('.input-search-ajax').keyup(function () {
     let _text = $(this).val();
     if (_text != '') {
@@ -206,7 +190,7 @@
       url: form.attr('action'),
       data: data,
       success: function (response) {
-        console.log(xhr.responseText); 
+        console.log(xhr.responseText);
       },
       error: function (xhr) {
         $('#addToCartModal').modal('show');
@@ -302,96 +286,6 @@
       input.val(val + 1);
     }
   });
-
-  //  
-
-  //   // Tìm giá trị giá mặc định và định dạng nó thành giá tiền hiển thị
-  //   var price = parseInt($(this).find('.cart-shop-price p').text().replace(/\D+/g, ''));
-  //   var formattedPrice = new Intl.NumberFormat().format(price) + '₫';
-  //   $(this).find('.cart-shop-price p').text(formattedPrice);
-
-  //   // Tìm giá trị số lượng sản phẩm và tính tổng cộng giá trị
-  //   var quantity = parseInt($(this).find('.cart-shop-quantity input').val());
-  //   var formattedQuantity = new Intl.NumberFormat().format(quantity);
-  //   var sum = quantity * price;
-  //   var formattedSum = new Intl.NumberFormat().format(sum) + '₫';
-  //   // Cập nhật giá trị cho các phần tử liên quan đến sản phẩm đó
-  //   $(this).find('.cart-shop-quantity input').val(formattedQuantity);
-  //   $(this).find('.cart-shop-sum p').text(formattedSum);
-
-  //   // Bắt sự kiện cho input số lượng và cập nhật lại giá trị tổng
-  //   $(this).find('.cart-shop-quantity input').on('input', function () {
-  //     var quantity = parseInt($(this).val().replace(/\D+/g, ''));
-  //     var sum = quantity * price;
-  //     var formattedSum = new Intl.NumberFormat().format(sum) + '₫';
-  //     $(this).siblings('.btn-quantity-minus').prop('disabled', quantity <= 1);
-  //     $(this).siblings('.btn-quantity-plus').prop('disabled', quantity >= $(this).attr('max'));
-  //     $(this).closest('.cart-shop li').find('.cart-shop-sum p').text(formattedSum);
-  //   });
-
-  // });
-
-
-  // $('.cart-shop li .cart-shop-input input[type="checkbox"]').change(function () {
-  //   var quantity = 0;
-  //   var sum = 0;
-  //   $('.cart-shop li').each(function () {
-  //     if ($(this).find('.cart-shop-input input[type="checkbox"]').prop('checked')) {
-  //       var itemQuantity = parseInt($(this).find('.cart-shop-quantity input').val().replace(/\D+/g, ''));
-  //       quantity += itemQuantity;
-  //       var itemSum = parseInt($(this).find('.cart-shop-sum p').text().replace(/\D+/g, ''));
-  //       sum += itemSum;
-  //     }
-  //   });
-  //   var formattedQuantity = new Intl.NumberFormat().format(quantity);
-  //   $('.main-cart-quantity').text('x' + formattedQuantity);
-  //   var formattedSum = new Intl.NumberFormat().format(sum) + '₫';
-  //   $('.main-cart-sum').text(formattedSum);
-  // });
-
-  // $('.cart-shop li .cart-shop-quantity-input').on('input', function () {
-  //   var quantity = 0;
-  //   var sum = 0;
-  //   $('.cart-shop li').each(function () {
-  //     var itemQuantity = parseInt($(this).find('.cart-shop-quantity input').val().replace(/\D+/g, ''));
-  //     quantity += itemQuantity;
-  //     var itemPrice = parseInt($(this).find('.cart-shop-price p').text().replace(/\D+/g, ''));
-  //     var itemSum = itemQuantity * itemPrice;
-  //     sum += itemSum;
-  //   });
-  //   var formattedQuantity = new Intl.NumberFormat().format(quantity);
-  //   $('.main-cart-quantity').text('x' + formattedQuantity);
-  //   var formattedSum = new Intl.NumberFormat().format(sum) + '₫';
-  //   $('.main-cart-sum').text(formattedSum);
-  // });
-
-
-  // $('.btn-quantity-minus').click(function () {
-  //   var input = $(this).siblings('input[type="number"]');
-  //   var val = parseInt(input.val().replace(/\D+/g, ''));
-  //   if (val > 1) {
-  //     var price = parseInt(input.closest('.cart-shop li').find('.cart-shop-price p').text().replace(/\D+/g, ''));
-  //     var quantity = val - 1;
-  //     var sum = quantity * price;
-  //     var formattedSum = new Intl.NumberFormat().format(sum) + '₫';
-  //     input.val(quantity);
-  //     input.closest('.cart-shop li').find('.cart-shop-sum p').text(formattedSum);
-  //   }
-  // });
-
-  // $('.btn-quantity-plus').click(function () {
-  //   var input = $(this).siblings('input[type="number"]');
-  //   var val = parseInt(input.val().replace(/\D+/g, ''));
-  //   var max = parseInt(input.attr('max'));
-  //   if (val < max) {
-  //     var price = parseInt(input.closest('.cart-shop li').find('.cart-shop-price p').text().replace(/\D+/g, ''));
-  //     var quantity = val + 1;
-  //     var sum = quantity * price;
-  //     var formattedSum = new Intl.NumberFormat().format(sum) + '₫';
-  //     input.val(quantity);
-  //     input.closest('.cart-shop li').find('.cart-shop-sum p').text(formattedSum);
-  //   }
-  // });
 
   setTimeout(function () {
     $("#loading").hide();

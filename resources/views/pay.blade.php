@@ -16,7 +16,7 @@
             <p class="mb-1"><b>Địa chỉ:</b> {{ Auth::guard('cus')->user()->housenumber }}, {{ Auth::guard('cus')->user()->city->name }}, {{ Auth::guard('cus')->user()->province->name }}</p>
             <div class="d-flex pay-customer-change align-items-center mt-3">
               <p class="m-0"><small>Mặc định</small></p>
-              <a href="#" class="ms-4"><small>Thay đổi</small></a>
+              <a href="/info" class="ms-4"><small>Thay đổi</small></a>
             </div>
             <input type="hidden" name="customer_id" value="{{ Auth::guard('cus')->user()->id }}">
           </div>

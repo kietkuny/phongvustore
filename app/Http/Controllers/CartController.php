@@ -97,6 +97,6 @@ class CartController extends Controller
   public function addOrder(Request $request)
   {
     $this->cartService->addOrder($request);
-    return redirect('/carts');
+    return redirect('/order');
   }
 }

@@ -16,7 +16,7 @@
             @if($product->promotion->sale != 0)
             <h6><del>{{ number_format($product->price, 0, '.', '.') }}₫</del> <small>{{ $product->promotion->name }}</small> </h6>
             @endif
-            <h5>{{ number_format($product->price - $product->price * $product->promotion->sale, 0, '.', '.') }} ₫</h5>
+            <h5>{{ number_format($product->price - $product->price * $product->promotion->sale, 0, '.', '.') }}₫</h5>
           </div>
           <div class="mt-4 mb-3">
             <form method="POST" action="/addcart" class="add-to-cart-form">

@@ -1,15 +1,15 @@
 <html>
 <head>
   <style>
-    /*style mở ra một khu vực để viết mã CSS*/
     .main {
-      background: lightblue;
+      background: lightcyan;
       max-width: 700px;
       margin: 0 auto;
       padding: 20px;
     }
 
     .link {
+      text-decoration: none;
       display: flex;
       width: fit-content;
       margin: auto;
@@ -29,10 +29,10 @@
 </head>
 <body>
   <div class="main">
-    <h2 style="text-align: center">Chào {{ $name }}</h2>
+    <h2 style="text-align: center">Chào {{ $customer->name }}</h2>
     <p>Bạn đã đăng ký tài khoản tại hệ thống của chúng tôi</p>
     <p>Để có thể tiếp tục sử dụng cho các dịch vụ, bạn vui lòng nhấn vào nút kích hoạt ở bên dưới để kích hoạt</p>
-    <a href="" class="link">Kích hoạt tài khoản</a>
+    <a href="{{ route('customer.actived',['customer' => $customer->id, 'token' => $customer->token ]) }}" class="link" style="color: black">Kích hoạt tài khoản</a>
   </div>
 </body>
 </html>

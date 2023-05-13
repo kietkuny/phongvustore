@@ -14,7 +14,12 @@ return new class extends Migration
     Schema::create('orders', function (Blueprint $table) {
       $table->id();
       $table->foreignId('customer_id')->constrained('customers');
-      $table->integer('user_id')->nullable();
+      $table->foreignId('status_id')->constrained('statuses');
+      $table->unsignedBigInteger('user_id')->nullable();
+
+      $table->foreign('user_id')
+          ->references('id')
+          ->on('users');
       $table->timestamps();
     });
   }

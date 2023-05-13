@@ -35,18 +35,15 @@
         <input type="text" name="email" required='required' autocomplete="off">
         <span>Email</span>
       </div>
-      {{-- <div class="d-flex justify-content-between align-items-center w-100">
-        <div class="input-box" style="min-width: 250px;">
-          <input type="text" name="gmail_verification_token" id="gmail_verification_token" required='required'>
-          <span>Nhập mã xác thực</span>
-        </div>
-        <button class="btn btn-secondary" style="height: fit-content;" id="send-verification-code">Nhận mã</button>
-      </div> --}}
       <div class="input-box">
         <input type="password" name="password" required='required' autocomplete="off">
         <span>Mật khẩu</span>
       </div>
-      <button type="submit" class="btn-submit" id="send-verification-code">Đăng ký</button>
+      <div class="input-box">
+        <input type="password" name="confirm_password" required='required' autocomplete="off">
+        <span>Nhập lại mật khẩu</span>
+      </div>
+      <button type="submit" class="btn-submit submit-register" id="send-verification-code">Đăng ký</button>
     </form>
   </div>
 </section>

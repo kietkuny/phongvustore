@@ -15,9 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class CustomerController extends Controller
 {
   protected $customerService;
-  /**
-   * Display a listing of the resource.
-   */
+
   public function __construct(CustomerService $customerService)
   {
     $this->customerService = $customerService;
@@ -54,25 +52,28 @@ class CustomerController extends Controller
   /**
    * Show the form for creating a new resource.
    */
-  // public function create()
-  // {
-  //   return view('admin.customer.add', [
-  //     'title' => 'Đăng kí khách hàng mới',
-  //   ]);
-  // }
+  public function create()
+  {
+    $provinces = Province::all();
+    $cities = City::all();
+    return view('admin.customer.add', [
+      'title' => 'Thêm khách hàng mới',
+      'provinces' => $provinces,
+      'cities' => $cities,
+    ]);
+  }
 
-  // public function store(CustomerRequest $request)
-  // {
-  //   $this->customerService->create($request);
-
-  //   return redirect()->back();
-  // }
+  public function store(CustomerRequest $request)
+  {
+    $this->customerService->create($request);
+    return redirect()->back();
+  }
 
   public function show(Customer $customer)
   {
     $provinces = Province::all();
     $cities = City::all();
-    return view('admin.customer.edit',[
+    return view('admin.customer.edit', [
       'title' => 'Chỉnh sửa khách hàng ' . $customer->name,
       'customer' => $customer,
       'cities' => $cities,
@@ -80,7 +81,7 @@ class CustomerController extends Controller
     ]);
   }
 
-  public function update(Customer $customer,CustomerRequest $request)
+  public function update(Customer $customer, CustomerRequest $request)
   {
     $this->customerService->update($request, $customer);
     return redirect('/admin/customers/list');
