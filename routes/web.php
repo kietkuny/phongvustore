@@ -38,7 +38,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('admin');
     Route::get('main', [MainController::class, 'index']);
 
-    
+    // Route::get('filter', [MainController::class, 'revenueByDay'])->name('sales.index');
+
     Route::get('info', [UserController::class, 'showInfoAdmin'])->name('admin.info');
 
     #Menu
@@ -151,41 +152,41 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // //Register
-Route::get('register', [HomeController::class,'register'])->name('home.register');
-Route::post('register', [HomeController::class,'post_register']);
-
-//Active
-Route::get('actived/{customer}/{token}', [HomeController::class,'actived'])->name('home.actived');
+Route::get('register', [HomeController::class, 'register'])->name('home.register');
+Route::post('register', [HomeController::class, 'post_register']);
+Route::get('actived/{customer}/{token}', [HomeController::class, 'actived'])->name('home.actived');
 
 // Login
-Route::get('login', [HomeController::class,'login'])->name('home.login');
-Route::post('login', [HomeController::class,'post_login']);
+Route::get('login', [HomeController::class, 'login'])->name('home.login');
+Route::post('login', [HomeController::class, 'post_login']);
 
 //logout
-Route::get('logout',[HomeController::class,'logout'])->name('home.logout');
+Route::get('logout', [HomeController::class, 'logout'])->name('home.logout');
 
 //forget
-Route::get('forget-password',[HomeController::class,'forget'])->name('home.forget');
-Route::post('forget-password',[HomeController::class,'post_forget']);
-Route::get('get-password/{customer}/{token}',[HomeController::class,'getPass'])->name('home.getPass');
-Route::post('get-password/{customer}/{token}',[HomeController::class,'postGetPass']);
+Route::get('forget-password', [HomeController::class, 'forget'])->name('home.forget');
+Route::post('forget-password', [HomeController::class, 'post_forget']);
+Route::get('get-password/{customer}/{token}', [HomeController::class, 'getPass'])->name('home.getPass');
+Route::post('get-password/{customer}/{token}', [HomeController::class, 'postGetPass']);
+
+//Actived
+Route::get('get-actived', [HomeController::class, 'getActived'])->name('home.getActived');
+Route::post('get-actived', [HomeController::class, 'postGetActived']);
 
 Route::get('test-email', [HomeController::class, 'testEmail']);
 
 //info
-Route::get('info',[HomeController::class, 'showInfo']);
-Route::post('info',[HomeController::class,'updateInfo']);
+Route::get('info', [HomeController::class, 'showInfo']);
+Route::post('info', [HomeController::class, 'updateInfo']);
 
 Route::get('product', [ProductsController::class, 'index']);
 Route::get('product/id={product}', [ProductsController::class, 'show']);
 Route::get('ajax-search-product', [HomeController::class, 'ajaxSearch'])->name('ajax-search-product');
-Route::get('order',[OrdersController::class,'index']);
+Route::get('order', [OrdersController::class, 'index']);
 Route::post('addcart', [CartController::class, 'index']);
 Route::get('carts', [CartController::class, 'show']);
-Route::post('update-cart',[CartController::class, 'update']);
+Route::post('update-cart', [CartController::class, 'update']);
 Route::delete('carts/{product_id}', [CartController::class, 'delete']);
 Route::delete('carts/delete/all', [CartController::class, 'deleteALL']);
 Route::get('pay', [CartController::class, 'showPay']);
 Route::post('addpay', [CartController::class, 'addOrder']);
-
-

@@ -44,8 +44,6 @@
 </script>
 
 <script>
-  //  type="text/javascipt"
-
   $('#search-user').typeahead({
     source: function(query, process) {
       return $.get('{{ route("admin.users.search") }}', {
@@ -88,6 +86,24 @@
 
 </script>
 
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+  $("#datepicker").datepicker({
+    prevText: "Tháng trước", 
+    nextText: "Tháng sau", 
+    dateFormat: "yy-mm-dd", 
+    dayNamesMin: ["T2", "T3", "T4", "T5", "T6", "T7", "CN"]
+  });
+  $("#datepicker2").datepicker({
+    prevText: "Tháng trước", 
+    nextText: "Tháng sau", 
+    dateFormat: "yy-mm-dd", 
+    dayNamesMin: ["T2", "T3", "T4", "T5", "T6", "T7", "CN"]
+  });
+
+</script>
+
+
 <!-- jQuery -->
 <script src="/template/admin/plugins/jquery/jquery.min.js"></script>
 
@@ -95,10 +111,6 @@
 <script src="/template/admin/dist/js/adminlte.min.js"></script>
 
 <script src="/template/admin/js/main.js"></script>
-
-{{-- <script src="/template/admin/plugins/chart.js/chart.bundle.min.js"></script> --}}
-
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js" integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
 
 @yield('footer')

@@ -20,7 +20,7 @@ use Illuminate\Support\Str;
 class HomeController extends Controller
 {
   protected $customerService;
-  
+
   public function __construct(CustomerService $customerService)
   {
     $this->customerService = $customerService;
@@ -59,7 +59,7 @@ class HomeController extends Controller
     if (Auth::guard('cus')->attempt($request->only('email', 'password'), $request->has('remember_token'))) {
       if (Auth::guard('cus')->user()->status == 0) {
         Auth::guard('cus')->logout();
-        return redirect()->route('home.login')->with('error', 'Tài khoản chưa kích hoạt, <a href="#">nhấn vào đây</a>');
+        return redirect()->route('home.login')->with('error', 'Tài khoản chưa kích hoạt, <a href="'. route('home.getActived') .'">nhấn vào đây</a>');
       }
       return redirect()->route('home');
     }
@@ -78,44 +78,126 @@ class HomeController extends Controller
     ]);
   }
 
-  public function post_register(Request $request){
+  public function post_register(Request $request)
+  {
     $request->validate([
       'password' => 'required',
       'confirm_password' => 'required|same:password',
     ]);
     $token = strtoupper(Str::random(10));
-    $data = $request->only('name','phone','housenumber','province_id','city_id','email');
+    $data = $request->only('name', 'phone', 'housenumber', 'province_id', 'city_id', 'email');
     $password = Hash::make($request->password);
     $data['password'] = $password;
     $data['token'] = $token;
 
-    if($customer = Customer::create($data)){
-      Mail::send('emails.active_account',compact('customer'), function($email) use($customer){
+    if ($customer = Customer::create($data)) {
+      Mail::send('emails.active_account', compact('customer'), function ($email) use ($customer) {
         $email->subject('Phong Vũ - Xác nhận tài khoản');
-        $email->to($customer->email,$customer->name);
+        $email->to($customer->email, $customer->name);
       });
-      return redirect()->route('home.login')->with('success','Đã đăng kí tài khoản, hãy xác thực tài khoản');
+      return redirect()->route('home.login')->with('success', 'Đã đăng kí tài khoản, hãy xác thực tài khoản');
     }
 
     return redirect()->back();
   }
 
-  public function actived(Customer $customer, $token){
-    if($customer->token === $token){
-      $customer->update(['status' => 1,'token' => null]);
-      return redirect()->route('home.login')->with('success','Xác nhận thành công, bạn có thể đăng nhập');
-    }else{
-      return redirect()->route('home.login')->with('error','Mã xác nhận bạn gửi không hợp lệ');
+  public function actived(Customer $customer, $token)
+  {
+    if ($customer->token === $token) {
+      $customer->update(['status' => 1, 'token' => null]);
+      return redirect()->route('home.login')->with('success', 'Xác nhận thành công, bạn có thể đăng nhập');
+    } else {
+      return redirect()->route('home.login')->with('error', 'Mã xác nhận bạn gửi không hợp lệ');
     }
   }
 
-  public function showInfo(){
+  public function showInfo()
+  {
     $customer = Auth::guard('cus')->user();
     $provinces = Province::all();
     $cities = City::all();
-    return view('info',[
+    return view('info', [
       'title' => 'Thông tin khách hàng',
-    ],compact('customer','provinces','cities'));
+    ], compact('customer', 'provinces', 'cities'));
+  }
+
+  public function forget()
+  {
+    return view('forget', [
+      'title' => 'Quên mật khẩu'
+    ]);
+  }
+
+  public function post_forget(Request $request)
+  {
+    $request->validate([
+      'email' => 'required|email|exists:customers'
+    ], [
+      'email.required' => "Vui lòng nhập địa chỉ email",
+      'email.email' => 'Địa chỉ email không hợp lệ',
+      'email.exists' => 'Email bạn nhập không tồn tại'
+    ]);
+
+    $token = strtoupper(Str::random(10));
+    $customer = Customer::where('email', $request->email)->first();
+    $customer->update(['token' => $token]);
+
+    Mail::send('emails.forget_account', compact('customer'), function ($email) use ($customer) {
+      $email->subject('Phong Vũ - Lấy lại mật khẩu tài khoản');
+      $email->to($customer->email, $customer->name);
+    });
+
+    return redirect()->back()->with('success', 'Xác nhận mail để thay đổi mật khẩu');
+  }
+
+  public function getPass(Customer $customer, $token)
+  {
+    if ($customer->token === $token) {
+      return view('changepassword', [
+        'title' => 'Thay đổi mật khẩu'
+      ])->with('success', 'Xác nhận thành công, hãy thay đổi mật khẩu');
+    }
+
+    return abort(404);
+  }
+
+  public function postGetPass(Customer $customer, $token, Request $request)
+  {
+    $request->validate([
+      'password' => 'required',
+      'confirm_password' => 'required|same:password',
+    ]);
+
+    $password = Hash::make($request->password);
+    $customer->update(['password' => $password, 'token' => NULL]);
+    return redirect()->route('home.login')->with('success', 'Đổi mật khẩu thành công, bạn có thể đăng nhập');
+  }
+
+  public function getActived(){
+    return view('getActived',[
+      'title' => 'Kích hoạt tài khoản'
+    ]);
+  }
+
+  public function postGetActived(Request $request){
+    $request->validate([
+      'email' => 'required|email|exists:customers'
+    ], [
+      'email.required' => "Vui lòng nhập địa chỉ email",
+      'email.email' => 'Địa chỉ email không hợp lệ',
+      'email.exists' => 'Email bạn nhập không tồn tại'
+    ]);
+
+    $token = strtoupper(Str::random(10));
+    $customer = Customer::where('email', $request->email)->first();
+    $customer->update(['token' => $token]);
+
+    Mail::send('emails.active_account', compact('customer'), function ($email) use ($customer) {
+      $email->subject('Phong Vũ - Xác nhận tài khoản');
+      $email->to($customer->email, $customer->name);
+    });
+
+    return redirect()->back()->with('success', 'Xác nhận mail để kích hoạt lại tài khoản');
   }
 
   public function updateInfo(HomeRequest $request)

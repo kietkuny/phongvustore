@@ -19,7 +19,7 @@
         <div>
           <input type="checkbox" name="remember"> Nhớ tài khoản
         </div>
-        <a href="/">Quên mật khẩu ?</a>
+        <a href="/forget-password">Quên mật khẩu ?</a>
       </div>
       <button type="submit" class="btn-submit">Đăng nhập</button>
       <div class="my-2">Bạn chưa có tài khoản ? <a href="/register">Đăng ký</a></div>

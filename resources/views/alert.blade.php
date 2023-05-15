@@ -13,7 +13,7 @@
 @if(Session::has('error'))
 <div class="w-100 pb-3">
   <div class="alert alert-danger mb-0">
-    {{ Session::get('error') }}
+    {!! Session::get('error') !!}
   </div>
 </div>
 @endif
@@ -21,7 +21,7 @@
 @if(Session::has('success'))
 <div class="w-100 pb-3 dislay-success">
   <div class="alert alert-success mb-0">
-    {{ Session::get('success') }}
+    {!! Session::get('success') !!}
   </div>
 </div>
 @endif
