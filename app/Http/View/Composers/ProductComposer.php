@@ -33,6 +33,7 @@ class ProductComposer
       });
     }
 
+    $products = $products->paginate(24);
     $products->appends(['search' => $search]);
 
     $view->with('products', $products);

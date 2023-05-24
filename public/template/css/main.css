@@ -384,6 +384,11 @@ main{
   padding-top: 100px;
   padding-bottom: 100px;
 }
+@media screen and (max-width: 767.98px) {
+  .main-register, .main-login {
+    padding-top: 0px;
+  }
+}
 .main-register form, .main-login form {
   padding: 40px;
   background-color: white;
@@ -480,6 +485,11 @@ main{
   background-color: #f8f8fc;
   padding-top: 100px;
   padding-bottom: 100px;
+}
+@media screen and (max-width: 767.98px) {
+  .main-info {
+    padding-top: 0px;
+  }
 }
 .main-info form {
   padding: 40px;
@@ -820,7 +830,7 @@ main{
   border-radius: 5px;
   color: black;
   width: 23%;
-  height: 370px;
+  height: 420px;
   box-shadow: 0px 5px 15px #1a5f7a;
 }
 .main-product .product-card:hover img {
@@ -861,7 +871,7 @@ main{
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  height: 190px;
+  height: 240px;
 }
 .main-product .product-card-content .trademark {
   color: #1a5f7a;
@@ -874,31 +884,32 @@ main{
 }
 @media screen and (max-width: 1439.98px) {
   .main-product .product-card {
-    height: 370px;
+    width: 31%;
+    height: 420px;
   }
   .main-product .product-card-img img {
     height: 120px;
   }
   .main-product .product-card-content {
-    height: 230px;
+    height: 280px;
   }
 }
 @media screen and (max-width: 1023.98px) {
   .main-product .product-card {
-    height: 360px;
-    width: 31%;
+    height: 410px;
+    width: 48%;
   }
   .main-product .product-card-img img {
     height: 130px;
   }
   .main-product .product-card-content {
-    height: 210px;
+    height: 260px;
   }
 }
 @media screen and (max-width: 767.98px) {
   .main-product .product-card {
-    height: 330px;
-    width: 48%;
+    height: 380px;
+    
   }
   .main-product .product-card-sale {
     font-size: 14px;
@@ -907,7 +918,7 @@ main{
     height: 140px;
   }
   .main-product .product-card-content {
-    height: 175px;
+    height: 225px;
   }
   .main-product .product-card-content .trademark,
   .main-product .product-card-content .name,
@@ -1143,6 +1154,11 @@ main{
   padding-top: 100px;
   padding-bottom: 100px;
 }
+@media screen and (max-width: 767.98px) {
+  .main-order {
+    padding-top: 0px;
+  }
+}
 .main-order-wait, .main-order-confirm, .main-order-shipping, .main-order-delivered, .main-order-cancel {
   border-radius: 5px;
   padding: 10px 20px;
@@ -1207,6 +1223,11 @@ main{
   background-color: #f8f8fc;
   padding-top: 100px;
   padding-bottom: 15px;
+}
+@media screen and (max-width: 767.98px) {
+  .main-cart {
+    padding-top: 0px;
+  }
 }
 .main-cart form {
   display: flex;
@@ -1345,6 +1366,11 @@ main{
   padding-bottom: 100px;
   background-color: #f8f8fc;
 }
+@media screen and (max-width: 767.98px) {
+  .main-pay {
+    padding-top: 0px;
+  }
+}
 .main-pay form {
   display: flex;
   justify-content: space-between;
@@ -1430,6 +1456,68 @@ main{
   color: white;
 }
 
+.main-chat {
+  background-color: #f8f8fc;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+@media screen and (max-width: 767.98px) {
+  .main-chat {
+    padding-top: 0px;
+  }
+}
+.main-chat .chat-row {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  padding: 0;
+  border: 2px solid #62cdff;
+  border-radius: 5px;
+  background-color: white;
+  min-height: 500px;
+}
+.main-chat .chat-row ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.main-chat .chat-row ul li {
+  margin-bottom: 20px;
+  border-radius: 5px;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 8px;
+}
+.main-chat .chat-row ul .admin-message {
+  background: gray;
+  color: white;
+}
+.main-chat .chat-row ul .customer-message {
+  background: #62cdff;
+  color: white;
+  margin-left: auto;
+}
+.main-chat .chat-content {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  border-bottom: 2px solid #62cdff;
+  overflow: auto;
+}
+.main-chat .chat-section {
+  position: absolute;
+  bottom: 20px;
+  width: 90%;
+}
+.main-chat .chat-input {
+  width: 100%;
+  border: 1px solid #1a5f7a;
+  box-shadow: 0px 0px 3px #1a5f7a;
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
 .bar1,
 .bar2,
 .bar3,
@@ -1476,6 +1564,12 @@ main{
   bottom: 60px;
   right: 50px;
   display: none;
+}
+footer a{
+  transition: 0.3s!important;
+}
+footer a:hover{
+  color: #002b5b!important;
 }
 
 @keyframes rotateMenu {

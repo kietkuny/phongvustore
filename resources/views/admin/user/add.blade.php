@@ -60,7 +60,7 @@
   <!-- /.card-body -->
 
   <div class="card-footer">
-    <button type="submit" class="btn btn-success">Tạo loại nhân viên</button>
+    <button type="submit" class="btn btn-success">Tạo nhân viên</button>
     <a href="/admin/users/list" class="btn btn-secondary">Quay lại</a>
   </div>
   @csrf

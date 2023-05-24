@@ -31,7 +31,7 @@ class LoginController extends Controller
       'password' => $request->input('password'),
     ], $request->input('remember'))) {
       {
-        if (Auth::user()->usertype_id != 1 && Auth::user()->usertype_id != 2) {
+        if (Auth::user()->usertype_id != 1 && Auth::user()->usertype_id != 2 && Auth::user()->usertype_id != 3) {
           Auth::logout();
           Session::flash('error', 'Tài khoản không có quyền đăng nhập');
           return redirect()->back();

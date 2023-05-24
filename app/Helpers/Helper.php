@@ -66,10 +66,18 @@ class Helper
   public static function menus($menus, $parent_id = 0): string
   {
     $html = '';
+    $currentUrl = request()->url();
     foreach ($menus as $key => $menu) {
+      $isActive = false; // Biến để kiểm tra xem mục hiện tại có được chọn là "active" hay không
+
+      if ($menu->url === 'product' && strpos($currentUrl, 'product') !== false) {
+        $isActive = true; // Nếu URL hiện tại chứa "product", thì đánh dấu mục "product" là "active"
+      } elseif ($currentUrl === $menu->url) {
+        $isActive = true; // Nếu URL hiện tại trùng khớp với URL của menu item, thì đánh dấu mục đó là "active"
+      }
       if ($menu->parent_id == $parent_id) {
         $html .= '
-          <li class="nav-item menu-header-item-menu ' . (request()->is($menu->url) ? 'active-header' : '') . '">
+          <li class="nav-item menu-header-item-menu ' . (request()->is($menu->url)||$isActive ? 'active-header' : '') . '">
             <a class="nav-link" href="' .((!empty($menu->url) && preg_match('/[a-zA-Z]/', $menu->url)) ? '/' : ''). $menu->url .'">
             ' . $menu->name . '
             </a>';

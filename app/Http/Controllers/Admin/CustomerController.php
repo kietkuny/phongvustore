@@ -7,6 +7,7 @@ use App\Http\Requests\Customer\CustomerRequest;
 use App\HTTP\Services\Customer\CustomerService;
 use App\Models\City;
 use App\Models\Customer;
+use App\Models\Order;
 use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -73,11 +74,14 @@ class CustomerController extends Controller
   {
     $provinces = Province::all();
     $cities = City::all();
+    $orders = Order::with(['customer', 'user', 'status', 'orderdetails.product'])
+      ->where('customer_id', $customer->id)->orderBy('id','desc')->get();
     return view('admin.customer.edit', [
       'title' => 'Chỉnh sửa khách hàng ' . $customer->name,
       'customer' => $customer,
       'cities' => $cities,
-      'provinces' => $provinces
+      'provinces' => $provinces,
+      'orders' => $orders
     ]);
   }
 

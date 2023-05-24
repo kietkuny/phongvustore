@@ -156,7 +156,13 @@
         <ul class="avatar-detail">
           <li><a href="/admin/info"><i class="fa-solid fa-info"></i> Chi tiết</a></li>
           <li>
-            <a href="{{ route('admin.logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+            <button type="button" class="border-0 text-white p-0" style="background: none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+            </button>
+            
+            <!-- Modal -->
+            
+            {{-- <a href="{{ route('admin.logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a> --}}
           </li>
         </ul>
       </div>
@@ -208,7 +214,23 @@
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
-
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Đăng xuất</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Bạn có chắc là muốn đăng xuất tài khoản trên hệ thống không?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          <a href="{{ route('admin.logout') }}" type="button" class="btn btn-danger">Đăng xuất</a>
+        </div>
+      </div>
+    </div>
+  </div>
   @include('admin.footer')
 </body>
 

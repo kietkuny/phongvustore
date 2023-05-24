@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\MenuController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Users\LoginController;
 use App\Http\Controllers\Admin\UserTypeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductsController;
@@ -84,7 +86,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     #Trademark
-    Route::prefix('trademarks')->group(function () {
+    Route::prefix('trademarks')->middleware('checkUserType2')->group(function () {
       Route::get('add', [TrademarkController::class, 'create']);
       Route::post('add', [TrademarkController::class, 'store']);
       Route::get('list', [TrademarkController::class, 'index']);
@@ -95,7 +97,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     #Promotion
-    Route::prefix('promotions')->group(function () {
+    Route::prefix('promotions')->middleware('checkUserType2')->group(function () {
       Route::get('add', [PromotionController::class, 'create']);
       Route::post('add', [PromotionController::class, 'store']);
       Route::get('list', [PromotionController::class, 'index']);
@@ -105,7 +107,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     #PromductType
-    Route::prefix('product_types')->group(function () {
+    Route::prefix('product_types')->middleware('checkUserType2')->group(function () {
       Route::get('add', [ProductTypeController::class, 'create']);
       Route::post('add', [ProductTypeController::class, 'store']);
       Route::get('list', [ProductTypeController::class, 'index']);
@@ -116,7 +118,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     #Product
-    Route::prefix('products')->group(function () {
+    Route::prefix('products')->middleware('checkUserType2')->group(function () {
       Route::get('add', [ProductController::class, 'create']);
       Route::post('add', [ProductController::class, 'store']);
       Route::get('list', [ProductController::class, 'index']);
@@ -142,6 +144,11 @@ Route::middleware(['auth'])->group(function () {
       Route::get('list', [OrderController::class, 'index']);
       Route::get('edit/id={order}', [OrderController::class, 'show']);
       Route::post('edit/id={order}', [OrderController::class, 'update']);
+    });
+
+    #Contact
+    Route::prefix('contacts')->group(function () {
+      Route::get('list', [ContactController::class, 'adminChat']);
     });
 
     #Upload
@@ -190,3 +197,7 @@ Route::delete('carts/{product_id}', [CartController::class, 'delete']);
 Route::delete('carts/delete/all', [CartController::class, 'deleteALL']);
 Route::get('pay', [CartController::class, 'showPay']);
 Route::post('addpay', [CartController::class, 'addOrder']);
+
+Route::get('contact',[ChatController::class,'customerChat']);
+// Route::post('contact/load-message',[ContactController::class,'loadMessages']);
+// Route::post('contact/sent-message',[ContactController::class,'sendMessage']);

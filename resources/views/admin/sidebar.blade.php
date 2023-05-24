@@ -35,44 +35,52 @@
         @endif
         @if ( Auth::user()->usertype_id === 1)
         <li class="nav-item pagination">
-          <a href="/admin/users/list" class="nav-link {{ request()->is('admin/users/*') ? 'active-sidebar' : '' }}">
-            <i class="nav-icon fa-regular fa-user"></i>
-            <p>Nhân viên</p>
-          </a>
-        </li>
-        @endif
-        @if ( Auth::user()->usertype_id === 1)
-        <li class="nav-item pagination">
           <a href="/admin/user_types/list" class="nav-link {{ request()->is('admin/user_types/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-regular fa-users"></i>
             <p>Loại nhân viên</p>
           </a>
         </li>
         @endif
+        @if ( Auth::user()->usertype_id === 1)
+        <li class="nav-item pagination">
+          <a href="/admin/users/list" class="nav-link {{ request()->is('admin/users/*') ? 'active-sidebar' : '' }}">
+            <i class="nav-icon fa-regular fa-user"></i>
+            <p>Nhân viên</p>
+          </a>
+        </li>
+        @endif
+        @if ( Auth::user()->usertype_id === 1 || Auth::user()->usertype_id === 2)
         <li class="nav-item pagination">
           <a href="/admin/trademarks/list" class="nav-link {{ request()->is('admin/trademarks/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-solid fa-trademark"></i>
             <p>Thương hiệu</p>
           </a>
         </li>
+        @endif
+        @if ( Auth::user()->usertype_id === 1 || Auth::user()->usertype_id === 2)
         <li class="nav-item pagination">
           <a href="/admin/promotions/list" class="nav-link {{ request()->is('admin/promotions/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-solid fa-percent"></i>
             <p>Khuyến mãi</p>
           </a>
         </li>
+        @endif
+        @if ( Auth::user()->usertype_id === 1 || Auth::user()->usertype_id === 2)
         <li class="nav-item pagination">
           <a href="/admin/product_types/list" class="nav-link {{ request()->is('admin/product_types/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-brands fa-shopify"></i>
             <p>Loại sản phẩm</p>
           </a>
         </li>
+        @endif
+        @if ( Auth::user()->usertype_id === 1 || Auth::user()->usertype_id === 2)
         <li class="nav-item pagination">
           <a href="/admin/products/list" class="nav-link {{ request()->is('admin/products/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-solid fa-laptop-mobile"></i>
             <p>Sản phẩm</p>
           </a>
         </li>
+        @endif
         <li class="nav-item pagination">
           <a href="/admin/customers/list" class="nav-link {{ request()->is('admin/customers/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-solid fa-user"></i>
@@ -85,12 +93,12 @@
             <p>Đơn hàng</p>
           </a>
         </li>
-        {{-- <li class="nav-item pagination">
-          <a href="/admin/messages/list" class="nav-link {{ request()->is('admin/messages/*') ? 'active-sidebar' : '' }}">
+        <li class="nav-item pagination">
+          <a href="/admin/contacts/list" class="nav-link {{ request()->is('admin/contacts/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-regular fa-comments"></i>
-            <p>Tin nhắn</p>
+            <p>Hỗ trợ</p>
           </a>
-        </li> --}}
+        </li>
       </ul>
     </nav>
   </div>

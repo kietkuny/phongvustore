@@ -51,18 +51,15 @@
                       <img src="{{ $product->thumb }}" alt="{{ $product->name }}" class="img-fluid">
                       <p class="ms-3">{{ $product->name }}</p>
                     </div>
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
                   </td>
                   <td class="text-center">
                     @if($product->promotion->sale != 0)
                     <p class="mb-1"><small><del>{{ number_format($product->price, 0, '.', '.') }}đ</del></small></p>
                     @endif
                     <p class="mb-0">{{ number_format($price, 0, '.', '.') }}đ</p>
-                    <input type="hidden" name="price" value="{{ $price }}">
                   </td>
                   <td class="text-center">
                     x{{ $carts[$product->id] }}
-                    <input type="hidden" name="quantity" value="{{ $carts[$product->id] }}">
                   </td>
                   <td class="text-center">{{ number_format($priceSum, 0, '.', '.') }}đ</td>
                 </tr>

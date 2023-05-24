@@ -4,21 +4,48 @@
   <div class="container">
     <h2 class="mb-3">Đơn hàng</h2>
     @include('alert')
+    @php
+    $st1 = 0;
+    $st2 = 0;
+    $st3 = 0;
+    $st4 = 0;
+    $st5 = 0;
+    @endphp
+
+    @foreach ($orders as $order)
+    @switch($order->status_id)
+    @case(1)
+    @php $st1++ @endphp
+    @break
+    @case(2)
+    @php $st2++ @endphp
+    @break
+    @case(3)
+    @php $st3++ @endphp
+    @break
+    @case(4)
+    @php $st4++ @endphp
+    @break
+    @case(5)
+    @php $st5++ @endphp
+    @break
+    @endswitch
+    @endforeach
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="wait-tab" data-bs-toggle="tab" data-bs-target="#wait-tab-pane" type="button" role="tab" aria-controls="wait-tab-pane" aria-selected="true">Chờ xác nhận</button>
+        <button class="nav-link active" id="wait-tab" data-bs-toggle="tab" data-bs-target="#wait-tab-pane" type="button" role="tab" aria-controls="wait-tab-pane" aria-selected="true">Chờ xác nhận ({{ $st1 }})</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="confirm-tab" data-bs-toggle="tab" data-bs-target="#confirm-tab-pane" type="button" role="tab" aria-controls="confirm-tab-pane" aria-selected="false">Duyệt đơn hàng</button>
+        <button class="nav-link" id="confirm-tab" data-bs-toggle="tab" data-bs-target="#confirm-tab-pane" type="button" role="tab" aria-controls="confirm-tab-pane" aria-selected="false">Duyệt đơn hàng ({{ $st2 }})</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping-tab-pane" type="button" role="tab" aria-controls="shipping-tab-pane" aria-selected="false">Đang giao hàng</button>
+        <button class="nav-link" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping-tab-pane" type="button" role="tab" aria-controls="shipping-tab-pane" aria-selected="false">Đang giao hàng ({{ $st3 }})</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="delivered-tab" data-bs-toggle="tab" data-bs-target="#delivered-tab-pane" type="button" role="tab" aria-controls="delivered-tab-pane" aria-selected="false">Đã giao hàng</button>
+        <button class="nav-link" id="delivered-tab" data-bs-toggle="tab" data-bs-target="#delivered-tab-pane" type="button" role="tab" aria-controls="delivered-tab-pane" aria-selected="false">Đã giao hàng ({{ $st4 }})</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="cancel-tab" data-bs-toggle="tab" data-bs-target="#cancel-tab-pane" type="button" role="tab" aria-controls="cancel-tab-pane" aria-selected="false">Hủy đơn hàng</button>
+        <button class="nav-link" id="cancel-tab" data-bs-toggle="tab" data-bs-target="#cancel-tab-pane" type="button" role="tab" aria-controls="cancel-tab-pane" aria-selected="false">Hủy đơn hàng ({{ $st5 }})</button>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">

@@ -37,7 +37,12 @@
             <span class="ms-2 logout">
               <div class="d-flex align-items-center">
                 <a href="/info" class="text-dark">{{ Auth::guard('cus')->user()->name }}</a>
-                <a href="{{ route('home.logout') }}" class="ms-3 text-dark"><i class="fa-regular fa-right-from-bracket d-flex" style="font-size: 20px"></i></a>
+                {{-- <a href="{{ route('home.logout') }}" class="ms-3 text-dark"><i class="fa-regular fa-right-from-bracket d-flex" style="font-size: 20px"></i></a> --}}
+                <a class="ms-3 text-dark border-0" style="background: none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <i class="fa-regular fa-right-from-bracket d-flex" style="font-size: 20px"></i>
+                </a>
+
+
               </div>
             </span>
             @else
@@ -52,3 +57,22 @@
     </nav>
   </div>
 </header>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" style="margin-top: 150px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Đăng xuất</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc là muốn đăng xuất tài khoản?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <a href="{{ route('home.logout') }}" type="button" class="btn btn-danger">Đăng xuất</a>
+      </div>
+    </div>
+  </div>
+</div>
