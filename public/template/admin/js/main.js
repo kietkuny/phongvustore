@@ -46,6 +46,25 @@ $('#upload').change(function () {
   })
 });
 
+// $('#btn-dashboard-filter').on('click', function(e) {
+//   e.preventDefault();
+
+//   let month = $('#month').val();
+//   let year = $('input[name="year"]').val();
+
+//   $.ajax({
+//       url: '/admin', // Đường dẫn xử lý yêu cầu lọc
+//       method: 'GET',
+//       data: { month: month, year: year },
+//       success: function(response) {
+//           $('.update-home').html(response); // Cập nhật kết quả thống kê trong phần tử với id "statistics-results"
+//       },
+//       error: function(xhr) {
+//           // Xử lý lỗi nếu có
+//       }
+//   });
+// });
+
 $('#province-select').change(function () {
   let provinceId = $(this).val();
   if (provinceId) {

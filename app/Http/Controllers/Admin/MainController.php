@@ -16,11 +16,8 @@ class MainController extends Controller
   {
     $selectedMonth = intval($request->input('month')) ? intval($request->input('month')) : Carbon::now()->month;
     $selectedYear = intval($request->input('year')) ? intval($request->input('year')) : Carbon::now()->year;
-
-    $startOfYear = Carbon::create($selectedYear, 1, 1, 0, 0, 0);
-    $endOfYear = Carbon::create($selectedYear, 12, 31, 23, 59, 59);
-    $startOfMonth = Carbon::create(null, $selectedMonth, 1, 0, 0, 0);
-    $endOfMonth = Carbon::create(null, $selectedMonth, 1, 0, 0, 0)->endOfMonth();
+    $startOfMonth = Carbon::create($selectedYear, $selectedMonth, 1, 0, 0, 0);
+    $endOfMonth = $startOfMonth->copy()->endOfMonth();
 
     $orderDetails = Orderdetail::select(DB::raw('DATE(orders.updated_at) as date'), DB::raw('SUM(orderdetails.price * orderdetails.quantity) as total_sales'))
       ->join('orders', 'orderdetails.order_id', '=', 'orders.id')
@@ -39,7 +36,7 @@ class MainController extends Controller
       ->join('products', 'orderdetails.product_id', '=', 'products.id')
       ->join('product_types', 'products.producttype_id', '=', 'product_types.id')
       ->where('orders.status_id', 4)
-      ->whereBetween('orders.created_at', [$startOfMonth, $endOfMonth])
+      ->whereBetween('orders.updated_at', [$startOfMonth, $endOfMonth])
       ->groupBy('product_types.name')
       ->get();
 
@@ -58,7 +55,7 @@ class MainController extends Controller
           ->from('orders')
           ->where('status_id', 4);
       })
-      ->whereBetween('orders.updated_at', [$startOfYear, $endOfYear])
+      ->whereYear('orders.updated_at', $selectedYear)
       ->groupBy('month')
       ->orderBy('month')
       ->get();
@@ -77,7 +74,8 @@ class MainController extends Controller
       'Tháng 11',
       'Tháng 12',
     ];
-
+    
+    // $selectedMonth = array_search($request->input('month'), $months) + 1;
     $revenue = [];
     foreach ($months as $key => $month) {
       $revenue[$key] = 0;
@@ -95,28 +93,32 @@ class MainController extends Controller
 
     $totalProducts = Orderdetail::whereHas('order', function ($query) use ($startOfMonth, $endOfMonth) {
       $query->where('status_id', 4)
-        ->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+        ->whereBetween('updated_at', [$startOfMonth, $endOfMonth]);
     })->sum('quantity');
 
     $totalRevenue = Orderdetail::whereHas('order', function ($query) use ($startOfMonth, $endOfMonth) {
       $query->where('status_id', 4)
-        ->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+        ->whereBetween('updated_at', [$startOfMonth, $endOfMonth]);
     })->sum(DB::raw('price * quantity'));
 
     $sumOrders = Order::where('status_id', 4)
+      ->whereBetween('updated_at', [$startOfMonth, $endOfMonth])
       ->count();
 
-    $sumProducts = Orderdetail::whereHas('order', function ($query) {
-      $query->where('status_id', 4);
+    $sumProducts = Orderdetail::whereHas('order', function ($query) use ($startOfMonth, $endOfMonth){
+      $query->where('status_id', 4)
+      ->whereBetween('updated_at', [$startOfMonth, $endOfMonth]);
     })->sum('quantity');
 
-    $sumRevenue = Orderdetail::whereHas('order', function ($query) {
-      $query->where('status_id', 4);
+    $sumRevenue = Orderdetail::whereHas('order', function ($query) use ($startOfMonth, $endOfMonth){
+      $query->where('status_id', 4)
+      ->whereBetween('updated_at', [$startOfMonth, $endOfMonth]);
     })->sum(DB::raw('price * quantity'));
 
     $sumCustomers = Customer::where('status', 1)
+      ->whereBetween('updated_at', [$startOfMonth, $endOfMonth])
       ->count();
-
+     
     return view('admin.home.home', [
       'title' => 'Thống kê doanh số'
     ], compact('orderDetails', 'selectedMonth', 'months', 'chartData', 'revenue', 'totalOrders', 'totalProducts', 'totalRevenue', 'sumOrders', 'sumProducts', 'sumRevenue', 'sumCustomers','selectedYear'));

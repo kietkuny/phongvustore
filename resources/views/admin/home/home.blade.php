@@ -2,26 +2,43 @@
 
 @section('content')
 
-{{-- <form method="get" action="/admin" autocomplete="off">
+<form method="get" action="/admin" autocomplete="off">
   <div class="row align-items-end">
     <div class="form-group col-md-3">
       <label for="month">Chọn tháng:</label>
       <select class="form-control form-select" id="month" name="month">
-          @foreach ($months as $month)
-              <option value="{{ $month }}" {{ $selectedMonth == $month ? 'selected' : '' }}>{{ $month }}</option>
-          @endforeach
+        @foreach ($months as $key => $month)
+        @php
+          $monthValue = $key + 1;
+          $selected = $monthValue == $selectedMonth ? 'selected' : '';
+          echo $selectedMonth;
+        @endphp
+          <option value="{{ $monthValue }}" {{ $selected }}>
+            {{ $month }}
+          </option>
+        @endforeach
       </select>
     </div>
     <div class="form-group col-md-3">
       <label for="month">Năm: </label>
-      <input type="year" class="form-control">
+      <select class="form-control form-select" id="year" name="year">
+        @php
+        $startYear = $selectedYear - 5;
+        $endYear = $selectedYear + 5;
+        @endphp
+        @for ($year = $startYear; $year <= $endYear; $year++)
+            <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
+                {{ $year }}
+            </option>
+        @endfor
+    </select>
     </div>
     <div class="col-md-3" style="margin-bottom: 1rem;">
-      <button type="submit" class="btn btn-primary" id="btn-dashboard-filter">Lọc kết quả</button>
+      <button type="submit" class="btn alert alert-info btn-outline-info m-0 px-3 py-2" id="btn-dashboard-filter">Lọc kết quả</button>
     </div>
   </div>
   @csrf
-</form> --}}
+</form>
 
 <div class="row">
   <div class="col-lg-3 col-6">
@@ -85,27 +102,6 @@
   </div>
   <p class="text-center mb-5">Biểu đồ: Doanh thu bán được trong tháng {{ $selectedMonth }}, năm {{ $selectedYear }}</p>
 
-  {{-- <div class="col-12 mb-5">
-    <table class="text-center table table-bordered">
-      <thead>
-        <tr>
-          <th colspan="3">Doanh thu tháng {{ $selectedMonth }}</th>
-        </tr>
-        <tr>
-          <th style="font-weight: 500;">Tổng đơn hàng</th>
-          <th style="font-weight: 500;">Tổng sản phẩm</th>
-          <th style="font-weight: 500;">Tổng doanh thu</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ $totalOrders }}</td>
-          <td>{{ $totalProducts }}</td>
-          <td>{{ number_format($totalRevenue, 0, '.', '.') }}₫</td>
-        </tr>
-      </tbody>
-    </table>
-  </div> --}}
   
   <div class="col-md-6 mb-5">
     <canvas width="300" height="200" id="productsChart"></canvas>
@@ -124,8 +120,8 @@
   // Đăng ký tiền tệ VNĐ
   numeral.register('locale', 'vi', {
     delimiters: {
-      thousands: ',', 
-      decimal: '.'
+      thousands: '.', 
+      decimal: ','
     }, 
     abbreviations: {
       thousand: 'k', 
@@ -147,9 +143,8 @@
 </script>
 
 <script>
-  var currentDate = new Date(); // Tạo đối tượng Date hiện tại
-  var currentMonth = currentDate.getMonth() + 1; // Lấy tháng hiện tại (giá trị trả về từ 0 - 11 nên cần cộng thêm 1)
-  var currentYear = currentDate.getFullYear(); // Lấy năm hiện tại
+  var currentMonth = {!!json_encode($selectedMonth)!!}; 
+  var currentYear = {!!json_encode($selectedYear)!!};
   var ctx = document.getElementById('salesChart').getContext('2d');
   var chart = new Chart(ctx, {
     type: 'line', 
@@ -272,7 +267,7 @@ var chart = new Chart(ctx, {
         ticks: {
           stepSize: 1000000,
           callback: function(value, index, values) {
-            return value.toLocaleString() + ' VNĐ';
+            return numeral(value).format('0,0 $');
           }
         }
       }

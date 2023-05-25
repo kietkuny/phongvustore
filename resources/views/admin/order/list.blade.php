@@ -25,7 +25,7 @@
     <th>Người giao</th>
     <th>Trạng thái</th>
     <th>Cập nhật</th>
-    <th style="width: 50px;"></th>
+    <th></th>
   </thead>
   <tbody>
     {!! \App\Helpers\Order\OrderHelper::order($orders) !!}

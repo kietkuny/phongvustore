@@ -144,6 +144,7 @@ Route::middleware(['auth'])->group(function () {
       Route::get('list', [OrderController::class, 'index']);
       Route::get('edit/id={order}', [OrderController::class, 'show']);
       Route::post('edit/id={order}', [OrderController::class, 'update']);
+      Route::delete('destroy', [OrderController::class, 'destroy']);
     });
 
     #Contact

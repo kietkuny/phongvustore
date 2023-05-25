@@ -44,6 +44,28 @@ class OrderHelper
             <a href="/admin/orders/edit/id=' . $order->id . '" class="btn btn-primary btn-sm">
               <i class="fa-solid fa-eye"></i>
             </a>
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#Modal' . $order->id . '">
+              <i class="fa-regular fa-trash"></i>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="Modal' . $order->id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa hóa đơn</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Bạn có chắc xóa hóa đơn <b>' . $order->id . '</b> không ?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="removeRow(' . $order->id . ',\'/admin/orders/destroy\')">Xóa</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </td>
         </tr>
         ';

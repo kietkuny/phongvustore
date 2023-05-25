@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\Orderdetail;
 use App\Models\Status;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -61,5 +62,20 @@ class OrderController extends Controller
   {
     $this->orderService->update($request, $order);
     return redirect('/admin/orders/list');
+  }
+
+  public function destroy(Request $request): JsonResponse
+  {
+    $result = $this->orderService->destroy($request);
+    if ($result) {
+      return response()->json([
+        'error' => false,
+        'message' => 'Xóa thành công sản phẩm'
+      ]);
+    }
+
+    return response()->json([
+      'error' => true
+    ]);
   }
 }

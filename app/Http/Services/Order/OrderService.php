@@ -4,6 +4,7 @@ namespace App\HTTP\Services\Order;
 
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Orderdetail;
 use App\Models\Product;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -53,7 +54,7 @@ class OrderService
         $status = "";
         break;
     }
-    Mail::send('emails.order', compact('customer', 'order','content'), function ($email) use ($customer,$status) {
+    Mail::send('emails.order', compact('customer', 'order', 'content'), function ($email) use ($customer, $status) {
       $email->subject('Phong Vũ - ' . $status);
       $email->to($customer->email, $customer->name);
     });
@@ -61,5 +62,18 @@ class OrderService
 
     Session::flash('success', 'Cập nhật hóa đơn thành công');
     return true;
+  }
+
+  public function destroy($request)
+  {
+    $id = (int) $request->input('id');
+    $order = Order::where('id', $id)->first();
+    if ($order) {
+      Orderdetail::where('order_id', $order->id)->delete();
+      $order->delete();
+      return true;
+    }
+
+    return false;
   }
 }
