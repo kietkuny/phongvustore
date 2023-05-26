@@ -9,13 +9,12 @@
       <select class="form-control form-select" id="month" name="month">
         @foreach ($months as $key => $month)
         @php
-          $monthValue = $key + 1;
-          $selected = $monthValue == $selectedMonth ? 'selected' : '';
-          echo $selectedMonth;
+        $monthValue = $key + 1;
+        $selected = $monthValue == $selectedMonth ? 'selected' : '';
         @endphp
-          <option value="{{ $monthValue }}" {{ $selected }}>
-            {{ $month }}
-          </option>
+        <option value="{{ $monthValue }}" {{ $selected }}>
+          {{ $month }}
+        </option>
         @endforeach
       </select>
     </div>
@@ -27,9 +26,9 @@
         $endYear = $selectedYear + 5;
         @endphp
         @for ($year = $startYear; $year <= $endYear; $year++)
-            <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
-                {{ $year }}
-            </option>
+        <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
+            {{ $year }}
+        </option>
         @endfor
     </select>
     </div>
