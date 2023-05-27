@@ -47,7 +47,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center flex-lg-row flex-column">
                       <img src="{{ $product->thumb }}" alt="{{ $product->name }}" class="img-fluid">
                       <p class="ms-3">{{ $product->name }}</p>
                     </div>

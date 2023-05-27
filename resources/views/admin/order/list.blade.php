@@ -18,7 +18,7 @@
     </button>
   </form>
 </div>
-<table class="table table-hover table-bordered table-responsive-md">
+<table class="table table-hover table-bordered table-responsive-xl">
   <thead>
     <th style="width: 50px">ID</th>
     <th>Khách hàng</th>

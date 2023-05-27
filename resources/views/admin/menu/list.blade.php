@@ -8,7 +8,7 @@
     </div>
   </a>
 </div>
-<table class="table table-hover table-bordered">
+<table class="table table-hover table-bordered table-responsive-xl">
   <thead>
     <th style="width: 50px">ID</th>
     <th>Name</th>

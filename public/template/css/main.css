@@ -946,10 +946,10 @@ main{
   .main-product .product-card-content .trademark,
   .main-product .product-card-content .name,
   .main-product .product-card-content h6 {
-    font-size: 12px;
+    font-size: 10px;
   }
   .main-product .product-card-content h5 {
-    font-size: 14px;
+    font-size: 12px;
   }
 }
 .main-product button {
@@ -1154,6 +1154,11 @@ main{
   padding-top: 100px;
   padding-bottom: 100px;
 }
+@media screen and (max-width: 997.98px) {
+  .main-order {
+    font-size:10px;
+  }
+}
 @media screen and (max-width: 767.98px) {
   .main-order {
     padding-top: 0px;
@@ -1223,6 +1228,11 @@ main{
   background-color: #f8f8fc;
   padding-top: 100px;
   padding-bottom: 15px;
+}
+@media screen and (max-width: 997.98px) {
+  .main-cart {
+    font-size:10px;
+  }
 }
 @media screen and (max-width: 767.98px) {
   .main-cart {
@@ -1365,6 +1375,11 @@ main{
   padding-top: 100px;
   padding-bottom: 100px;
   background-color: #f8f8fc;
+}
+@media screen and (max-width: 997.98px) {
+  .main-pay {
+    font-size:10px;
+  }
 }
 @media screen and (max-width: 767.98px) {
   .main-pay {

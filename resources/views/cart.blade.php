@@ -50,7 +50,7 @@
             $total += $priceSum;
             @endphp
             <li class="d-flex align-items-center">
-              <div class="p-2 cart-shop-product d-flex align-items-center">
+              <div class="p-2 cart-shop-product d-flex align-items-center flex-lg-row flex-column">
                 <img class="img-fluid" src="{{ $product->thumb }}" alt="{{ $product->name }}" width="100px">
                 <p class="mb-0 ms-2">{{ $product->name }}</p>
               </div>
@@ -61,9 +61,9 @@
                 <p class="mb-0">{{ number_format($price, 0, '.', '.') }}đ</p>
               </div>
               <div class="cart-shop-quantity d-flex">
-                <button type="button" class="btn-quantity-minus"><i class="fa-solid fa-minus"></i></button>
+                <button type="button" class="btn-quantity-minus d-none d-lg-flex align-items-center"><i class="fa-solid fa-minus"></i></button>
                 <input type="number" name="num_product[{{ $product->id }}]" class="text-center cart-shop-quantity-input btn-quantity" value="{{ $carts[$product->id] }}" min="1" max="{{ $product->quantity }}">
-                <button type="button" class="btn-quantity-plus"><i class="fa-solid fa-plus"></i></button>
+                <button type="button" class="btn-quantity-plus d-none d-lg-flex align-items-center"><i class="fa-solid fa-plus"></i></button>
               </div>
               <div class="cart-shop-sum text-center">
                 <p class="mb-0">{{ number_format($priceSum, 0, '.', '.') }}đ</p>

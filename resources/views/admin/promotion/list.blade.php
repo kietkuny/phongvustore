@@ -8,7 +8,7 @@
     </div>
   </a>
 </div>
-<table class="table table-hover table-bordered table-responsive-md">
+<table class="table table-hover table-bordered table-responsive-xl">
   <thead>
     <th style="width: 50px">STT</th>
     <th>Tên khuyến mãi</th>

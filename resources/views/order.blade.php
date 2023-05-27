@@ -83,7 +83,7 @@
             </ul>
             @foreach ($order->orderdetails as $detail)
             <ul class="order-main d-flex">
-              <li class="order-main-img d-flex align-items-center">
+              <li class="order-main-img d-flex align-items-center flex-lg-row flex-column">
                 <img src="{{ $detail->product->thumb }}" alt="{{ $detail->product->name }}" width="120px" class="img-fluid">
                 <p class="ms-4">
                   {{ $detail->product->name }}
@@ -153,7 +153,7 @@
             </ul>
             @foreach ($order->orderdetails as $detail)
             <ul class="order-main d-flex">
-              <li class="order-main-img d-flex align-items-center">
+              <li class="order-main-img d-flex align-items-center flex-lg-row flex-column">
                 <img src="{{ $detail->product->thumb }}" alt="{{ $detail->product->name }}" width="120px" class="img-fluid">
                 <p class="ms-4">
                   {{ $detail->product->name }}
@@ -223,7 +223,7 @@
             </ul>
             @foreach ($order->orderdetails as $detail)
             <ul class="order-main d-flex">
-              <li class="order-main-img d-flex align-items-center">
+              <li class="order-main-img d-flex align-items-center flex-lg-row flex-column">
                 <img src="{{ $detail->product->thumb }}" alt="{{ $detail->product->name }}" width="120px" class="img-fluid">
                 <p class="ms-4">
                   {{ $detail->product->name }}
@@ -293,7 +293,7 @@
             </ul>
             @foreach ($order->orderdetails as $detail)
             <ul class="order-main d-flex">
-              <li class="order-main-img d-flex align-items-center">
+              <li class="order-main-img d-flex align-items-center flex-lg-row flex-column">
                 <img src="{{ $detail->product->thumb }}" alt="{{ $detail->product->name }}" width="120px" class="img-fluid">
                 <p class="ms-4">
                   {{ $detail->product->name }}
@@ -363,7 +363,7 @@
             </ul>
             @foreach ($order->orderdetails as $detail)
             <ul class="order-main d-flex">
-              <li class="order-main-img d-flex align-items-center">
+              <li class="order-main-img d-flex align-items-center flex-lg-row flex-column">
                 <img src="{{ $detail->product->thumb }}" alt="{{ $detail->product->name }}" width="120px" class="img-fluid">
                 <p class="ms-4">
                   {{ $detail->product->name }}

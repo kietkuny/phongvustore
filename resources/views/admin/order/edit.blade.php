@@ -72,7 +72,7 @@
     <div class="row">
       <div class="form-group col-md-6">
         <label>Trạng thái</label>
-        <select name="status_id" class="form-control form-select" {{ ($order->status_id == 5 || $order->status_id == 4) ? 'disabled' : '' }}>
+        <select name="status_id" class="form-control form-select" {{ ($order->status_id == 5 || ($order->updated_at->diffInDays(now()) > 1 && $order->status_id == 4)) ? 'disabled' : '' }}>
           @foreach ($statuses as $status)
           <option value="{{ $status->id }}" {{ $order->status_id == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
           @endforeach
@@ -80,7 +80,7 @@
       </div>
       <div class="form-group col-md-6">
         <label>Người giao hàng</label>
-        <select name="user_id" class="form-control form-select" id="user-select" {{ ($order->status_id == 5 || $order->status_id == 4) ? 'disabled' : '' }}>
+        <select name="user_id" class="form-control form-select" id="user-select" {{ ($order->status_id == 5 || ($order->updated_at->diffInDays(now()) > 1 && $order->status_id == 4)) ? 'disabled' : '' }}>
           <option value="">Chọn người giao</option>
           @foreach ($users as $user)
           <option value="{{ $user->id }}" {{ $order->user_id == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
