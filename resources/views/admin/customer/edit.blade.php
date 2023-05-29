@@ -58,7 +58,7 @@ $ordernum++;
           </div>
           <div class="form-group col-md-6">
             <label for="password">Mật khẩu</label>
-            <input type="text" class="form-control" name="password" value="{{ $customer->password }}" placeholder="Nhập mật khẩu khách hàng">
+            <input type="password" class="form-control" name="password" value="{{ $customer->password }}" placeholder="Nhập mật khẩu khách hàng">
           </div>
           <div class="form-group col-12 d-flex align-items-center">
             <label for="password" class="mb-0">Hiển thị thêm</label>

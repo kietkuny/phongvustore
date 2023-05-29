@@ -45,7 +45,7 @@
       </div>
       <div class="form-group col-md-6">
         <label for="password">Mật khẩu</label>
-        <input type="text" class="form-control" name="password" value="{{ $user->password }}" placeholder="Nhập mật khẩu nhân viên">
+        <input type="password" class="form-control" name="password" value="{{ $user->password }}" placeholder="Nhập mật khẩu nhân viên">
       </div>
     </div>
     <div class="form-group">
