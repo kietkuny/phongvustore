@@ -287,6 +287,19 @@
     }
   });
 
+  $('.show-password').click(function() {
+    let passwordInput = $('input[name="password"]');
+    let passwordIcon = $('.show-password i');
+
+    if (passwordInput.attr('type') === 'password') {
+      passwordInput.attr('type', 'text');
+      passwordIcon.removeClass('fa-eye-slash').addClass('fa-eye');
+    } else {
+      passwordInput.attr('type', 'password');
+      passwordIcon.removeClass('fa-eye').addClass('fa-eye-slash');
+    }
+  });
+
   setTimeout(function () {
     $("#loading").hide();
   }, 1500);

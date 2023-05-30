@@ -23,22 +23,25 @@
             <input type="text" name="email" required autocomplete="off">
             <label for="">Email</label>
           </div>
-          <div class="inputbox">
+          <div class="inputbox" id="password-show">
             <ion-icon name="lock-closed-outline"></ion-icon>
             <input type="password" name="password" required autocomplete="off">
             <label for="">Password</label>
+            <div class="show-password text-white" style="position: absolute; cursor: pointer; ; right: 38px; bottom: 6px;">
+              <i class="fa-regular fa-eye-slash"></i>
+            </div>
           </div>
-          <div class="forget">
+          {{-- <div class="forget">
             <label>Remember Me
               <input type="checkbox" name="remember_token">
               <span class="checkmark"></span>
             </label>
             <a href="#">Forget Password</a>
-          </div>
+          </div> --}}
           <button type="submit" class="submit-admin">Log in</button>
-          <div class="register">
+          {{-- <div class="register">
             <p>Don't have a account <a href="#">Register</a></p>
-          </div>
+          </div> --}}
           @csrf
         </form>
       </div>
@@ -50,7 +53,7 @@
     </div>
     <p>Đang đăng nhập...</p>
   </div> --}}
-  
+
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script>
@@ -59,15 +62,28 @@
       $('.submit-admin').click(function() {
         let email = $('input[name="email"]').val().trim();
         let password = $('input[name="password"]').val().trim();
-        if (email == '') {
-          alert('Email không được để trống!');
-          return false;
-        }
-        if (password == '') {
-          alert('Password không được để trống!');
-          return false;
-        }
+        // if (email == '') {
+        //   alert('Email không được để trống!');
+        //   return false;
+        // }
+        // if (password == '') {
+        //   alert('Password không được để trống!');
+        //   return false;
+        // }
         $('#loading').show();
+      });
+
+      $('.show-password').click(function() {
+        let passwordInput = $('input[name="password"]');
+        let passwordIcon = $('.show-password i');
+
+        if (passwordInput.attr('type') === 'password') {
+          passwordInput.attr('type', 'text');
+          passwordIcon.removeClass('fa-eye-slash').addClass('fa-eye');
+        } else {
+          passwordInput.attr('type', 'password');
+          passwordIcon.removeClass('fa-eye').addClass('fa-eye-slash');
+        }
       });
     });
 

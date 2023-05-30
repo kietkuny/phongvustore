@@ -11,9 +11,12 @@
         <input type="text" name="email" required='required'>
         <span>Email</span>
       </div>
-      <div class="input-box">
+      <div class="input-box" id="password-show">
         <input type="password" name="password" required='required'>
         <span>Mật khẩu</span>
+        <div class="show-password" style="position: absolute; cursor: pointer; ; right: 14px; bottom: 10px;">
+          <i class="fa-regular fa-eye-slash"></i>
+        </div>
       </div>
       <div class="w-100 d-flex justify-content-between my-2">
         <div>
