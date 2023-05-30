@@ -77,7 +77,6 @@ class MainController extends Controller
       'Tháng 12',
     ];
 
-    // $selectedMonth = array_search($request->input('month'), $months) + 1;
     $revenue = [];
     foreach ($months as $key => $month) {
       $revenue[$key] = 0;
