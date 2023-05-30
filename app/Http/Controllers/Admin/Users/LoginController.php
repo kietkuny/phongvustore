@@ -29,7 +29,7 @@ class LoginController extends Controller
     if (Auth::attempt([
       'email' => $request->input('email'),
       'password' => $request->input('password'),
-    ], $request->input('remember'))) {
+    ], $request->has('remember_token'))) {
       {
         if (Auth::user()->usertype_id != 1 && Auth::user()->usertype_id != 2 && Auth::user()->usertype_id != 3) {
           Auth::logout();
