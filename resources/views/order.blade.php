@@ -58,7 +58,7 @@
             <p>Người giao hàng: {{ $order->user->name }} ({{ $order->user->phone }})</p>
             @endif
             <div class="d-flex justify-content-between align-items-center mb-4">
-              <h5><b>Đơn hàng {{ $order->id }}</b></h5>
+              <h6><b>Đơn hàng {{ $order->id }} </b>({{ date('d/m/Y H:i:s', strtotime($order->updated_at)) }})</h6>
               <div class="main-order-@switch($order->status_id)
           @case(1)wait
           @break
@@ -128,7 +128,7 @@
             <p>Người giao hàng: {{ $order->user->name }} ({{ $order->user->phone }})</p>
             @endif
             <div class="d-flex justify-content-between align-items-center mb-4">
-              <h5><b>Đơn hàng {{ $order->id }}</b></h5>
+              <h6><b>Đơn hàng {{ $order->id }} </b>({{ date('d/m/Y H:i:s', strtotime($order->updated_at)) }})</h6>
               <div class="main-order-@switch($order->status_id)
           @case(1)wait
           @break
@@ -198,7 +198,7 @@
             <p>Người giao hàng: {{ $order->user->name }} ({{ $order->user->phone }})</p>
             @endif
             <div class="d-flex justify-content-between align-items-center mb-4">
-              <h5><b>Đơn hàng {{ $order->id }}</b></h5>
+              <h6><b>Đơn hàng {{ $order->id }} </b>({{ date('d/m/Y H:i:s', strtotime($order->updated_at)) }})</h6>
               <div class="main-order-@switch($order->status_id)
           @case(1)wait
           @break
@@ -268,7 +268,7 @@
             <p>Người giao hàng: {{ $order->user->name }} ({{ $order->user->phone }})</p>
             @endif
             <div class="d-flex justify-content-between align-items-center mb-4">
-              <h5><b>Đơn hàng {{ $order->id }}</b></h5>
+              <h6><b>Đơn hàng {{ $order->id }} </b>({{ date('d/m/Y H:i:s', strtotime($order->updated_at)) }})</h6>
               <div class="main-order-@switch($order->status_id)
           @case(1)wait
           @break
@@ -338,7 +338,7 @@
             <p>Người giao hàng: {{ $order->user->name }} ({{ $order->user->phone }})</p>
             @endif
             <div class="d-flex justify-content-between align-items-center mb-4">
-              <h5><b>Đơn hàng {{ $order->id }}</b></h5>
+              <h6><b>Đơn hàng {{ $order->id }} </b>({{ date('d/m/Y H:i:s', strtotime($order->updated_at)) }})</h6>
               <div class="main-order-@switch($order->status_id)
           @case(1)wait
           @break
