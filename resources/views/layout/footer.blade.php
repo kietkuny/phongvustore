@@ -20,15 +20,10 @@
   <section class="">
     <div class="container text-center text-md-start mt-5">
       <div class="row mt-3">
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-          <h6 class="text-uppercase fw-bold mb-4">
-            <i class="fas fa-gem me-3"></i>PHONG VŨ
-          </h6>
-          <p>
-            Giấy chứng nhận đăng ký doanh nghiệp: 0304998358 do Sở KH-ĐT TP.HCM cấp lần đầu ngày 30 tháng 05 năm 2007
-          </p>
+        <div class="col-lg-12 col-xl-3 mx-auto mb-4">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2125.9460289082317!2d109.18545754202937!3d12.248123927178645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31705d93e826b8b9%3A0x40da7c96b93c44e8!2zUGhvbmcgVsWp!5e0!3m2!1svi!2s!4v1685502873444!5m2!1svi!2s" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="max-width: 100%"></iframe>
         </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+        <div class=" col-lg-2 col-xl-2 mx-auto mb-4">
           <h6 class="text-uppercase fw-bold mb-4">
             Thông tin Phong Vũ
           </h6>
@@ -45,7 +40,7 @@
             <a href="/order" class="text-reset">Đơn hàng</a>
           </p>
         </div>
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+        <div class="col-lg-2 col-xl-2 mx-auto mb-4">
           <h6 class="text-uppercase fw-bold mb-4">
             Email liên hệ
           </h6>
@@ -63,9 +58,9 @@
           </p>
         </div>
 
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+        <div class="col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           <h6 class="text-uppercase fw-bold mb-4">Liên hệ:</h6>
-          <p><i class="fas fa-home me-3"></i> Tầng 5, Số 117-119-121 Nguyễn Du, Phường Bến Thành, Quận 1, Thành Phố Hồ Chí Minh (Trụ sở chính)</p>
+          <p><i class="fas fa-home me-3"></i> 42 Thái Nguyên, p, Nha Trang, Khánh Hòa</p>
           <p><i class="fas fa-phone me-3"></i> 18006867</p>
         </div>
       </div>
