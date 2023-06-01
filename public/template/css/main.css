@@ -1331,7 +1331,7 @@ main{
   height: -moz-fit-content;
   height: fit-content;
 }
-.main-cart .right a {
+.main-cart .right button {
   padding: 10px 20px;
   border: none;
   background-image: linear-gradient(to right, #62cdff, #62cdff, #1a5f7a, #1a5f7a);
@@ -1340,7 +1340,7 @@ main{
   color: black;
   transition: 0.4s;
 }
-.main-cart .right a:hover {
+.main-cart .right button:hover {
   background-position: right;
   color: white;
 }

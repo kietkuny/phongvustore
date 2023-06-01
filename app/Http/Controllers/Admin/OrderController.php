@@ -47,6 +47,7 @@ class OrderController extends Controller
       },
       'user',
       'status',
+      'sale',
       'orderdetails.product'
     ])->findOrFail($id);
     return view('admin.order.edit', [

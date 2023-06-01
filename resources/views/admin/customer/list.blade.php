@@ -18,7 +18,7 @@
     </a>
   </div>
 </div>
-<table class="table table-hover table-bordered table-responsive-xl">
+<table class="table table-hover table-bordered table-responsive">
   <thead>
     <th style="width: 50px">ID</th>
     <th>Tên khách hàng</th>

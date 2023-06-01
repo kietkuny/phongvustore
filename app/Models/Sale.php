@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Slider extends Model
+class Sale extends Model
 {
   use HasFactory;
   protected $fillable = [
     'name',
-    'url',
-    'thumb',
-    'description',
-    'active',
+    'token',
+    'sale',
+    'quantity',
   ];
+  public function orders()
+  {
+    return $this->hasMany(Order::class);
+  }
 }

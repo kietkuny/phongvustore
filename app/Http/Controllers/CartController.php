@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\HTTP\Services\Cart\CartService;
 use App\Models\Promotion;
+use App\Models\Sale;
 use Illuminate\Http\JsonResponse as HttpJsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,14 +47,19 @@ class CartController extends Controller
 
   public function showPay()
   {
-    // $customer = Auth::customer();
     $promotions = Promotion::all();
     $products = $this->cartService->getProduct();
+    $saleId = Session::get('sale_id');
+    $sale = null;
 
+    if ($saleId) {
+      $sale = Sale::findOrFail($saleId);
+    }
     return view('pay', [
       'title' => 'Thanh toán',
       'products' => $products,
       'promotions' => $promotions,
+      'sale' => $sale,
       'carts' => Session::get('carts'),
     ]);
   }
@@ -92,6 +98,19 @@ class CartController extends Controller
     return response()->json([
       'error' => true
     ]);
+  }
+
+  public function checkSaleToken(Request $request)
+  {
+    $cartToken = $request->input('cart_token');
+    if ($request->filled('cart_token')) {
+      $result = $this->cartService->checkSaleToken($cartToken);
+      if (!$result) {
+        return back()->with('error', 'Mã không tồn tại hoặc là mã đã hết');
+      }
+    }
+    // Session::forget('sale_id');
+    return redirect('/pay');
   }
 
   public function addOrder(Request $request)

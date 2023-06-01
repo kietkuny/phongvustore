@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Orderdetail;
 use App\Models\Product;
+use App\Models\Sale;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -32,6 +33,7 @@ class OrderService
     }
     $status = '';
     $content = '';
+    $sale = Sale::find($order->sale_id);
     $customer = Customer::find($order->customer_id);
     switch ($order->status_id) {
       case 2:
@@ -54,7 +56,7 @@ class OrderService
         $status = "";
         break;
     }
-    Mail::send('emails.order', compact('customer', 'order', 'content'), function ($email) use ($customer, $status) {
+    Mail::send('emails.order', compact('customer', 'order', 'content', 'sale'), function ($email) use ($customer, $status) {
       $email->subject('Phong Vũ - ' . $status);
       $email->to($customer->email, $customer->name);
     });

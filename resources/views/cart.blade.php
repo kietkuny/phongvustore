@@ -4,8 +4,9 @@
   <div class="container">
     <div>
       <h2 class="mb-3">{{ $title }}</h2>
+      @include('alert')
       @if (count($products) != 0)
-      <form method="post" action="">
+      <form method="POST" action="checkSaleToken">
         @csrf
         <div class="left">
           <div class="text-end">
@@ -76,6 +77,10 @@
           </ul>
         </div>
         <div class="right">
+          <div class="mb-3">
+            <label class="form-label">Mã khuyến mãi</label>
+            <input type="text" name="cart_token" class="form-control">
+          </div>
           <h6 class="mb-3"><b>Thanh toán</b></h6>
           <div class="d-flex justify-content-between mb-3">
             <p>Tổng sản phẩm</p>
@@ -85,11 +90,10 @@
             <p>Tổng tiền</p>
             <p class="main-cart-sum">{{ number_format($total, 0, '.', '.') }}đ</p>
           </div>
-          <a href="/pay" type="button" class="btn w-100 mb-4">Thanh toán</a>
+          <button type="submit" class="btn w-100 mb-4">Thanh toán</button>
         </div>
       </form>
       @else
-      @include('alert')
       <div class="main-cart-empty">
         <h3 class="text-center pt-4">Chưa có sản phẩm nào</h3>
         <a class="mt-5" href="product">Mua sắm ngay</a>

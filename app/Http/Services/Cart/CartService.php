@@ -5,6 +5,7 @@ namespace App\HTTP\Services\Cart;
 use App\Models\Order;
 use App\Models\Orderdetail;
 use App\Models\Product;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +54,12 @@ class CartService
     if (is_null($carts)) return [];
 
     $productId = array_keys($carts);
+    // $saleId = Session::get('sale_id');
+    // $sale = null;
 
+    // if ($saleId) {
+    //     $sale = Sale::findOrFail($saleId);
+    // }
     return Product::with(['promotion'])
       ->select('id', 'name', 'quantity', 'thumb', 'price', 'promotion_id')
       ->whereIn('id', $productId)
@@ -88,15 +94,27 @@ class CartService
     return true;
   }
 
+  public function checkSaleToken($cartToken)
+  {
+    $sale = Sale::where('token', $cartToken)
+      ->where('quantity', '>', 0)
+      ->first();
+    if ($sale) {
+      Session::put('sale_id', $sale->id);
+    } else {
+      return false;
+    }
+    return true;
+  }
   public function addOrder(Request $request)
   {
     // Lấy thông tin khách hàng từ input
     $customer_id = $request->input('customer_id');
-
     // Tạo một đối tượng Order mới
     $order = new Order();
     $order->customer_id = $customer_id;
     $order->status_id = 1;
+    $order->sale_id = Session::get('sale_id');
     $order->save();
 
     // Lấy giỏ hàng hiện tại
@@ -124,15 +142,20 @@ class CartService
       $product->quantity -= $quantity;
       $product->save();
     }
+    $saleID = session()->get('sale_id');
+    if ($saleID) {
+        Sale::where('id', $saleID)->decrement('quantity');
+        Session::forget('sale_id');
+    }
     Session::forget('carts');
 
     $customer = Auth::guard('cus')->user();
     $content = 'đã đặt thành công, chờ đơn hàng được xác nhận để được giao hàng';
-    Mail::send('emails.order',compact('customer', 'order','content'), function($email) use($customer){
+    Mail::send('emails.order', compact('customer', 'order', 'content'), function ($email) use ($customer) {
       $email->subject('Phong Vũ - Chờ duyệt đơn hàng');
-      $email->to($customer->email,$customer->name);
+      $email->to($customer->email, $customer->name);
     });
-    
-    return redirect('/addpay')->with('success', 'Thanh toán thành công');
+
+    return redirect('/addpay')->with('success', 'Đặt hàng thành công');
   }
 }

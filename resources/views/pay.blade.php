@@ -78,6 +78,16 @@
             <p>Tổng tiền sản phẩm</p>
             <p class="main-pay-sum">{{ number_format($total, 0, '.', '.') }}đ</p>
           </div>
+          @if($sale) 
+          <div class="d-flex justify-content-between mb-3 text-danger">
+            <p>Mã khuyến mãi</p>
+            <p>{{ $sale->name }}</p>
+          </div>
+          <div class="d-flex justify-content-between mb-3 text-danger">
+            <p>Tổng tiền đặt hàng</p>
+            <p class="main-pay-sum">{{ number_format($total*(1-$sale->sale), 0, '.', '.') }}đ</p>
+          </div>
+          @endif
           <button type="submit" class="btn w-100 mb-4">Đặt hàng</button>
         </div>
       </form>

@@ -59,6 +59,14 @@
         @endif
         @if ( Auth::user()->usertype_id === 1 || Auth::user()->usertype_id === 2)
         <li class="nav-item pagination">
+          <a href="/admin/sales/list" class="nav-link {{ request()->is('admin/sales/*') ? 'active-sidebar' : '' }}">
+            <i class="nav-icon fa-regular fa-ticket"></i>
+            <p>Giảm giá</p>
+          </a>
+        </li>
+        @endif
+        @if ( Auth::user()->usertype_id === 1 || Auth::user()->usertype_id === 2)
+        <li class="nav-item pagination">
           <a href="/admin/promotions/list" class="nav-link {{ request()->is('admin/promotions/*') ? 'active-sidebar' : '' }}">
             <i class="nav-icon fa-solid fa-percent"></i>
             <p>Khuyến mãi</p>

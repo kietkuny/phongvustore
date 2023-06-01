@@ -63,8 +63,20 @@
   });
   @endphp
   <tfoot>
-    <th colspan="4" class="text-end">Tổng tiền:</th>
-    <th>{{ number_format($total, 0, '.', '.') }}₫</th>
+    <tr>
+      <th colspan="4" class="text-end">Tổng tiền:</th>
+      <th>{{ number_format($total, 0, '.', '.') }}₫</th>
+    </tr>
+    @if($order->sale_id != Null)
+    <tr class="text-danger">
+      <th colspan="4" class="text-end">Mã giảm giá:</th>
+      <th>{{ $order->sale->name }}</th>
+    </tr>
+    <tr class="text-danger">
+      <th colspan="4" class="text-end">Tổng tiền giảm:</th>
+      <th>{{ number_format($total*(1 - $order->sale->sale), 0, '.', '.') }}₫</th>
+    </tr>
+    @endif
   </tfoot>
 </table>
 <form action="" method="post">

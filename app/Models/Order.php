@@ -14,7 +14,10 @@ class Order extends Model
     'status_id',
     'user_id',
   ];
-
+  public function sale()
+  {
+    return $this->belongsTo(Sale::class);
+  }
   public function user()
   {
     return $this->belongsTo(User::class);

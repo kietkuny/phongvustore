@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductTypeController;
 use App\Http\Controllers\Admin\PromotionController;
+use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TrademarkController;
 use App\Http\Controllers\Admin\UploadController;
@@ -94,6 +95,16 @@ Route::middleware(['auth'])->group(function () {
       Route::get('edit/id={trademark}', [TrademarkController::class, 'show']);
       Route::post('edit/id={trademark}', [TrademarkController::class, 'update']);
       Route::delete('destroy', [TrademarkController::class, 'destroy']);
+    });
+
+    #Sale
+    Route::prefix('sales')->middleware('checkUserType2')->group(function () {
+      Route::get('add', [SaleController::class, 'create']);
+      Route::post('add', [SaleController::class, 'store']);
+      Route::get('list', [SaleController::class, 'index']);
+      Route::get('edit/id={sale}', [SaleController::class, 'show']);
+      Route::post('edit/id={sale}', [SaleController::class, 'update']);
+      Route::delete('destroy', [SaleController::class, 'destroy']);
     });
 
     #Promotion
@@ -196,6 +207,7 @@ Route::get('carts', [CartController::class, 'show']);
 Route::post('update-cart', [CartController::class, 'update']);
 Route::delete('carts/{product_id}', [CartController::class, 'delete']);
 Route::delete('carts/delete/all', [CartController::class, 'deleteALL']);
+Route::post('checkSaleToken',[CartController::class, 'checkSaleToken'])->name('checkSaleToken');
 Route::get('pay', [CartController::class, 'showPay']);
 Route::post('addpay', [CartController::class, 'addOrder']);
 

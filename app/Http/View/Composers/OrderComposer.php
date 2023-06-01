@@ -27,7 +27,7 @@ class OrderComposer
   public function compose(View $view): void
   {
     $customer = Auth::guard('cus')->user();
-    $orders = Order::with(['customer', 'user', 'status', 'orderdetails.product'])
+    $orders = Order::with(['customer', 'user', 'status', 'orderdetails.product','sale'])
       ->where('customer_id', $customer->id)->orderBy('id','desc')->get();
     foreach ($orders as $order) {
       foreach ($order->orderdetails as $detail) {
