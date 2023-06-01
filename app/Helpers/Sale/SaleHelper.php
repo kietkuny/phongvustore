@@ -24,6 +24,7 @@ class SaleHelper
           <td>' . $sale->token . '</td>
           <td>' . $sale->quantity . '</td>
           <td>' . $sale->sale . '</td>
+          <td>' . self::active($sale->active) . '</td>
           <td>' . date('d-m-Y H:i:s', strtotime($sale->updated_at)) . '</td>
           <td>
             <a href="/admin/sales/edit/id=' . $sale->id . '" class="btn btn-primary btn-sm">
@@ -59,5 +60,9 @@ class SaleHelper
     }
 
     return $html;
+  }
+  public static function active($active = 0)
+  {
+    return $active == 0 ? '<span class="btn btn-danger btn-sm"><i class="fa-solid fa-x"></i></span>' : '<span class="btn btn-success btn-sm"><i class="fa-regular fa-check"></i></span>';
   }
 }

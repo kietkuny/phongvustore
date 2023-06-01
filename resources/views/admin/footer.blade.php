@@ -65,6 +65,16 @@
     }
   });
 
+  $('#search-sale').typeahead({
+    source: function(query, process) {
+      return $.get('{{ route("admin.sales.search") }}', {
+        query: query
+      }, function(data) {
+        return process(data);
+      });
+    }
+  });
+
   $('#search-trademark').typeahead({
     source: function(query, process) {
       return $.get('{{ route("admin.trademarks.search") }}', {

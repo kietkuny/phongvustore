@@ -8,6 +8,7 @@ use App\Http\View\Composers\OrderComposer;
 use App\Http\View\Composers\ProductComposer;
 use App\Http\View\Composers\ProductHomeComposer;
 use App\Http\View\Composers\ProductTypeComposer;
+use App\Http\View\Composers\SaleComposer;
 use App\Http\View\Composers\SliderComposer;
 use App\Http\View\Composers\TrademarkComposer;
 use Illuminate\Support\Facades\View;
@@ -34,6 +35,7 @@ class ViewServiceProvider extends ServiceProvider
     View::composer('home',TrademarkComposer::class);
     View::composer('home',ProductHomeComposer::class);
     View::composer('product',ProductComposer::class);
+    View::composer('sale',SaleComposer::class);
     View::composer('order',OrderComposer::class);
     View::composer('layout.cart',CartComposer::class);
   }

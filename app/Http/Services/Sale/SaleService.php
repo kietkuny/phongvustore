@@ -19,6 +19,7 @@ class SaleService
         'sale' => (string) $request->input('sale'),
         'token' => (string) $request->input('token'),
         'quantity' => (string) $request->input('quantity'),
+        'active' => (string) $request->input('active'),
       ]);
 
       Session::flash('success', 'Tạo mã giảm giá thành công');
@@ -36,6 +37,7 @@ class SaleService
     $sale->sale = (string) $request->input('sale');
     $sale->token = (string) $request->input('token');
     $sale->quantity = (string) $request->input('quantity');
+    $sale->active = (string) $request->input('active');
     $sale->save();
 
     Session::flash('success', 'Cập nhật mã giảm giá thành công');

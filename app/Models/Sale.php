@@ -13,6 +13,7 @@ class Sale extends Model
     'token',
     'sale',
     'quantity',
+    'active',
   ];
   public function orders()
   {

@@ -20,6 +20,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SalesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -102,6 +103,7 @@ Route::middleware(['auth'])->group(function () {
       Route::get('add', [SaleController::class, 'create']);
       Route::post('add', [SaleController::class, 'store']);
       Route::get('list', [SaleController::class, 'index']);
+      Route::get('search', [SaleController::class, 'search'])->name('admin.sales.search');
       Route::get('edit/id={sale}', [SaleController::class, 'show']);
       Route::post('edit/id={sale}', [SaleController::class, 'update']);
       Route::delete('destroy', [SaleController::class, 'destroy']);
@@ -200,6 +202,7 @@ Route::post('info', [HomeController::class, 'updateInfo']);
 
 Route::get('product', [ProductsController::class, 'index']);
 Route::get('product/id={product}', [ProductsController::class, 'show']);
+Route::get('sale',[SalesController::class,'index']);
 Route::get('ajax-search-product', [HomeController::class, 'ajaxSearch'])->name('ajax-search-product');
 Route::get('order', [OrdersController::class, 'index']);
 Route::post('addcart', [CartController::class, 'index']);

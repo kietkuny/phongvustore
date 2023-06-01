@@ -300,6 +300,27 @@
     }
   });
 
+  $('.btn-sale').click(function () {
+    let saleId = $(this).closest('.card-body').find('.card-subtitle').attr('id');
+    let saleCode = $(this).closest('.card-body').find('.card-subtitle').text();
+
+    // Tạo một thẻ input ẩn
+    let $tempInput = $('<input>');
+    $('body').append($tempInput);
+
+    // Đặt giá trị của thẻ input bằng mã khuyến mãi
+    $tempInput.val(saleCode).select();
+
+    // Sao chép nội dung vào clipboard
+    document.execCommand('copy');
+
+    // Xóa thẻ input
+    $tempInput.remove();
+
+    // Thông báo sao chép thành công
+    alert('Đã sao chép mã: ' + saleCode);
+  });
+
   setTimeout(function () {
     $("#loading").hide();
   }, 1500);

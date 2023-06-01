@@ -1149,6 +1149,38 @@ main{
   }
 }
 
+.main-sale {
+  background-color: #f8f8fc;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+@media screen and (max-width: 767.98px) {
+  .main-sale {
+    padding-top: 0px;
+  }
+}
+.main-sale .sale-list {
+  padding: 40px;
+  background-color: white;
+}
+.main-sale .sale-list .card {
+  /* background: linear-gradient(90deg, #3fadfc 0%, #abffff 100%); */
+}
+.main-sale .sale-list .btn-sale {
+  outline: none;
+  border: none;
+  padding: 10px 20px;
+  background-image: linear-gradient(to right, #62cdff, #62cdff, #1a5f7a, #1a5f7a);
+  background-size: 300%;
+  border-radius: 10px;
+  color: black;
+  transition: 0.6s;
+}
+.main-sale .sale-list .btn-sale:hover {
+  background-position: right;
+  color: white;
+}
+
 .main-order {
   background-color: #f8f8fc;
   padding-top: 100px;
