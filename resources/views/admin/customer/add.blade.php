@@ -36,7 +36,7 @@
       </div>
       <div class="form-group col-md-6">
         <label for="email">Email</label>
-        <input type="text" class="form-control" name="email" placeholder="Nhập email khách hàng">
+        <input type="email" class="form-control" name="email" placeholder="Nhập email khách hàng">
       </div>
       <div class="form-group col-md-6">
         <label for="password">Mật khẩu</label>

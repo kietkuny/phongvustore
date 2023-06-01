@@ -27,11 +27,12 @@ class CustomerRequest extends FormRequest
       'housenumber' => 'required',
       'city_id' => 'required',
       'province_id' => 'required',
-      'email' => 'required',
+      'email' => 'required|email|unique:customers,email',
       'password' => 'required',
     ];
   }
-  public function messages(){
+  public function messages()
+  {
     return [
       'name.required' => 'Vui lòng nhập tên',
       'phone.required' => 'Vui lòng điền số điện thoại',
@@ -39,6 +40,8 @@ class CustomerRequest extends FormRequest
       'city_id.required' => 'Vui lòng chọn thành phố',
       'province_id.required' => 'Vui lòng chọn tỉnh',
       'email.required' => 'Vui lòng nhập email',
+      'email.email' => 'Email không hợp lệ',
+      'email.unique' => 'Email đã tồn tại trong hệ thống. Vui lòng sử dụng email khác.',
       'password.required' => 'Vui lòng nhập mật khẩu',
     ];
   }

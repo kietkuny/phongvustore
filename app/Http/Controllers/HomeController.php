@@ -59,7 +59,7 @@ class HomeController extends Controller
     if (Auth::guard('cus')->attempt($request->only('email', 'password'), $request->has('remember_token'))) {
       if (Auth::guard('cus')->user()->status == 0) {
         Auth::guard('cus')->logout();
-        return redirect()->route('home.login')->with('error', 'Tài khoản chưa kích hoạt, <a href="'. route('home.getActived') .'">nhấn vào đây</a>');
+        return redirect()->route('home.login')->with('error', 'Tài khoản chưa kích hoạt, <a href="' . route('home.getActived') . '">nhấn vào đây</a>');
       }
       return redirect()->route('home');
     }
@@ -83,7 +83,14 @@ class HomeController extends Controller
     $request->validate([
       'password' => 'required',
       'confirm_password' => 'required|same:password',
+    ],[
+      'confirm_password.same' => 'Mật khẩu xác nhận không khớp với mật khẩu.',
     ]);
+    $email = $request->input('email');
+    $existingCustomer = Customer::where('email', $email)->first();
+    if ($existingCustomer) {
+      return redirect()->back()->with('error','Email đã tồn tại, hãy đăng ký email khác.');
+    }
     $token = strtoupper(Str::random(10));
     $data = $request->only('name', 'phone', 'housenumber', 'province_id', 'city_id', 'email');
     $password = Hash::make($request->password);
@@ -173,13 +180,15 @@ class HomeController extends Controller
     return redirect()->route('home.login')->with('success', 'Đổi mật khẩu thành công, bạn có thể đăng nhập');
   }
 
-  public function getActived(){
-    return view('getActived',[
+  public function getActived()
+  {
+    return view('getActived', [
       'title' => 'Kích hoạt tài khoản'
     ]);
   }
 
-  public function postGetActived(Request $request){
+  public function postGetActived(Request $request)
+  {
     $request->validate([
       'email' => 'required|email|exists:customers'
     ], [
