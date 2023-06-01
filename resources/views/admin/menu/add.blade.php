@@ -12,8 +12,8 @@
   
       <div class="form-group col-md-6">
         <label>Danh Mục</label>
-        <select name="parent_id" class="form-select col-4">
-          <option value="0">Chọn menu gốc(hoặc không)</option>
+        <select name="parent_id" class="form-select">
+          <option value="0">Chọn menu gốc (hoặc không)</option>
           @foreach ($menus as $menu)
           <option value="{{ $menu->id }}">{{ $menu->name }}</option>
           @endforeach
