@@ -36,6 +36,9 @@ class OrderService
     $sale = Sale::find($order->sale_id);
     $customer = Customer::find($order->customer_id);
     switch ($order->status_id) {
+      case 1:
+        $status = "Chờ duyệt đơn hàng";
+        $content = "đã đặt thành công, chờ đơn hàng được xác nhận để được giao hàng";
       case 2:
         $status = "Đã duyệt đơn hàng";
         $content = "đã được duyệt qua, chờ được giao hàng";

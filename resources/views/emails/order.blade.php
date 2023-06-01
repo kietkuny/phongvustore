@@ -34,7 +34,7 @@
     <p><b>Đơn hàng {{ $order->id }}</b></p>
     <table style="width: 100%;">
       <tr>
-        <th style="width: 5%"></th>
+        <th style="width: 5%">STT</th>
         {{-- <th>Ảnh</th> --}}
         <th style="width: 50%">Sản phẩm</th>
         <th style="width: 15%">Số lượng</th>
@@ -69,12 +69,12 @@
         <th>{{ number_format($total, 0, '.', '.') }}₫</th>
       </tr>
       @if($order->sale_id != Null)
-        <tr style="color: tomato;text-align: end">
-          <th colspan="3" class="text-end">Mã giảm giá:</th>
+        <tr style="color: tomato;">
+          <th colspan="3" style="text-align: end">Mã giảm giá:</th>
           <th>{{ $order->sale->name }}</th>
         </tr>
-        <tr style="color: tomato;text-align: end">
-          <th colspan="3" class="text-end">Tổng tiền giảm:</th>
+        <tr style="color: tomato;">
+          <th colspan="3" style="text-align: end">Tổng tiền giảm:</th>
           <th>{{ number_format($total*(1 - $order->sale->sale), 0, '.', '.') }}₫</th>
         </tr>
         @endif

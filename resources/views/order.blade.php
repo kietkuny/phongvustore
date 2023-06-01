@@ -114,6 +114,20 @@
               <li class="text-end"><b>Tổng tiền:</b></li>
               <li class="text-center"><b>{{ number_format($total, 0, '.', '.') }} ₫</b></li>
             </ul>
+            @if($order->sale_id)
+            <ul class="d-flex mb-0 text-danger">
+              <li></li>
+              <li></li>
+              <li class="text-end"><b>Mã giảm giá:</b></li>
+              <li class="text-center"><b>{{ $order->sale->name }}</b></li>
+            </ul>
+            <ul class="d-flex mb-0 text-danger">
+              <li></li>
+              <li></li>
+              <li class="text-end"><b>Tổng tiền giảm:</b></li>
+              <li class="text-center"><b>{{ number_format($total*(1-$order->sale->sale), 0, '.', '.') }} ₫</b></li>
+            </ul>
+            @endif
           </div>
         </div>
         @endif
@@ -184,6 +198,20 @@
               <li class="text-end"><b>Tổng tiền:</b></li>
               <li class="text-center"><b>{{ number_format($total, 0, '.', '.') }} ₫</b></li>
             </ul>
+            @if($order->sale_id)
+            <ul class="d-flex mb-0 text-danger">
+              <li></li>
+              <li></li>
+              <li class="text-end"><b>Mã giảm giá:</b></li>
+              <li class="text-center"><b>{{ $order->sale->name }}</b></li>
+            </ul>
+            <ul class="d-flex mb-0 text-danger">
+              <li></li>
+              <li></li>
+              <li class="text-end"><b>Tổng tiền giảm:</b></li>
+              <li class="text-center"><b>{{ number_format($total*(1-$order->sale->sale), 0, '.', '.') }} ₫</b></li>
+            </ul>
+            @endif
           </div>
         </div>
         @endif
@@ -254,6 +282,20 @@
               <li class="text-end"><b>Tổng tiền:</b></li>
               <li class="text-center"><b>{{ number_format($total, 0, '.', '.') }} ₫</b></li>
             </ul>
+            @if($order->sale_id)
+            <ul class="d-flex mb-0 text-danger">
+              <li></li>
+              <li></li>
+              <li class="text-end"><b>Mã giảm giá:</b></li>
+              <li class="text-center"><b>{{ $order->sale->name }}</b></li>
+            </ul>
+            <ul class="d-flex mb-0 text-danger">
+              <li></li>
+              <li></li>
+              <li class="text-end"><b>Tổng tiền giảm:</b></li>
+              <li class="text-center"><b>{{ number_format($total*(1-$order->sale->sale), 0, '.', '.') }} ₫</b></li>
+            </ul>
+            @endif
           </div>
         </div>
         @endif
@@ -324,6 +366,20 @@
               <li class="text-end"><b>Tổng tiền:</b></li>
               <li class="text-center"><b>{{ number_format($total, 0, '.', '.') }} ₫</b></li>
             </ul>
+            @if($order->sale_id)
+            <ul class="d-flex mb-0 text-danger">
+              <li></li>
+              <li></li>
+              <li class="text-end"><b>Mã giảm giá:</b></li>
+              <li class="text-center"><b>{{ $order->sale->name }}</b></li>
+            </ul>
+            <ul class="d-flex mb-0 text-danger">
+              <li></li>
+              <li></li>
+              <li class="text-end"><b>Tổng tiền giảm:</b></li>
+              <li class="text-center"><b>{{ number_format($total*(1-$order->sale->sale), 0, '.', '.') }} ₫</b></li>
+            </ul>
+            @endif
           </div>
         </div>
         @endif
@@ -394,6 +450,20 @@
               <li class="text-end"><b>Tổng tiền:</b></li>
               <li class="text-center"><b>{{ number_format($total, 0, '.', '.') }} ₫</b></li>
             </ul>
+            @if($order->sale_id)
+            <ul class="d-flex mb-0 text-danger">
+              <li></li>
+              <li></li>
+              <li class="text-end"><b>Mã giảm giá:</b></li>
+              <li class="text-center"><b>{{ $order->sale->name }}</b></li>
+            </ul>
+            <ul class="d-flex mb-0 text-danger">
+              <li></li>
+              <li></li>
+              <li class="text-end"><b>Tổng tiền giảm:</b></li>
+              <li class="text-center"><b>{{ number_format($total*(1-$order->sale->sale), 0, '.', '.') }} ₫</b></li>
+            </ul>
+            @endif
           </div>
         </div>
         @endif
