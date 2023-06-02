@@ -40,7 +40,7 @@
 </form>
 
 <div class="row">
-  <div class="col-lg-3 col-6">
+  <div class="col-lg-3 col-md-6">
     <!-- small box -->
     <div class="small-box alert alert-info">
       <div class="inner">
@@ -53,7 +53,7 @@
     </div>
   </div>
   <!-- ./col -->
-  <div class="col-lg-3 col-6">
+  <div class="col-lg-3 col-md-6">
     <!-- small box -->
     <div class="small-box alert alert-success">
       <div class="inner">
@@ -66,7 +66,7 @@
     </div>
   </div>
   <!-- ./col -->
-  <div class="col-lg-3 col-6">
+  <div class="col-lg-3 col-md-6">
     <!-- small box -->
     <div class="small-box alert alert-danger">
       <div class="inner">
@@ -79,7 +79,7 @@
     </div>
   </div>
   <!-- ./col -->
-  <div class="col-lg-3 col-6">
+  <div class="col-lg-3 col-md-6">
     <!-- small box -->
     <div class="small-box alert alert-warning">
       <div class="inner">
@@ -99,17 +99,17 @@
   <div class="col-12 mb-3">
     <canvas id="salesChart" width="300" height="300"></canvas>
   </div>
-  <p class="text-center mb-5">Biểu đồ: Doanh thu bán được trong tháng {{ $selectedMonth }}, năm {{ $selectedYear }}</p>
+  {{-- <p class="text-center mb-5">Biểu đồ: Doanh thu bán được trong tháng {{ $selectedMonth }}, năm {{ $selectedYear }}</p> --}}
 
   
   <div class="col-md-6 mb-5">
     <canvas width="300" height="200" id="productsChart"></canvas>
-    <p class="text-center mt-5">Biểu đồ: Loại sản phẩm bán được trong tháng {{ $selectedMonth }}, năm {{ $selectedYear }}</p>
+    {{-- <p class="text-center mt-5">Biểu đồ: Loại sản phẩm bán được trong tháng {{ $selectedMonth }}, năm {{ $selectedYear }}</p> --}}
   </div>
 
   <div class="col-md-6 mb-5">
     <canvas width="300" height="200" id="revenueChart"></canvas>
-    <p class="text-center mt-5">Biểu đồ: Doanh thu theo từng tháng, năm {{ $selectedYear }}</p>
+    {{-- <p class="text-center mt-5">Biểu đồ: Doanh thu theo từng tháng, năm {{ $selectedYear }}</p> --}}
   </div>
 
 </div>
@@ -163,7 +163,7 @@
       }, 
       title: {
         display: true, 
-        text: "Báo cáo đơn hàng tháng " + currentMonth + ", năm " + currentYear 
+        text: "Báo cáo doanh thu tháng " + currentMonth + ", năm " + currentYear 
       }, 
       scales: {
         xAxes: [{
@@ -198,6 +198,8 @@
 </script>
 
 <script>
+var currentMonth = {!!json_encode($selectedMonth)!!}; 
+var currentYear = {!!json_encode($selectedYear)!!};
 var chartData = {!! json_encode($chartData)!!};
 
 var ctx = document.getElementById('productsChart').getContext('2d');
@@ -210,7 +212,7 @@ chartData.forEach(function (item) {
 });
 
 var chart = new Chart(ctx, {
-  type: 'pie',
+  type: 'doughnut',
   data: {
     labels: labels,
     datasets: [{
@@ -235,13 +237,18 @@ var chart = new Chart(ctx, {
     }]
   },
   options: {
-    responsive: true
+    responsive: true,
+    title: {
+      display: true, 
+      text: "Báo cáo loại sản phẩm bán được trong tháng " + currentMonth + ", năm " + currentYear 
+    },
   }
 });
 </script>
 
 <script>
 var months = {!!json_encode($months)!!};
+var currentYear = {!!json_encode($selectedYear)!!};
 var revenue = {!!json_encode($revenue)!!};
 // Tạo biểu đồ cột
 var ctx = document.getElementById('revenueChart').getContext('2d');
@@ -260,17 +267,36 @@ var chart = new Chart(ctx, {
   },
   options: {
     responsive: true,
+    title: {
+      display: true, 
+      text: "Báo cáo doanh thu các tháng, năm " + currentYear 
+    },
     scales: {
-      y: {
-        beginAtZero: true,
+      xAxes: [{
+        scaleLabel: {
+          display: true, 
+          labelString: 'Các tháng trong năm'
+        }
+      }], 
+      yAxes: [{
         ticks: {
-          stepSize: 1000000,
-          callback: function(value, index, values) {
-            return numeral(value).format('0,0 $');
+          callback: function(value) {
+            return numeral(value).format('0,0 $')
           }
+        }, 
+        scaleLabel: {
+          display: true, 
+          labelString: 'Tổng thành tiền'
+        }
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          return numeral(tooltipItem.value).format('0,0 $')
         }
       }
-    }
+    }, 
   }
 });
 </script>
