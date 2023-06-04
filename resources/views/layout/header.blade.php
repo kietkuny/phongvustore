@@ -38,11 +38,9 @@
               <div class="d-flex align-items-center">
                 <a href="/info" class="text-dark">{{ Auth::guard('cus')->user()->name }}</a>
                 {{-- <a href="{{ route('home.logout') }}" class="ms-3 text-dark"><i class="fa-regular fa-right-from-bracket d-flex" style="font-size: 20px"></i></a> --}}
-                <a class="ms-3 text-dark border-0" style="background: none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <a class="ms-3 text-dark border-0" style="background: none; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                   <i class="fa-regular fa-right-from-bracket d-flex" style="font-size: 20px"></i>
                 </a>
-
-
               </div>
             </span>
             @else
