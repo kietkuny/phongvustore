@@ -6,7 +6,7 @@
     <h2 class="mb-3">Liên hệ</h2>
     <div class="row mt-5 bg-white p-4">
       <div class="col-lg-6 chat-row">
-        <div class="chat-content">
+        <div class="chat-content" id="chatcontent">
           <ul id="chatMessages" class="p-2">
             {{-- Tin nhắn sẽ được hiển thị ở đây --}}
             {{-- @php
@@ -16,8 +16,10 @@
             @foreach ($messages as $message)
               @if ($message->sender == 'admin')
               <li class="admin-message">{{ $message->message }}</li>
+              <span class="d-flex mb-4"><small>{{ date('H:i:s d/m/Y', strtotime($message->updated_at)) }}</small></span>
               @else
               <li class="customer-message">{{ $message->message }}</li>
+              <span class="d-flex justify-content-end mb-4"><small>{{ date('H:i:s d/m/Y', strtotime($message->updated_at)) }}</small></span>
               @endif
             @endforeach
             {{-- @endif --}}
@@ -40,6 +42,13 @@
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js" integrity="sha512-AI5A3zIoeRSEEX9z3Vyir8NqSMC1pY7r5h2cE+9J6FLsoEmSSGLFaqMQw8SWvoONXogkfFrkQiJfLeHLz3+HOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+  function scrollToBottom() {
+    var chatMessages = document.getElementById("chatcontent");
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // Gọi hàm scrollToBottom để đặt scroll ở cuối trang khi cần thiết
+  scrollToBottom();
   let ip_address = '127.0.0.1';
   let socket_port = '3000';
 
@@ -60,7 +69,8 @@
       success: function(response) {
         // Xử lý thành công
         $('#chatInput').val('');
-        $('#chatMessages').append('<li class="customer-message">' + message + '</li>');
+        $('#chatMessages').append('<li class="customer-message">' + message + '</li><span class="d-flex justify-content-end mb-4"><small>{{ date('H:i:s d/m/Y', strtotime($message->updated_at)) }}</small></span>');
+        scrollToBottom();
       },
       error: function(xhr, status, error) {
         // Xử lý lỗi
@@ -71,7 +81,8 @@
 
   socket.on('adminMessage', function(data) {
     if (data.customerId == customerId) {
-      $('#chatMessages').append('<li class="admin-message">' + data.message + '</li>');
+      $('#chatMessages').append('<li class="admin-message">' + data.message + '</li><span class="d-flex mb-4"><small>{{ date('H:i:s d/m/Y', strtotime($message->updated_at)) }}</small></span>');
+      scrollToBottom();
     }
   });
 </script>

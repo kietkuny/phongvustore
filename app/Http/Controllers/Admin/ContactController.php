@@ -26,6 +26,7 @@ class ContactController extends Controller
             ->whereRaw('messages.recipient = "admin"');
         });
       })
+      ->orderBy('created_at')
       ->get();
     return view('admin.contact.list', [
       'title' => 'Hỗ trợ khách hàng'

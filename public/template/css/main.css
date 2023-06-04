@@ -1163,9 +1163,6 @@ main{
   padding: 40px;
   background-color: white;
 }
-.main-sale .sale-list .card {
-  /* background: linear-gradient(90deg, #3fadfc 0%, #abffff 100%); */
-}
 .main-sale .sale-list .btn-sale {
   outline: none;
   border: none;
@@ -1530,7 +1527,6 @@ main{
   list-style: none;
 }
 .main-chat .chat-row ul li {
-  margin-bottom: 20px;
   border-radius: 5px;
   width: -moz-fit-content;
   width: fit-content;

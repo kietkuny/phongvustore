@@ -70,6 +70,14 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js" integrity="sha512-AI5A3zIoeRSEEX9z3Vyir8NqSMC1pY7r5h2cE+9J6FLsoEmSSGLFaqMQw8SWvoONXogkfFrkQiJfLeHLz3+HOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+  
+</script>
+<script>
+  function scrollToBottom() {
+    var chatMessages = document.getElementById("chatMessages");
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  
   let ip_address = '127.0.0.1';
   let socket_port = '3000';
 
@@ -104,6 +112,7 @@
             $('#chatMessages').append("<div class='incoming_msg mb-2'><div class='incoming_msg_img'> <img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'> </div> <div class='received_msg'><div class='received_withd_msg'><p>"+ message.message +"</p><span class='time_date'>" + messageTime.toLocaleString() + "</span></div> </div></div>");
           }
         }
+        scrollToBottom();
       },
       error: function(xhr, status, error) {
         console.log('Error retrieving messages:', error);
@@ -119,6 +128,7 @@
       $.post('/admin/contacts/send-message', {customerId: currentCustomerId, message: message});
       $('#chatInput').val('');
       $('#chatMessages').append("<div class='outgoing_msg'><div class='sent_msg'><p>" + message + "</p><span class='time_date'>" + new Date().toLocaleString() + "</span></div></div>");
+      scrollToBottom();
     } else {
       alert('Vui lòng chọn một khách hàng để trò chuyện.');
     }
@@ -128,6 +138,7 @@
     console.log(data);
     if (data.customerId == currentCustomerId) {
       $('#chatMessages').append("<div class='incoming_msg mb-2'><div class='incoming_msg_img'> <img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'> </div> <div class='received_msg'><div class='received_withd_msg'><p>"+ data.message +"</p><span class='time_date'>" + new Date().toLocaleString() + "</span></div> </div></div>");
+      scrollToBottom();
     }
   });
 
