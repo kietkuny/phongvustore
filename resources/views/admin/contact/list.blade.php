@@ -55,9 +55,10 @@
       <div class="mesgs">
         <div class="msg_history" id="chatMessages">
         </div>
-        <form id="adminChatForm" class="type_msg">
+        <form id="adminChatForm" class="type_msg" method="POST">
+          @csrf
           <div class="input_msg_write">
-            <input type="hidden" name="customerId" value="">
+            <input type="hidden" id="customerIdInput" name="customerId" value="">
             <input type="text" id="chatInput" name="message" autocomplete="off" class="write_msg" placeholder="Nhập tin nhắn" />
             <button class="msg_send_btn" type="submit"><i class="fa-regular fa-paper-plane-top"></i></button>
           </div>
@@ -74,21 +75,50 @@
 
   let socket = io.connect(ip_address + ':' + socket_port + '/admin');
   let currentCustomerId = null;
-
   $('.customerLink').click(function(e) {
     e.preventDefault();
-    var customerId = $(this).data('customer-id');
+    let customerId = $(this).data('customer-id');
+    $('.customerLink').removeClass('active_chat');
+    $(this).addClass('active_chat');
     currentCustomerId = customerId;
+    $('#customerIdInput').val(customerId);
     socket.emit('selectCustomer', customerId);
+
+    // Xóa các tin nhắn hiện tại
+    $('#chatMessages').empty();
+
+    // Lấy tin nhắn từ cơ sở dữ liệu cho cặp admin và customer hiện tại
+    $.ajax({
+      url: '/admin/contacts/messages/' + customerId,
+      method: 'GET',
+      success: function(response) {
+        let messages = response.messages;
+        // Hiển thị tin nhắn từ cơ sở dữ liệu
+        for (let i = 0; i < messages.length; i++) {
+          let message = messages[i];
+          let messageTime = new Date(message.created_at); // Thời gian tin nhắn
+
+          if (message.sender === 'admin') {
+            $('#chatMessages').append("<div class='outgoing_msg'><div class='sent_msg'><p>" + message.message + "</p><span class='time_date'>" + messageTime.toLocaleString() + "</span></div></div>");
+          } else {
+            $('#chatMessages').append("<div class='incoming_msg mb-2'><div class='incoming_msg_img'> <img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'> </div> <div class='received_msg'><div class='received_withd_msg'><p>"+ message.message +"</p><span class='time_date'>" + messageTime.toLocaleString() + "</span></div> </div></div>");
+          }
+        }
+      },
+      error: function(xhr, status, error) {
+        console.log('Error retrieving messages:', error);
+      }
+    });
   });
 
   $('#adminChatForm').submit(function(e) {
     e.preventDefault();
-    var message = $('#chatInput').val();
+    let message = $('#chatInput').val();
     if (currentCustomerId) {
       socket.emit('adminSendMessage', {customerId: currentCustomerId, message: message });
+      $.post('/admin/contacts/send-message', {customerId: currentCustomerId, message: message});
       $('#chatInput').val('');
-      $('#chatMessages').append("<div class='outgoing_msg'><div class='sent_msg'><p>" + message + "</p></div></div>");
+      $('#chatMessages').append("<div class='outgoing_msg'><div class='sent_msg'><p>" + message + "</p><span class='time_date'>" + new Date().toLocaleString() + "</span></div></div>");
     } else {
       alert('Vui lòng chọn một khách hàng để trò chuyện.');
     }
@@ -97,7 +127,7 @@
   socket.on('customerMessage', function(data) {
     console.log(data);
     if (data.customerId == currentCustomerId) {
-      $('#chatMessages').append("<div class='incoming_msg mb-2'><div class='incoming_msg_img'> <img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'> </div> <div class='received_msg'><div class='received_withd_msg'><p>"+ data.message +"</p></div> </div></div>");
+      $('#chatMessages').append("<div class='incoming_msg mb-2'><div class='incoming_msg_img'> <img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'> </div> <div class='received_msg'><div class='received_withd_msg'><p>"+ data.message +"</p><span class='time_date'>" + new Date().toLocaleString() + "</span></div> </div></div>");
     }
   });
 

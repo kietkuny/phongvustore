@@ -163,6 +163,8 @@ Route::middleware(['auth'])->group(function () {
     #Contact
     Route::prefix('contacts')->group(function () {
       Route::get('list', [ContactController::class, 'adminChat']);
+      Route::get('messages/{customerId}', [ContactController::class,'getMessages']);
+      Route::post('send-message', [ContactController::class, 'adminSendMessage']);
     });
 
     #Upload
@@ -215,5 +217,5 @@ Route::get('pay', [CartController::class, 'showPay']);
 Route::post('addpay', [CartController::class, 'addOrder']);
 
 Route::get('contact',[ChatController::class,'customerChat']);
-// Route::post('contact/load-message',[ContactController::class,'loadMessages']);
-// Route::post('contact/sent-message',[ContactController::class,'sendMessage']);
+Route::post('send-message',[ChatController::class,'customerSendMessage']);
+

@@ -9,9 +9,23 @@
         <div class="chat-content">
           <ul id="chatMessages" class="p-2">
             {{-- Tin nhắn sẽ được hiển thị ở đây --}}
-          </ul>
+            {{-- @php
+            $messageCount = $messages->count();
+            @endphp
+            @if ($messageCount > 0) --}}
+            @foreach ($messages as $message)
+              @if ($message->sender == 'admin')
+              <li class="admin-message">{{ $message->message }}</li>
+              @else
+              <li class="customer-message">{{ $message->message }}</li>
+              @endif
+            @endforeach
+            {{-- @endif --}}
+          </ul> 
         </div>
-        <form class="chat-section" id="customerChatForm">
+        <form class="chat-section" id="customerChatForm" method="POST">
+          @csrf
+          <input type="hidden" name="customerId" value="{{ Auth::guard('cus')->user()->id }}">
           <div class="chat-box d-flex">
             <input class="chat-input bg-white" name="message" id="chatInput" autocomplete="off" contenteditable="" placeholder="Nhập tin nhắn" type="text">
             <button type="submit" class="btn btn-outline-primary ms-3" style="transition: 0.3s"><i class="fa-sharp fa-solid fa-paper-plane-top"></i></button>
@@ -39,8 +53,20 @@
     e.preventDefault();
     let message = $('#chatInput').val();
     socket.emit('customerSendMessage', { customerId: customerId, message: message, room });
-    $('#chatInput').val('');
-    $('#chatMessages').append('<li class="customer-message">' + message + '</li>');
+    $.ajax({
+      url: '/send-message',
+      method: 'POST',
+      data: { customerId: customerId, message: message },
+      success: function(response) {
+        // Xử lý thành công
+        $('#chatInput').val('');
+        $('#chatMessages').append('<li class="customer-message">' + message + '</li>');
+      },
+      error: function(xhr, status, error) {
+        // Xử lý lỗi
+        console.log('Error sending message:', error);
+      }
+    });
   });
 
   socket.on('adminMessage', function(data) {
