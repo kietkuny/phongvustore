@@ -22,13 +22,12 @@ class SaleController extends Controller
   public function index(Request $request)
   {
     $search = $request->get('search');
-    $sales = Sale::when($search, function ($query, $search) {
-      $query->where('name', 'like', '%' . $search . '%');
-    })
+    $sales = Sale::where('name', 'like', '%' . $search . '%')
+      ->orWhere('token', 'like', '%' . $search . '%')
       ->orderBy('id')
       ->paginate(5);
     $sales->appends(['search' => $search]);
-    return view('admin.sale.list',[
+    return view('admin.sale.list', [
       'title' => 'Danh Sách mã giảm giá',
       'sales' => $sales
     ]);
@@ -37,6 +36,7 @@ class SaleController extends Controller
   {
     $search = $request->get('query');
     $sales = Sale::where('name', 'like', '%' . $search . '%')
+      ->orWhere('token', 'like', '%' . $search . '%')
       ->orderBy('id')
       ->get()
       ->pluck('name');
@@ -79,7 +79,7 @@ class SaleController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Sale $sale,SaleRequest $request)
+  public function update(Sale $sale, SaleRequest $request)
   {
     $this->saleService->update($request, $sale);
 
