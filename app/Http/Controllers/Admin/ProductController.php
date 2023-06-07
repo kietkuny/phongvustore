@@ -26,7 +26,11 @@ class ProductController extends Controller
 
   public function index(Request $request)
   {
+    $trademarks = Trademark::all();
+    $producttypes = ProductType::all();
     $search = $request->get('search');
+    $productTypeId = $request->get('producttype_id');
+    $trademarkId = $request->get('trademark_id');
     $products = Product::with(['producttype', 'trademark', 'promotion'])
       ->when($search, function ($query, $search) {
         $query->where('name', 'like', '%' . $search . '%')
@@ -37,11 +41,24 @@ class ProductController extends Controller
             $query->where('name', 'like', '%' . $search . '%');
           });
       })
+      ->when($productTypeId, function ($query, $productTypeId) {
+        $query->where('producttype_id', $productTypeId);
+      })
+      ->when($trademarkId, function ($query, $trademarkId) {
+        $query->where('trademark_id', $trademarkId);
+      })
       ->orderBy('id', 'desc')
       ->paginate(5);
-    $products->appends(['search' => $search]);
+
+    $products->appends([
+      'search' => $search,
+      'producttype_id' => $productTypeId,
+      'trademark_id' => $trademarkId
+    ]);
     return view('admin.product.list', [
       'title' => 'Danh sách sản phẩm',
+      'trademarks' => $trademarks,
+      'producttypes' => $producttypes,
       'products' => $products,
     ]);
   }

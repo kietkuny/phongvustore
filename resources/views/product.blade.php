@@ -2,7 +2,7 @@
 @section('main')
 <section class="main-product">
   <div class="container">
-    <h6 class="mt-3 mb-4"><b>Lọc sản phẩm</b></h6>
+    <h6 class="mt-3 mb-2"><b>Lọc sản phẩm</b></h6>
     <form role="search" action="/product" class="row">
       <div class="form-group d-flex align-items-center mb-4 col-lg-5">
         <label class="me-3">Loại sản phẩm: </label>
@@ -22,8 +22,8 @@
           @endforeach
         </select>
       </div>
-      <button class="btn btn-primary mb-4 col-md-2" type="submit">
-        Lọc
+      <button class="btn btn-primary mb-4 col-md-2 alert alert-info p-0" type="submit">
+        Lọc <i class="fa-regular fa-filter"></i>
       </button>
     </form>
     <div class="product">
