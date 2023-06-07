@@ -33,8 +33,19 @@ class ProductComposer
       });
     }
 
+    $productTypeId = request()->input('producttype_id');
+    $trademarkId = request()->input('trademark_id');
+
+    if (!empty($productTypeId)) {
+      $products->where('products.producttype_id', $productTypeId);
+    }
+
+    if (!empty($trademarkId)) {
+      $products->where('products.trademark_id', $trademarkId);
+    }
+
     $products = $products->paginate(24);
-    $products->appends(['search' => $search]);
+    $products->appends(['search' => $search, 'producttype_id' => $productTypeId, 'trademark_id' => $trademarkId]);
 
     $view->with('products', $products);
   }
