@@ -9,7 +9,7 @@
         <select name="producttype_id" class="form-control form-select w-75">
           <option value="">Chọn loại sản phẩm</option>
           @foreach ($product_types as $producttype)
-          <option value="{{ $producttype->id }}">{{ $producttype->name }}</option>
+          <option value="{{ $producttype->id }}" {{ $producttype->id == request()->input('producttype_id') ? 'selected' : '' }}>{{ $producttype->name }}</option>
           @endforeach
         </select>  
       </div>
@@ -18,7 +18,7 @@
         <select name="trademark_id" class="form-control form-select w-75">
           <option value="">Chọn thương hiệu</option>
           @foreach ($trademarks as $trademark)
-          <option value="{{ $trademark->id }}">{{ $trademark->name }}</option>
+          <option value="{{ $trademark->id }}" {{ $trademark->id == request()->input('trademark_id') ? 'selected' : '' }}>{{ $trademark->name }}</option>
           @endforeach
         </select>
       </div>
