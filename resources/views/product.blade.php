@@ -22,7 +22,7 @@
           @endforeach
         </select>
       </div>
-      <button class="btn btn-primary mb-4 col-md-2 alert alert-info p-0" type="submit">
+      <button class="btn btn-primary mb-4 col-md-2 alert alert-info py-2 p-lg-0" type="submit">
         Lọc <i class="fa-regular fa-filter"></i>
       </button>
     </form>
