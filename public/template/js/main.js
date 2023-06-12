@@ -269,6 +269,9 @@
     if (val < max) {
       input.val(val + 1);
     }
+    else{
+      alert("Sản phẩm không vượt quá số lượng trên hệ thống");
+    }
   });
 
   $(".btn-quantity-minus").click(function () {
