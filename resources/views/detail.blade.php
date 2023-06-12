@@ -32,7 +32,6 @@
               </div>
               @csrf
             </form>
-            
           </div>
         </div>
         <hr class="w-100 px-3">

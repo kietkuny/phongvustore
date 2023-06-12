@@ -13,7 +13,7 @@
             <h6 class="mb-3"><i class="fa-solid fa-location-dot"></i> Địa chỉ nhận hàng</h6>
             <p class="mb-1"><b>Họ và tên:</b> {{ Auth::guard('cus')->user()->name }}</p>
             <p class="mb-1"><b>Số điện thoại:</b> {{ Auth::guard('cus')->user()->phone }}</p>
-            <p class="mb-1"><b>Địa chỉ:</b> {{ Auth::guard('cus')->user()->housenumber }}, {{ Auth::guard('cus')->user()->city->name }}, {{ Auth::guard('cus')->user()->province->name }}</p>
+            <p class="mb-1"><b>Địa chỉ:</b> {{ Auth::guard('cus')->user()->housenumber }}, {{ Auth::guard('cus')->user()->city->name }}, {{ Auth::guard('cus')->user()->city->province->name }}</p>
             <div class="d-flex pay-customer-change align-items-center mt-3">
               <p class="m-0"><small>Mặc định</small></p>
               <a href="/info" class="ms-4"><small>Thay đổi</small></a>

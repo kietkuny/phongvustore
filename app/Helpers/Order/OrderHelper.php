@@ -11,7 +11,8 @@ class OrderHelper
   {
     $html = '';
     foreach ($orders as $key => $order) {
-      $userInfo = ($order->user_id == NULL) ? '' : ($order->user->name . ' (' . $order->user->phone . ')');
+      $userSet = ($order->userset_id == NULL) ? '' : ($order->userSet->name . ' (' . $order->userSet->usertype->name . ')');
+      $userShip = ($order->user_id == NULL) ? '' : ($order->user->name);
       $statusClass = '';
       switch ($order->status_id) {
         case 1:
@@ -37,7 +38,8 @@ class OrderHelper
         <tr>
           <td>' . $order->id . '</td>
           <td>' . $order->customer->name . ' (' . $order->customer->phone . ')</td>
-          <td>' . $userInfo . ' </td>
+          <td>' . $userSet . ' </td>
+          <td>' . $userShip . ' </td>
           <td><div class="main-order-'. $statusClass .'">' . $order->status->name . '</div></td>
           <td>' . date('d-m-Y H:i:s', strtotime($order->updated_at)) . '</td>
           <td>

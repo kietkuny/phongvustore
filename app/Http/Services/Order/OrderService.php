@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Orderdetail;
 use App\Models\Product;
 use App\Models\Sale;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -21,6 +22,9 @@ class OrderService
   public function update($request, $order): bool
   {
     $order->status_id = (string) $request->input('status_id');
+    if ($order->status_id == 2) {
+      $order->userset_id = Auth::user()->id;
+    }
     if (!empty($request->input('user_id'))) {
       $order->user_id = (string) $request->input('user_id');
     }

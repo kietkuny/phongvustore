@@ -54,12 +54,6 @@ class CartService
     if (is_null($carts)) return [];
 
     $productId = array_keys($carts);
-    // $saleId = Session::get('sale_id');
-    // $sale = null;
-
-    // if ($saleId) {
-    //     $sale = Sale::findOrFail($saleId);
-    // }
     return Product::with(['promotion'])
       ->select('id', 'name', 'quantity', 'thumb', 'price', 'promotion_id')
       ->whereIn('id', $productId)

@@ -25,7 +25,6 @@ class CustomerService
         'phone' => (string) $request->input('phone'),
         'housenumber' => (string) $request->input('housenumber'),
         'city_id' => (string) $request->input('city_id'),
-        'province_id' => (string) $request->input('province_id'),
         'email' => (string) $request->input('email'),
         'password' => Hash::make($request->input('password')),
         'status' => (string) $request->input('status'),
@@ -46,7 +45,6 @@ class CustomerService
     $customer->phone = (string) $request->input('phone');
     $customer->housenumber = (string) $request->input('housenumber');
     $customer->city_id = (string) $request->input('city_id');
-    $customer->province_id = (string) $request->input('province_id');
     $customer->email = (string) $request->input('email');
     $newPassword = $request->input('password');
     if (!empty($newPassword) && $newPassword !== $customer->password) {
@@ -65,7 +63,6 @@ class CustomerService
     $customer->phone = (string) $request->input('phone');
     $customer->housenumber = (string) $request->input('housenumber');
     $customer->city_id = (string) $request->input('city_id');
-    $customer->province_id = (string) $request->input('province_id');
     $newPassword = $request->input('password');
     if (!empty($newPassword) && $newPassword !== $customer->password) {
       $customer->password = Hash::make($newPassword);

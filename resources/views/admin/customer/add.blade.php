@@ -18,7 +18,7 @@
       </div>
       <div class="form-group col-md-6">
         <label>Tỉnh thành</label>
-        <select name="province_id" class="form-control form-select" id="province-select">
+        <select class="form-control form-select" id="province-select">
           <option value="">Tỉnh</option>
           @foreach ($provinces as $province)
           <option value="{{ $province->id }}">{{ $province->name }}</option>

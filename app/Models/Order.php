@@ -12,15 +12,20 @@ class Order extends Model
   protected $fillable = [
     'customer_id',
     'status_id',
+    'userset_id',
     'user_id',
   ];
   public function sale()
   {
     return $this->belongsTo(Sale::class);
   }
+  public function userSet()
+  {
+    return $this->belongsTo(User::class, 'userset_id');
+  }
   public function user()
   {
-    return $this->belongsTo(User::class);
+    return $this->belongsTo(User::class, 'user_id');
   }
 
   public function customer()

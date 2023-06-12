@@ -26,7 +26,7 @@
     <th>Địa chỉ</th>
     <th>Email</th>
     <th>Kích hoạt</th>
-    <th>Cập nhật</th>
+    <th>Ngày tạo</th>
     <th style="width: 100px;"></th>
   </thead>
   <tbody>

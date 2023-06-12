@@ -26,7 +26,6 @@ class CustomerRequest extends FormRequest
       'phone' => 'required',
       'housenumber' => 'required',
       'city_id' => 'required',
-      'province_id' => 'required',
       'email' => 'required|email|unique:customers,email',
       'password' => 'required',
     ];
@@ -38,7 +37,6 @@ class CustomerRequest extends FormRequest
       'phone.required' => 'Vui lòng điền số điện thoại',
       'housenumber.required' => 'Vui lòng nhập số nhà',
       'city_id.required' => 'Vui lòng chọn thành phố',
-      'province_id.required' => 'Vui lòng chọn tỉnh',
       'email.required' => 'Vui lòng nhập email',
       'email.email' => 'Email không hợp lệ',
       'email.unique' => 'Email đã tồn tại trong hệ thống. Vui lòng sử dụng email khác.',

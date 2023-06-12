@@ -190,6 +190,7 @@
       url: form.attr('action'),
       data: data,
       success: function (response) {
+        alert('Vui lòng đăng nhập mới được thêm sản phẩm');
         console.log(xhr.responseText);
       },
       error: function (xhr) {
@@ -287,7 +288,7 @@
     }
   });
 
-  $('.show-password').click(function() {
+  $('.show-password').click(function () {
     let passwordInput = $('input[name="password"]');
     let passwordIcon = $('.show-password i');
 

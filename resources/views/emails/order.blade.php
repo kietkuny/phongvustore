@@ -27,7 +27,7 @@
     <p style="margin-bottom: 10px"><b>Địa chỉ nhận hàng</b></p>
     <p style="margin-bottom: 0">Họ và tên: {{ $order->customer->name }}</p>
     <p style="margin-bottom: 0">Số điện thoại: {{ $order->customer->phone }}</p>
-    <p style="margin-bottom: 50px">Địa chỉ: {{ $order->customer->housenumber }}, {{ $order->customer->city->name }}, {{ $order->customer->province->name }}</p>
+    <p style="margin-bottom: 50px">Địa chỉ: {{ $order->customer->housenumber }}, {{ $order->customer->city->name }}, {{ $order->customer->city->province->name }}</p>
     @if ($order->user_id)
     <p style="margin-bottom: 50px"><b>Người giao hàng: {{ $order->user->name }} ({{ $order->user->phone }})</b></p>
     @endif

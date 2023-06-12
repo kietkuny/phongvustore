@@ -7,7 +7,7 @@
     <p class="mb-1"><b>Thông tin khách hàng</b></p>
     <p class="mb-0">Họ và tên: {{ $order->customer->name }}</p>
     <p class="mb-0">Số điện thoại: {{ $order->customer->phone }}</p>
-    <p class="mb-0">Địa chỉ: {{ $order->customer->housenumber }}, {{ $order->customer->city->name }}, {{ $order->customer->province->name }}</p>
+    <p class="mb-0">Địa chỉ: {{ $order->customer->housenumber }}, {{ $order->customer->city->name }}, {{ $order->customer->city->province->name }}</p>
   </div>
   <div class="mb-3 main-order-@switch($order->status_id)
     @case(1)wait

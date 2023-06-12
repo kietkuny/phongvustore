@@ -26,7 +26,6 @@ class HomeRequest extends FormRequest
       'phone' => 'required',
       'housenumber' => 'required',
       'city_id' => 'required',
-      'province_id' => 'required',
       'password' => 'required',
     ];
   }
@@ -36,7 +35,6 @@ class HomeRequest extends FormRequest
       'phone.required' => 'VUi lòng điền số điện thoại',
       'housenumber.required' => 'Vui lòng nhập số nhà',
       'city_id.required' => 'Vui lòng chọn thành phố',
-      'province_id.required' => 'Vui lòng chọn tỉnh',
       'password.required' => 'Vui lòng nhập mật khẩu',
     ];
   }

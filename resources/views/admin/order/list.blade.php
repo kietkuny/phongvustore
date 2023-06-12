@@ -22,6 +22,7 @@
   <thead>
     <th style="width: 50px">ID</th>
     <th>Khách hàng</th>
+    <th>Người duyệt đơn</th>
     <th>Người giao</th>
     <th>Trạng thái</th>
     <th>Cập nhật</th>

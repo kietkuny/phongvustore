@@ -18,11 +18,11 @@ class CustomerHelper
           <td>
           ' . $customer->housenumber . ',
           ' . $customer->city->name . ',
-          ' . $customer->province->name . '
+          ' . $customer->city->province->name . '
           </td>
           <td>' . $customer->email . '</td>
           <td>' . self::active($customer->status) . '</td>
-          <td>' . date('d-m-Y H:i:s', strtotime($customer->updated_at)) . '</td>
+          <td>' . date('d-m-Y H:i:s', strtotime($customer->created_at)) . '</td>
           <td>
             <a href="/admin/customers/edit/id=' . $customer->id . '" class="btn btn-primary btn-sm">
               <i class="fa-regular fa-pen-to-square"></i>
