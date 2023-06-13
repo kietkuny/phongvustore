@@ -308,7 +308,6 @@
   });
 
   $('.btn-sale').click(function () {
-    let saleId = $(this).closest('.card-body').find('.card-subtitle').attr('id');
     let saleCode = $(this).closest('.card-body').find('.card-subtitle').text();
 
     // Tạo một thẻ input ẩn
