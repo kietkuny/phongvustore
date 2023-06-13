@@ -9,7 +9,7 @@
     <p class="mb-0">Số điện thoại: {{ $order->customer->phone }}</p>
     <p class="mb-0">Địa chỉ: {{ $order->customer->housenumber }}, {{ $order->customer->city->name }}, {{ $order->customer->city->province->name }}</p>
   </div>
-  <div class="mb-3 main-order-@switch($order->status_id)
+  <div class="print-hidden mb-3 main-order-@switch($order->status_id)
     @case(1)wait
     @break
     @case(2)confirm
@@ -104,8 +104,8 @@
   <!-- /.card-body -->
 
   <div class="card-footer">
-    <button type="submit" class="btn btn-primary">Cập Nhật đơn hàng</button>
-    <a href="/admin/orders/list" class="btn btn-secondary">Quay lại</a>
+    <button type="submit" class="btn btn-primary print-hidden">Cập Nhật đơn hàng</button>
+    <a href="/admin/orders/list" class="btn btn-secondary print-hidden">Quay lại</a>
   </div>
   @csrf
 </form>
