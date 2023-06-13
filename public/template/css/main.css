@@ -54,6 +54,9 @@ header .menu-header-item-menu.active-header a {
   header .menu-header-item-menu.active-header a {
     color: white;
   }
+  header .menu-header-item-menu:hover a {
+    color: white!important;
+  }
 }
 header .menu-header-item-menu a {
   font-weight: bold;
