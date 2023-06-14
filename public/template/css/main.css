@@ -1489,7 +1489,7 @@ main{
     width: 100%;
   }
 }
-.main-pay .right button {
+/* .main-pay .right button {
   padding: 10px 20px;
   border: none;
   background-image: linear-gradient(to right, #62cdff, #62cdff, #1a5f7a, #1a5f7a);
@@ -1501,7 +1501,7 @@ main{
 .main-pay .right button:hover {
   background-position: right;
   color: white;
-}
+} */
 
 .main-chat {
   background-color: #f8f8fc;

@@ -71,7 +71,7 @@ class OrderController extends Controller
     if ($result) {
       return response()->json([
         'error' => false,
-        'message' => 'Xóa thành công sản phẩm'
+        'message' => 'Xóa thành công đơn hàng'
       ]);
     }
 

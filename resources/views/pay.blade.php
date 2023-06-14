@@ -5,7 +5,7 @@
     <div>
       @if (count($products) != 0)
       <h2 class="mb-3">Thanh toán đơn hàng</h2>
-      <form method="post" action="/addpay">
+      <form method="post" action="/addpay" id="form-pay">
         @csrf
         <div class="left">
           <div class="makecolor"></div>
@@ -78,7 +78,7 @@
             <p>Tổng tiền sản phẩm</p>
             <p class="main-pay-sum">{{ number_format($total, 0, '.', '.') }}đ</p>
           </div>
-          @if($sale) 
+          @if($sale)
           <div class="d-flex justify-content-between mb-3 text-danger">
             <p>Mã khuyến mãi</p>
             <p>{{ $sale->name }}</p>
@@ -88,7 +88,23 @@
             <p class="main-pay-sum">{{ number_format($total*(1-$sale->sale), 0, '.', '.') }}đ</p>
           </div>
           @endif
-          <button type="submit" class="btn w-100 mb-4">Đặt hàng</button>
+          <div class="w-100 text-center">
+            <button type="submit" class="truck-button mb-4">
+              <span class="default">Đặt hàng</span>
+              <span class="success">
+                Đặt thành công
+                <svg viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </svg>
+              </span>
+              <div class="truck">
+                <div class="wheel"></div>
+                <div class="back"></div>
+                <div class="front"></div>
+                <div class="box"></div>
+              </div>
+            </button>
+          </div>
         </div>
       </form>
       @else
@@ -97,4 +113,119 @@
     </div>
   </div>
 </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $('.main-pay form').on('submit', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var button = $('.truck-button');
+    handleButtonClick(button)
+    .then(function() {
+        // Hoàn thành animation
+        $('.main-pay form').submit(); // Submit form
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  });
+
+  function handleButtonClick(button) {
+    
+    let box = button.find('.box')
+      , truck = button.find('.truck');
+
+    if (!button.hasClass('done')) {
+
+      if (!button.hasClass('animation')) {
+
+        button.addClass('animation');
+
+        gsap.to(button, {
+          '--box-s': 1
+          , '--box-o': 1
+          , duration: .3
+          , delay: .5
+        });
+
+        gsap.to(box, {
+          x: 0
+          , duration: .4
+          , delay: .7
+        });
+
+        gsap.to(button, {
+          '--hx': -5
+          , '--bx': 50
+          , duration: .18
+          , delay: .92
+        });
+
+        gsap.to(box, {
+          y: 0
+          , duration: .1
+          , delay: 1.15
+        });
+
+        gsap.set(button, {
+          '--truck-y': 0
+          , '--truck-y-n': -26
+        });
+
+        gsap.to(button, {
+          '--truck-y': 1
+          , '--truck-y-n': -25
+          , duration: .2
+          , delay: 1.25
+          , onComplete() {
+            gsap.timeline({
+              onComplete() {
+                button.addClass('done');
+                $('.main-pay form').submit();
+              }
+            }).to(truck, {
+              x: 0
+              , duration: .4
+            }).to(truck, {
+              x: 40
+              , duration: 1
+            }).to(truck, {
+              x: 20
+              , duration: .6
+            }).to(truck, {
+              x: 96
+              , duration: .4
+            });
+            gsap.to(button, {
+              '--progress': 1
+              , duration: 2.4
+              , ease: "power2.in"
+            });
+          }
+        });
+
+      }
+
+    } else {
+      button.removeClass('animation done');
+      gsap.set(truck, {
+        x: 4
+      });
+      gsap.set(button, {
+        '--progress': 0
+        , '--hx': 0
+        , '--bx': 0
+        , '--box-s': .5
+        , '--box-o': 0
+        , '--truck-y': 0
+        , '--truck-y-n': -26
+      });
+      gsap.set(box, {
+        x: -24
+        , y: -6
+      });
+    }
+  }
+
+</script>
 @endsection
