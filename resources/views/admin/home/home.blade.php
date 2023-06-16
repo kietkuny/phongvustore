@@ -22,10 +22,11 @@
       <label for="month">Năm: </label>
       <select class="form-control form-select" id="year" name="year">
         @php
-        $startYear = $selectedYear - 20;
+        $startYear = date('Y')-10;
+        $endYear = date('Y');
         // $endYear = $selectedYear + 8;
         @endphp
-        @for ($year = $startYear; $year <= $selectedYear; $year++)
+        @for ($year = $startYear; $year <= $endYear ; $year++)
         <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
             {{ $year }}
         </option>
