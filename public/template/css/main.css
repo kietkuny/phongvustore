@@ -602,9 +602,26 @@ main{
   color: black;
   transition: 0.4s;
 }
+.slide-item-content button {
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  background-image: linear-gradient(to right, #62cdff, #62cdff, #1a5f7a, #1a5f7a);
+  background-size: 300%;
+  border-radius: 100px;
+  color: black;
+  transition: 0.4s;
+}
 .slide-item-content a:hover {
   background-position: right;
   color: white;
+}
+.slide-item-content button:hover {
+  background-position: right;
+  color: white;
+}
+.slide-item-content form{
+  margin-top: -10px;
 }
 @media screen and (max-width: 1439.98px) {
   .slide-item-img,
@@ -628,6 +645,9 @@ main{
     margin-bottom: 20px;
   }
   .slide-item a {
+    font-size: 10px;
+  }
+  .slide-item button {
     font-size: 10px;
   }
 }

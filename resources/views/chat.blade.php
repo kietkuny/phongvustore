@@ -9,10 +9,7 @@
         <div class="chat-content" id="chatcontent">
           <ul id="chatMessages" class="p-2">
             {{-- Tin nhắn sẽ được hiển thị ở đây --}}
-            {{-- @php
-            $messageCount = $messages->count();
-            @endphp
-            @if ($messageCount > 0) --}}
+            @if ($messages->count() > 0)
             @foreach ($messages as $message)
               @if ($message->sender == 'admin')
               <li class="admin-message">{{ $message->message }}</li>
@@ -22,7 +19,7 @@
               <span class="d-flex justify-content-end mb-4"><small>{{ date('H:i:s d/m/Y', strtotime($message->updated_at)) }}</small></span>
               @endif
             @endforeach
-            {{-- @endif --}}
+            @endif
           </ul> 
         </div>
         <form class="chat-section" id="customerChatForm" method="POST">
@@ -41,9 +38,10 @@
   </div>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js" integrity="sha512-AI5A3zIoeRSEEX9z3Vyir8NqSMC1pY7r5h2cE+9J6FLsoEmSSGLFaqMQw8SWvoONXogkfFrkQiJfLeHLz3+HOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script>
   function scrollToBottom() {
-    var chatMessages = document.getElementById("chatcontent");
+    let chatMessages = document.getElementById("chatcontent");
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
@@ -69,7 +67,7 @@
       success: function(response) {
         // Xử lý thành công
         $('#chatInput').val('');
-        $('#chatMessages').append('<li class="customer-message">' + message + '</li><span class="d-flex justify-content-end mb-4"><small>{{ date('H:i:s d/m/Y', strtotime($message->updated_at)) }}</small></span>');
+        $('#chatMessages').append('<li class="customer-message">' + message + '</li><span class="d-flex justify-content-end mb-4"><small>' + moment().format('H:mm:ss DD/MM/YYYY') + '</small></span>');
         scrollToBottom();
       },
       error: function(xhr, status, error) {
@@ -81,7 +79,7 @@
 
   socket.on('adminMessage', function(data) {
     if (data.customerId == customerId) {
-      $('#chatMessages').append('<li class="admin-message">' + data.message + '</li><span class="d-flex mb-4"><small>{{ date('H:i:s d/m/Y', strtotime($message->updated_at)) }}</small></span>');
+      $('#chatMessages').append('<li class="admin-message">' + data.message + '</li><span class="d-flex mb-4"><small>' + moment().format('H:mm:ss DD/MM/YYYY') + '</small></span>');
       scrollToBottom();
     }
   });

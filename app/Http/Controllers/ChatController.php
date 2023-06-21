@@ -48,6 +48,7 @@ class ChatController extends Controller
     $message->sender = $customerId;
     $message->recipient = 'admin';
     $message->message = $messageContent;
+    $message->read = 1;
     $message->save();
 
     // Các mã khác để gửi tin nhắn cho admin

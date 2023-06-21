@@ -11,11 +11,14 @@
           <div class="px-5">
             <h1>{{ $slider->name }}</h1>
             <p>{{ $slider->description }}</p>
-            <div>
-              <a href="{{ $slider->url }}">
-                Xem thêm
-              </a>
-            </div>
+            @if (str_contains($slider->url, '/'))
+            <a href="{{ $slider->url }}">Xem thêm</a>
+            @else
+            <form action="/product" role="search">
+              <input type="hidden" name="search" value="{{ $slider->url }}">
+              <button type="submit">Xem thêm</button>
+            </form>
+            @endif
           </div>
         </div>
       </div>

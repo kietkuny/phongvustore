@@ -165,6 +165,10 @@ Route::middleware(['auth'])->group(function () {
       Route::get('list', [ContactController::class, 'adminChat']);
       Route::get('messages/{customerId}', [ContactController::class,'getMessages']);
       Route::post('send-message', [ContactController::class, 'adminSendMessage']);
+      Route::get('unread/{customerId}', [ContactController::class, 'unread']);
+      Route::get('get-customer-list', [ContactController::class,'getCustomerList']);
+      Route::post('mark-message-as-read', [ContactController::class, 'markMessageAsRead']);
+      Route::get('get-unread-message-counts', [ContactController::class, 'getUnreadMessageCounts']);
     });
 
     #Upload

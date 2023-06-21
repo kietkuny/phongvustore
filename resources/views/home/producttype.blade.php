@@ -10,7 +10,7 @@
           </h3>
           <div class="my-4">
             <form action="/product" role="search">
-              <input type="hidden" name="search" value="{{ $product_type->name }}">
+              <input type="hidden" name="producttype_id" value="{{ $product_type->id }}">
               <button type="submit">Xem thêm</button>
             </form>
           </div>

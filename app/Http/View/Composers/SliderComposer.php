@@ -16,7 +16,7 @@ class SliderComposer
 
   public function compose(View $view): void
   {
-    $sliders = Slider::select('sliders.*')->where('active',1)->orderByDesc('id')->get();
+    $sliders = Slider::select('sliders.*')->where('active',1)->orderBy('id')->get();
     $view->with('sliders',$sliders);
   }
 }
