@@ -19,7 +19,7 @@
         <span>Số nhà</span>
       </div>
       <div class="input-box">
-        <select class="form-select" id="province-select" required>
+        <select class="form-select" id="province-select" name="province_id" required>
           <option value="">Tỉnh</option>
           @foreach ($provinces as $province)
             <option value="{{ $province->id }}">{{ $province->name }}</option>
