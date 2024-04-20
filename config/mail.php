@@ -40,7 +40,7 @@ return [
             'port' => 587,
             'encryption' => 'tls',
             'username' => 'dotuankiet00@gmail.com',
-            'password' => 'hdburehurgpqgbgc',
+            'password' => 'pket tcat lhzt ihyv',//tnaw epcw isrt ibf
             'timeout' => null,
             'local_domain' => null,
         ],

@@ -88,23 +88,6 @@ class MainController extends Controller
       }
     }
 
-    // $totalOrders = Order::where('status_id', 4)
-    //   ->whereBetween('updated_at', [$startOfMonth, $endOfMonth])
-    //   ->count();
-
-    // $totalProducts = Orderdetail::whereHas('order', function ($query) use ($startOfMonth, $endOfMonth) {
-    //   $query->where('status_id', 4)
-    //     ->whereBetween('updated_at', [$startOfMonth, $endOfMonth]);
-    // })->sum('quantity');
-
-    // $totalRevenue = Orderdetail::whereHas('order', function ($query) use ($startOfMonth, $endOfMonth) {
-    //   $query->where('status_id', 4)
-    //     ->whereBetween('updated_at', [$startOfMonth, $endOfMonth]);
-    // })
-    //   ->selectRaw('SUM(price * quantity) as total_revenue')
-    //   ->pluck('total_revenue')
-    //   ->first();
-
     $sumOrders = Order::where('status_id', 4)
       ->whereBetween('updated_at', [$startOfMonth, $endOfMonth])
       ->count();
