@@ -39,8 +39,8 @@ return [
             'host' => 'smtp.gmail.com',
             'port' => 587,
             'encryption' => 'tls',
-            'username' => 'dotuankiet00@gmail.com',
-            'password' => 'pket tcat lhzt ihyv',//tnaw epcw isrt ibf
+            'username' => '',
+            'password' => '',//tnaw epcw isrt ibf
             'timeout' => null,
             'local_domain' => null,
         ],
@@ -98,7 +98,7 @@ return [
     */
 
     'from' => [
-        'address' => 'dotuankiet00@gmail.com',
+        'address' => '',
         'name' => 'Phong Vũ',
     ],
 
